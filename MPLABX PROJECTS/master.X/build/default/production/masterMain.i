@@ -5257,7 +5257,15 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 82 "masterMain.c"
+# 83 "masterMain.c"
+unsigned int count = 0;
+unsigned int count2 = 0;
+char *str;
+unsigned int number = 100;
+unsigned char digit = 0;
+char stringBuffer[20];
+
+
 void swap(char *, char *);
 char* reverse(char *, int , int );
 void setupUART(void);
@@ -5273,8 +5281,7 @@ void SPI_Write(unsigned char);
 unsigned char SPI_Read();
 void UART_Send(unsigned char []);
 
-int countDigit(unsigned int n)
-{
+int countDigit(unsigned int n) {
 int count = 0;
 while (n != 0)
 {
@@ -5284,28 +5291,65 @@ n = n / 10;
 return count;
 }
 
-unsigned int count = 0;
-unsigned int count2 = 0;
-char *str;
-unsigned int number = 100;
-unsigned char digit = 0;
-char stringBuffer[20];
+signed char WriteSPI( unsigned char data_out ) {
+unsigned char TempVar;
+TempVar = SSPBUF;
+PIR1bits.SSPIF = 0;
+SSPCON1bits.WCOL = 0;
+SSPBUF = data_out;
+if (SSPCON1 & 0x80)
+return -1;
+else
+while( !PIR1bits.SSPIF );
+return 0;
+}
+
+unsigned char ReadSPI(void) {
+unsigned char TempVar;
+TempVar = SSPBUF;
+PIR1bits.SSPIF = 0;
+SSPBUF = 0x00;
+while(!PIR1bits.SSPIF);
+return (SSPBUF);
+}
+
+char DataRdySPI( void ) {
+if (SSPSTATbits.BF)
+return 1;
+else
+return 0;
+}
+
+unsigned char transferDataSPI(void) {
+PORTCbits.RC2 = 0;
+unsigned char temp;
+WriteSPI(0xEF);
+while(!DataRdySPI());
+temp = ReadSPI();
+PORTCbits.RC2 = 1;
+return temp;
+}
+
+void transferDataUART(char temp) {
+
+}
 
 void interrupt ISR() {
 if(INTCONbits.TMR0IF == 1) {
 count++;
-if (count == 60000) {
-PORTCbits.RC2 = 0;
-digit = SPI_Read();
-PORTCbits.RC2 = 1;
-itoa(stringBuffer,digit,10);
+if (count == 30000) {
+char temp;
+temp = transferDataSPI();
+PORTBbits.RB6 = 1 - PORTBbits.RB6;
+itoa(stringBuffer,239,10);
 int i = 0;
 while (stringBuffer[i]) {
 tx_char(stringBuffer[i]);
 i++;
 }
 tx_char(0x0a);
-
+tx_char(temp);
+count = 0;
 }
 }
 
@@ -5386,6 +5430,9 @@ while(!TRMT);
 }
 
 void SPI_Init_Master() {
+PIE1bits.SSPIE = 1;
+IPR1bits.SSPIP = 1;
+
 
 TRISDbits.TRISD2 = 1;
 TRISDbits.TRISD3 = 0;
@@ -5394,15 +5441,15 @@ TRISDbits.TRISD1 = 0;
 
 CS = 1;
 SSPSTAT=0x40;
-SSPCON1=0x24;
+SSPCON1=0x20;
 
-# 220
+# 268
 PIR1bits.SSPIF=0;
 
-# 224
+# 272
 ADCON0=0;
 
-# 226
+# 274
 ADCON1=0x0F;
 }
 
@@ -5418,14 +5465,14 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 241
+# 289
 PIR1bits.SSPIF=0;
 PIE1bits.SSPIE=1;
 
-# 246
+# 294
 ADCON0=0;
 
-# 248
+# 296
 ADCON1=0x0F;
 }
 
@@ -5442,7 +5489,6 @@ data_flush=SSPBUF;
 unsigned char SPI_Read() {
 SSPBUF=0xff;
 while(!PIR1bits.SSPIF);
-PORTBbits.RB6 = 1 - PORTBbits.RB6;
 PIR1bits.SSPIF=0;
 return(SSPBUF);
 }

@@ -79,6 +79,15 @@
 #include <stdio.h>
 #define _XTAL_FREQ 20000000
 
+
+unsigned int count = 0;
+unsigned int count2 = 0;
+char *str;                          //Global variable used for interrupt
+unsigned int number = 100;
+unsigned char digit = 0;
+char stringBuffer[20];
+
+
 void swap(char *, char *);
 char* reverse(char *, int , int );
 void setupUART(void);
@@ -94,8 +103,7 @@ void SPI_Write(unsigned char);
 unsigned char SPI_Read();
 void UART_Send(unsigned char []);
 
-int countDigit(unsigned int n)
-{
+int countDigit(unsigned int n) {
     int count = 0;
     while (n != 0)
     {
@@ -105,41 +113,66 @@ int countDigit(unsigned int n)
     return count;
 }
 
-unsigned int count = 0;
-unsigned int count2 = 0;
-char *str;                          //Global variable used for interrupt
-unsigned int number = 100;
-unsigned char digit = 0;
-char stringBuffer[20];
+signed char WriteSPI( unsigned char data_out ) {
+    unsigned char TempVar;
+    TempVar = SSPBUF;           // Clears BF
+    PIR1bits.SSPIF = 0;         // Clear interrupt flag
+    SSPCON1bits.WCOL = 0;            //Clear any previous write collision
+    SSPBUF = data_out;           // write byte to SSPBUF register
+    if (SSPCON1 & 0x80)        // test if write collision occurred
+        return -1;              // if WCOL bit is set return negative #
+    else
+        while( !PIR1bits.SSPIF );  // wait until bus cycle complete
+    return 0;                // if WCOL bit is not set return non-negative#
+}
+
+unsigned char ReadSPI(void) {
+    unsigned char TempVar;
+    TempVar = SSPBUF;        // Clear BF
+    PIR1bits.SSPIF = 0;      // Clear interrupt flag
+    SSPBUF = 0x00;           // initiate bus cycle
+    while(!PIR1bits.SSPIF);  // wait until cycle complete
+    return (SSPBUF);       // return with byte read
+}
+
+char DataRdySPI( void ) {
+    if (SSPSTATbits.BF)
+        return 1;                // data in SSPBUF register
+    else
+        return 0;                 // no data in SSPBUF register
+}
+
+unsigned char transferDataSPI(void) {
+    PORTCbits.RC2 = 0;
+    unsigned char temp;
+    WriteSPI(0xEF);         // Send a byte
+    while(!DataRdySPI());   // wait for a data to arrive
+    temp = ReadSPI();
+    PORTCbits.RC2 = 1;
+    return temp;
+}
+
+void transferDataUART(char temp) {
+
+}
 
 void interrupt ISR() {
     if(INTCONbits.TMR0IF == 1) {
         count++;
-        if (count == 60000) {
-            PORTCbits.RC2 = 0;
-            digit = SPI_Read();
-            PORTCbits.RC2 = 1;
-            itoa(stringBuffer,digit,10);
+        if (count == 30000) {
+            char temp; 
+            temp = transferDataSPI();
+            PORTBbits.RB6 = 1 - PORTBbits.RB6;
+            itoa(stringBuffer,239,10);
             int i = 0;
             while (stringBuffer[i]) {
                 tx_char(stringBuffer[i]);
                 i++;
             }
             tx_char(0x0a);
-            
+            tx_char(temp);
+            count = 0;
         }
-    }
-    
-    if() {
-        
-    }
-    
-    if() {
-        
-    }
-    
-    if() {
-        
     }
     
     if(RCIF == 1) {
@@ -230,7 +263,7 @@ void SPI_Init_Master() {
     /* To initialize SPI Communication configure following Register*/
     CS = 1;
     SSPSTAT=0x40;		/* Data change on rising edge of clk,BF=0*/
-    SSPCON1=0x24;		/* Master mode,Serial enable, 
+    SSPCON1=0x20;		/* Master mode,Serial enable, 
                           * idle state low for clk, fosc/4 */ 
     PIR1bits.SSPIF=0;
 
@@ -276,7 +309,6 @@ void SPI_Write(unsigned char x) {
 unsigned char SPI_Read() {    
     SSPBUF=0xff;		/* Copy flush data in SSBUF */
     while(!PIR1bits.SSPIF);	/* Wait for complete 1 byte transmission */
-    PORTBbits.RB6 = 1 - PORTBbits.RB6;
     PIR1bits.SSPIF=0;
     return(SSPBUF);		/* Return received data.*/   
 }

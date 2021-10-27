@@ -5258,6 +5258,17 @@ extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
 # 93 "motorMain.c"
+unsigned char w = "u";
+unsigned int count = 0;
+unsigned int count2 = 0;
+char *str;
+unsigned int number = 100;
+unsigned char digit = 0;
+char stringBuffer[20];
+
+void setupUART(void);
+char rx_char(void);
+void tx_char(char );
 void setupQEI(void);
 void setupTimer5(void);
 void setupTimer0(void);
@@ -5266,15 +5277,49 @@ void SPI_Init_Master();
 void SPI_Write(unsigned char);
 unsigned char SPI_Read();
 
-unsigned char w = "u";
-unsigned int count = 0;
+
+signed char WriteSPI( unsigned char data_out ) {
+unsigned char TempVar;
+TempVar = SSPBUF;
+PIR1bits.SSPIF = 0;
+SSPCON1bits.WCOL = 0;
+SSPBUF = data_out;
+if (SSPCON1 & 0x80)
+return -1;
+else
+while( !PIR1bits.SSPIF );
+return 0;
+}
+
+
+unsigned char ReadSPI( void ) {
+unsigned char TempVar;
+TempVar = SSPBUF;
+PIR1bits.SSPIF = 0;
+SSPBUF = 0xEF;
+while(!PIR1bits.SSPIF);
+return (SSPBUF);
+}
+
+unsigned char DataRdySPI( void ) {
+if (SSPSTATbits.BF)
+return 1;
+else
+return 0;
+}
 
 void interrupt ISR() {
 if(INTCONbits.TMR0IF == 1) {
 count++;
-if (count == 60000) {
+if (count == 30000) {
+itoa(stringBuffer,239,10);
+int i = 0;
+while (stringBuffer[i]) {
+tx_char(stringBuffer[i]);
+i++;
+}
+tx_char(0x0a);
 PORTBbits.RB6 = 1 - PORTBbits.RB6;
-SPI_Write(w);
 }
 }
 }
@@ -5282,9 +5327,12 @@ SPI_Write(w);
 void main(void) {
 unsigned long RPM_CONSTANT_QEI = 93750;
 INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
+TRISBbits.RB6 = 0;
+PORTBbits.RB6 = 1;
+setupUART();
 setupQEI();
 setupTimer5();
-SPI_Init_Slave();
+setupTimer0();
 while(1) {
 
 }
@@ -5311,8 +5359,6 @@ QEICONbits.PDEC1 = 0;
 
 void setupTimer0(void) {
 INTCONbits.TMR0IE = 1;
-
-
 T0CONbits.T016BIT = 1;
 T0CONbits.T0CS = 0;
 
@@ -5321,9 +5367,8 @@ T0CONbits.PSA = 0;
 T0CONbits.T0PS2 = 1;
 T0CONbits.T0PS1 = 0;
 T0CONbits.T0PS0 = 1;
-
-T0CONbits.TMR0ON = 1;
 TMR0 = 0;
+T0CONbits.TMR0ON = 1;
 }
 
 void setupTimer5(void) {
@@ -5346,13 +5391,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 181
+# 226
 PIR1bits.SSPIF=0;
 
-# 185
+# 230
 ADCON0=0;
 
-# 187
+# 232
 ADCON1=0x0F;
 }
 
@@ -5368,13 +5413,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 202
+# 247
 PIR1bits.SSPIF=0;
 
-# 206
+# 251
 ADCON0=0;
 
-# 208
+# 253
 ADCON1=0x0F;
 }
 
@@ -5392,4 +5437,27 @@ SSPBUF=0xff;
 while(!PIR1bits.SSPIF);
 PIR1bits.SSPIF=0;
 return(SSPBUF);
+}
+
+void setupUART(void) {
+TRISCbits.RC6 = 0;
+TRISCbits.RC7 = 1;
+TXSTAbits.BRGH = 0;
+TXSTAbits.SYNC = 0;
+TXSTAbits.TXEN = 1;
+RCSTAbits.SPEN = 1;
+RCSTAbits.CREN = 1;
+PIE1bits.RCIE = 1;
+PIE1bits.TXIE = 0;
+SPBRG = 31;
+}
+
+char rx_char(void) {
+while(!RCIF);
+return RCREG;
+}
+
+void tx_char(char a) {
+TXREG=a;
+while(!TRMT);
 }

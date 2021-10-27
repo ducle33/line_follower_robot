@@ -90,6 +90,17 @@
 
 // 200, 8225 rpm,
 
+unsigned char w = "u";
+unsigned int count = 0;
+unsigned int count2 = 0;
+char *str;                          //Global variable used for interrupt
+unsigned int number = 100;
+unsigned char digit = 0;
+char stringBuffer[20];
+
+void setupUART(void);
+char rx_char(void);
+void tx_char(char );
 void setupQEI(void);
 void setupTimer5(void);
 void setupTimer0(void);
@@ -98,15 +109,49 @@ void SPI_Init_Master();
 void SPI_Write(unsigned char);
 unsigned char SPI_Read();
 
-unsigned char w = "u";
-unsigned int count = 0;
+
+signed char WriteSPI( unsigned char data_out ) {
+    unsigned char TempVar;
+    TempVar = SSPBUF;           // Clears BF
+    PIR1bits.SSPIF = 0;         // Clear interrupt flag
+    SSPCON1bits.WCOL = 0;            //Clear any previous write collision
+    SSPBUF = data_out;           // write byte to SSPBUF register
+    if (SSPCON1 & 0x80)        // test if write collision occurred
+        return -1;              // if WCOL bit is set return negative #
+    else
+        while( !PIR1bits.SSPIF );  // wait until bus cycle complete
+    return 0;                // if WCOL bit is not set return non-negative#
+}
+
+
+unsigned char ReadSPI( void ) {
+    unsigned char TempVar;
+    TempVar = SSPBUF;        // Clear BF
+    PIR1bits.SSPIF = 0;      // Clear interrupt flag
+    SSPBUF = 0xEF;           // initiate bus cycle
+    while(!PIR1bits.SSPIF);  // wait until cycle complete
+    return (SSPBUF);       // return with byte read
+}
+
+unsigned char DataRdySPI( void ) {
+    if (SSPSTATbits.BF)
+        return 1;                // data in SSPBUF register
+    else
+        return 0;                 // no data in SSPBUF register
+}
 
 void interrupt ISR() {
     if(INTCONbits.TMR0IF == 1) {
         count++;
-        if (count == 60000) {
+        if (count == 30000) {
+            itoa(stringBuffer,239,10);
+            int i = 0;
+            while (stringBuffer[i]) {
+                tx_char(stringBuffer[i]);
+                i++;
+            }
+            tx_char(0x0a);
             PORTBbits.RB6 = 1 - PORTBbits.RB6;
-            SPI_Write(w);
         }
     }
 }
@@ -114,9 +159,12 @@ void interrupt ISR() {
 void main(void) {
     unsigned long RPM_CONSTANT_QEI = 93750;
     INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
+    TRISBbits.RB6 = 0;
+    PORTBbits.RB6 = 1;
+    setupUART();
     setupQEI();
     setupTimer5();
-    SPI_Init_Slave();
+    setupTimer0();
     while(1) {
         
     }
@@ -143,8 +191,6 @@ void setupQEI(void) {
 
 void setupTimer0(void) {
     INTCONbits.TMR0IE = 1;
-    
-    
     T0CONbits.T016BIT = 1; // 8bit Mode
     T0CONbits.T0CS = 0; // Internal CLK = 1/20MHz * 4
     
@@ -153,9 +199,8 @@ void setupTimer0(void) {
     T0CONbits.T0PS2 = 1;
     T0CONbits.T0PS1 = 0;
     T0CONbits.T0PS0 = 1;
-    
-    T0CONbits.TMR0ON = 1; // Turns on Timer0
     TMR0 = 0;
+    T0CONbits.TMR0ON = 1; // Turns on Timer0
 }
 
 void setupTimer5(void) {
@@ -222,4 +267,27 @@ unsigned char SPI_Read() {
     while(!PIR1bits.SSPIF);	/* Wait for complete 1 byte transmission */
     PIR1bits.SSPIF=0;
     return(SSPBUF);		/* Return received data.*/   
+}
+
+void setupUART(void) {
+    TRISCbits.RC6 = 0;       //direction of Tx and Rx pins
+    TRISCbits.RC7 = 1;
+    TXSTAbits.BRGH = 0; // Low speed Baud Rate
+    TXSTAbits.SYNC = 0; // Asynchronous
+    TXSTAbits.TXEN = 1; // Transmission Enable
+    RCSTAbits.SPEN = 1; // Serial Port Enable
+    RCSTAbits.CREN = 1; // Continuous Receive
+    PIE1bits.RCIE = 1; // Enable Receive Interrupt
+    PIE1bits.TXIE = 0; // Enable Transmit Interrupt
+    SPBRG = 31;        // 9600 baud rate @20Mhz clock freq
+}
+
+char rx_char(void) {
+    while(!RCIF);                   //Wait till RCREG is full
+    return RCREG;                   //Return value in received data
+}
+
+void tx_char(char a) {
+    TXREG=a;                        //Load TXREG register with data to be sent
+    while(!TRMT);                   //Wait till transmission is complete
 }
