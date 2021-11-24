@@ -5265,6 +5265,8 @@ char *str;
 unsigned int number = 100;
 unsigned char digit = 0;
 char stringBuffer[20];
+int speed = 0;
+int pre_speed = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -5276,7 +5278,11 @@ void SPI_Init_Slave();
 void SPI_Init_Master();
 void SPI_Write(unsigned char);
 unsigned char SPI_Read();
-
+void setupTimer2(void);
+void setupPWM(void);
+unsigned char motorOutMSB(float);
+unsigned char motorOutLSB(float);
+long RPM_CONSTANT_QEI = 93750;
 
 signed char WriteSPI( unsigned char data_out ) {
 unsigned char TempVar;
@@ -5309,23 +5315,35 @@ return 0;
 }
 
 void interrupt ISR() {
-if(INTCONbits.TMR0IF == 1) {
+
+# 157
+if(IC2QEIE && IC2QEIF) {
+speed++;
+IC2QEIF = 0;
+}
+if(INTCONbits.TMR0IF) {
 count++;
-if (count == 30000) {
-itoa(stringBuffer,239,10);
+
+if (count == 1) {
+count = 0;
+PORTBbits.RB6 = 1 - PORTBbits.RB6;
+count = 0;
+itoa(stringBuffer,speed*17,10);
+
 int i = 0;
 while (stringBuffer[i]) {
 tx_char(stringBuffer[i]);
 i++;
 }
 tx_char(0x0a);
-PORTBbits.RB6 = 1 - PORTBbits.RB6;
+speed = 0;
 }
+INTCONbits.TMR0IF = 0;
 }
 }
 
 void main(void) {
-unsigned long RPM_CONSTANT_QEI = 93750;
+
 INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
 TRISBbits.RB6 = 0;
 PORTBbits.RB6 = 1;
@@ -5333,8 +5351,11 @@ setupUART();
 setupQEI();
 setupTimer5();
 setupTimer0();
-while(1) {
+setupPWM();
 
+while(1) {
+CCPR1L = motorOutMSB(100);
+CCP1CONbits.DC1B = motorOutLSB(100);
 }
 return;
 }
@@ -5345,15 +5366,16 @@ DFLTCONbits.FLT3EN = 1;
 DFLTCONbits.FLT2EN = 1;
 DFLTCONbits.FLTCK = 0;
 
-QEICONbits.nVELM = 0;
-QEICONbits.QERR = 0;
+QEICONbits.nVELM = 1;
 
-QEICONbits.QEIM0 = 0;
-QEICONbits.QEIM1 = 1;
 QEICONbits.QEIM2 = 1;
+QEICONbits.QEIM1 = 1;
+QEICONbits.QEIM0 = 0;
+CAP3BUFH = 0x00; CAP3BUFL = 1;
 
-QEICONbits.PDEC0 = 1;
+QEICONbits.PDEC0 = 0;
 QEICONbits.PDEC1 = 0;
+PIE3bits.IC2QEIE = 1;
 
 }
 
@@ -5365,7 +5387,7 @@ T0CONbits.T0CS = 0;
 
 T0CONbits.PSA = 0;
 T0CONbits.T0PS2 = 1;
-T0CONbits.T0PS1 = 0;
+T0CONbits.T0PS1 = 1;
 T0CONbits.T0PS0 = 1;
 TMR0 = 0;
 T0CONbits.TMR0ON = 1;
@@ -5378,6 +5400,7 @@ T5CONbits.T5PS1 = 0;
 T5CONbits.T5MOD = 0;
 TMR5 = 0;
 T5CONbits.TMR5ON = 1;
+
 }
 
 void SPI_Init_Master() {
@@ -5391,13 +5414,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 226
+# 254
 PIR1bits.SSPIF=0;
 
-# 230
+# 258
 ADCON0=0;
 
-# 232
+# 260
 ADCON1=0x0F;
 }
 
@@ -5413,13 +5436,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 247
+# 275
 PIR1bits.SSPIF=0;
 
-# 251
+# 279
 ADCON0=0;
 
-# 253
+# 281
 ADCON1=0x0F;
 }
 
@@ -5450,6 +5473,41 @@ RCSTAbits.CREN = 1;
 PIE1bits.RCIE = 1;
 PIE1bits.TXIE = 0;
 SPBRG = 31;
+}
+
+void setupPWM(void) {
+
+TRISCbits.RC2 = 0;
+PR2 = 0xFF;
+setupTimer2();
+
+CCP1CONbits.CCP1M3 = 1;
+CCP1CONbits.CCP1M2 = 1;
+
+TRISCbits.RC0 = 0;
+TRISCbits.RC1 = 0;
+PORTCbits.RC0 = 0;
+PORTCbits.RC1 = 1;
+}
+
+void setupTimer2(void) {
+
+T2CON = 0;
+T2CONbits.T2CKPS0 = 1;
+T2CONbits.T2CKPS1 = 1;
+T2CONbits.TMR2ON = 1;
+}
+
+unsigned char motorOutMSB(float duty) {
+int buffer = 10.239*duty;
+unsigned char bufferChar = buffer >> 2;
+return bufferChar;
+}
+
+unsigned char motorOutLSB(float duty) {
+int buffer = 10.239*duty;
+unsigned char bufferChar = buffer & 0b00000011;
+return bufferChar;
 }
 
 char rx_char(void) {

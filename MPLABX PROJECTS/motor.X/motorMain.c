@@ -79,10 +79,10 @@
 #include <stdio.h>
 
 #define _XTAL_FREQ 20000000 // Define oscillator frequency
-#define ENCODER_PPR 1024 // PPR of Encoder on the motor
+#define ENCODER_PPR 200 // PPR of Encoder on the motor
 #define TIMER5_PRESCALE 1 // Timer5 prescaler
 #define QEI_X_UPDATE 4 // Define the QEI mode of operation.
-#define VELOCITY_PULSE_DECIMATION 16
+#define VELOCITY_PULSE_DECIMATION 4
 #define INSTRUCTION_CYCLE _XTAL_FREQ/4
 
 // RPM_CONSTANT_QEI = ((INSTRUCTION_CYCLE)/
@@ -97,6 +97,8 @@ char *str;                          //Global variable used for interrupt
 unsigned int number = 100;
 unsigned char digit = 0;
 char stringBuffer[20];
+int speed = 0;
+int pre_speed = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -108,7 +110,11 @@ void SPI_Init_Slave();
 void SPI_Init_Master();
 void SPI_Write(unsigned char);
 unsigned char SPI_Read();
-
+void setupTimer2(void);
+void setupPWM(void);
+unsigned char motorOutMSB(float);
+unsigned char motorOutLSB(float);
+long RPM_CONSTANT_QEI = 93750;
 
 signed char WriteSPI( unsigned char data_out ) {
     unsigned char TempVar;
@@ -141,23 +147,40 @@ unsigned char DataRdySPI( void ) {
 }
 
 void interrupt ISR() {
-    if(INTCONbits.TMR0IF == 1) {
+    
+    // PWM duty cycle = (CCPR1L:CCP1CON,<5:4>)*Tosc*(TMR2_pre)
+    // CCP1CONbits.DC1B1 = 5;
+    // CCP1CONbits.DC1B0 = 4;
+    // => CCPR1L:CCP1CON,<5:4> =  PWM duty cycle / (Tosc*TMR2_pre)
+    // int motorOut(float duty) { return int(5.12*duty); }
+    
+    if(IC2QEIE && IC2QEIF) {
+        speed++;
+        IC2QEIF = 0;
+    }
+    if(INTCONbits.TMR0IF) {
         count++;
-        if (count == 30000) {
-            itoa(stringBuffer,239,10);
+//        speed = speed + (CAP2BUFH << 8) | (CAP2BUFL & 0xff);
+        if (count == 1) {
+            count = 0;
+            PORTBbits.RB6 = 1 - PORTBbits.RB6;
+            count = 0;
+            itoa(stringBuffer,speed*17,10);
+    //        itoa(stringBuffer,(int)((float)speed*60.0/4.0),10);
             int i = 0;
             while (stringBuffer[i]) {
                 tx_char(stringBuffer[i]);
                 i++;
             }
             tx_char(0x0a);
-            PORTBbits.RB6 = 1 - PORTBbits.RB6;
+            speed = 0;
         }
+        INTCONbits.TMR0IF = 0;
     }
 }
 
 void main(void) {
-    unsigned long RPM_CONSTANT_QEI = 93750;
+    
     INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
     TRISBbits.RB6 = 0;
     PORTBbits.RB6 = 1;
@@ -165,8 +188,11 @@ void main(void) {
     setupQEI();
     setupTimer5();
     setupTimer0();
+    setupPWM();
+    
     while(1) {
-        
+        CCPR1L = motorOutMSB(100);
+        CCP1CONbits.DC1B = motorOutLSB(100);
     }
     return;
 }
@@ -177,27 +203,28 @@ void setupQEI(void) {
     DFLTCONbits.FLT2EN = 1;
     DFLTCONbits.FLTCK = 0;
     
-    QEICONbits.nVELM = 0;
-    QEICONbits.QERR = 0;
+    QEICONbits.nVELM = 1; // Disable Velocity Mode
     // x4 Mode, resets on POSCNT = MAXCNT
-    QEICONbits.QEIM0 = 0;
-    QEICONbits.QEIM1 = 1;
     QEICONbits.QEIM2 = 1;
-    // Velocity Pulse Reduction = 4
-    QEICONbits.PDEC0 = 1;
+    QEICONbits.QEIM1 = 1;
+    QEICONbits.QEIM0 = 0;
+    CAP3BUFH = 0x00; CAP3BUFL = 1;
+    // Velocity Pulse Reduction = 1
+    QEICONbits.PDEC0 = 0;
     QEICONbits.PDEC1 = 0;
+    PIE3bits.IC2QEIE = 1;
     
 }
 
 void setupTimer0(void) {
     INTCONbits.TMR0IE = 1;
-    T0CONbits.T016BIT = 1; // 8bit Mode
+    T0CONbits.T016BIT = 1; // 16bit Mode
     T0CONbits.T0CS = 0; // Internal CLK = 1/20MHz * 4
     
     // Set Prescaler to 1:256
     T0CONbits.PSA = 0;
     T0CONbits.T0PS2 = 1;
-    T0CONbits.T0PS1 = 0;
+    T0CONbits.T0PS1 = 1;
     T0CONbits.T0PS0 = 1;
     TMR0 = 0;
     T0CONbits.TMR0ON = 1; // Turns on Timer0
@@ -210,6 +237,7 @@ void setupTimer5(void) {
     T5CONbits.T5MOD = 0;
     TMR5 = 0;
     T5CONbits.TMR5ON = 1;
+    
 }
 
 void SPI_Init_Master() {
@@ -280,6 +308,41 @@ void setupUART(void) {
     PIE1bits.RCIE = 1; // Enable Receive Interrupt
     PIE1bits.TXIE = 0; // Enable Transmit Interrupt
     SPBRG = 31;        // 9600 baud rate @20Mhz clock freq
+}
+
+void setupPWM(void) {
+    // PWM_period = [(PR2) + 1]*4*Tosc*(TMR2_pre)
+    TRISCbits.RC2 = 0;
+    PR2 = 0xFF;
+    setupTimer2();
+    // PWM mode on
+    CCP1CONbits.CCP1M3 = 1;
+    CCP1CONbits.CCP1M2 = 1;
+    // Setup RC0, RC1 for negative direction
+    TRISCbits.RC0 = 0;
+    TRISCbits.RC1 = 0;
+    PORTCbits.RC0 = 0;
+    PORTCbits.RC1 = 1;
+}
+
+void setupTimer2(void) {
+    // Post-scaler=0, Pre-scaler=0
+    T2CON = 0;
+    T2CONbits.T2CKPS0 = 1;
+    T2CONbits.T2CKPS1 = 1;
+    T2CONbits.TMR2ON = 1;
+}
+
+unsigned char motorOutMSB(float duty) {
+    int buffer = 10.239*duty;
+    unsigned char bufferChar = buffer >> 2;
+    return bufferChar;
+}
+
+unsigned char motorOutLSB(float duty) {
+    int buffer = 10.239*duty;
+    unsigned char bufferChar = buffer & 0b00000011;
+    return bufferChar;
 }
 
 char rx_char(void) {
