@@ -97,8 +97,8 @@ char *str;                          //Global variable used for interrupt
 unsigned int number = 100;
 unsigned char digit = 0;
 char stringBuffer[20];
-int speed = 0;
-int pre_speed = 0;
+float speed = 0;
+float sum_err = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -114,6 +114,7 @@ void setupTimer2(void);
 void setupPWM(void);
 unsigned char motorOutMSB(float);
 unsigned char motorOutLSB(float);
+float PID(float);
 long RPM_CONSTANT_QEI = 93750;
 
 signed char WriteSPI( unsigned char data_out ) {
@@ -155,26 +156,25 @@ void interrupt ISR() {
     // int motorOut(float duty) { return int(5.12*duty); }
     
     if(IC2QEIE && IC2QEIF) {
-        speed++;
+        speed = speed + 1;
         IC2QEIF = 0;
     }
     if(INTCONbits.TMR0IF) {
-        count++;
-//        speed = speed + (CAP2BUFH << 8) | (CAP2BUFL & 0xff);
-        if (count == 1) {
-            count = 0;
-            PORTBbits.RB6 = 1 - PORTBbits.RB6;
-            count = 0;
-            itoa(stringBuffer,speed*17,10);
-    //        itoa(stringBuffer,(int)((float)speed*60.0/4.0),10);
-            int i = 0;
-            while (stringBuffer[i]) {
-                tx_char(stringBuffer[i]);
-                i++;
-            }
-            tx_char(0x0a);
-            speed = 0;
+        PORTBbits.RB6 = 1 - PORTBbits.RB6;
+        speed = speed * 22.7;
+        float refSpeed = 190;
+        CCPR1L = motorOutMSB(PID(refSpeed));
+        CCP1CONbits.DC1B = motorOutLSB(PID(refSpeed));
+        
+        itoa(stringBuffer,speed,10);
+//        itoa(stringBuffer,(int)((float)speed*60.0/4.0),10);
+        int i = 0;
+        while (stringBuffer[i]) {
+            tx_char(stringBuffer[i]);
+            i++;
         }
+        tx_char(0x0a);
+        speed = 0;
         INTCONbits.TMR0IF = 0;
     }
 }
@@ -191,8 +191,7 @@ void main(void) {
     setupPWM();
     
     while(1) {
-        CCPR1L = motorOutMSB(100);
-        CCP1CONbits.DC1B = motorOutLSB(100);
+        
     }
     return;
 }
@@ -321,8 +320,8 @@ void setupPWM(void) {
     // Setup RC0, RC1 for negative direction
     TRISCbits.RC0 = 0;
     TRISCbits.RC1 = 0;
-    PORTCbits.RC0 = 0;
-    PORTCbits.RC1 = 1;
+    PORTCbits.RC0 = 1;
+    PORTCbits.RC1 = 0;
 }
 
 void setupTimer2(void) {
@@ -343,6 +342,26 @@ unsigned char motorOutLSB(float duty) {
     int buffer = 10.239*duty;
     unsigned char bufferChar = buffer & 0b00000011;
     return bufferChar;
+}
+
+float PID(float ref) {
+    float duty = 0;
+    float Kp = 2.5;
+    float Ki = 0.017;
+    float err = speed - ref;
+    sum_err = sum_err + err;
+    duty = Kp*err + Ki*sum_err;
+    if(duty>100) duty = 100;
+    if(duty<-100) duty = -100;
+    if(duty<0) {
+        PORTCbits.RC0 = 1;
+        PORTCbits.RC1 = 0;   
+    }
+    if(duty>0) {
+        PORTCbits.RC0 = 0;
+        PORTCbits.RC1 = 1; 
+    }
+    return abs(duty);
 }
 
 char rx_char(void) {

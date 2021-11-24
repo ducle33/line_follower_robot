@@ -5265,8 +5265,8 @@ char *str;
 unsigned int number = 100;
 unsigned char digit = 0;
 char stringBuffer[20];
-int speed = 0;
-int pre_speed = 0;
+float speed = 0;
+float sum_err = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -5282,6 +5282,7 @@ void setupTimer2(void);
 void setupPWM(void);
 unsigned char motorOutMSB(float);
 unsigned char motorOutLSB(float);
+float PID(float);
 long RPM_CONSTANT_QEI = 93750;
 
 signed char WriteSPI( unsigned char data_out ) {
@@ -5316,19 +5317,19 @@ return 0;
 
 void interrupt ISR() {
 
-# 157
+# 158
 if(IC2QEIE && IC2QEIF) {
-speed++;
+speed = speed + 1;
 IC2QEIF = 0;
 }
 if(INTCONbits.TMR0IF) {
-count++;
-
-if (count == 1) {
-count = 0;
 PORTBbits.RB6 = 1 - PORTBbits.RB6;
-count = 0;
-itoa(stringBuffer,speed*17,10);
+speed = speed * 22.7;
+float refSpeed = 190;
+CCPR1L = motorOutMSB(PID(refSpeed));
+CCP1CONbits.DC1B = motorOutLSB(PID(refSpeed));
+
+itoa(stringBuffer,speed,10);
 
 int i = 0;
 while (stringBuffer[i]) {
@@ -5337,7 +5338,6 @@ i++;
 }
 tx_char(0x0a);
 speed = 0;
-}
 INTCONbits.TMR0IF = 0;
 }
 }
@@ -5354,8 +5354,7 @@ setupTimer0();
 setupPWM();
 
 while(1) {
-CCPR1L = motorOutMSB(100);
-CCP1CONbits.DC1B = motorOutLSB(100);
+
 }
 return;
 }
@@ -5414,13 +5413,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 254
+# 253
 PIR1bits.SSPIF=0;
 
-# 258
+# 257
 ADCON0=0;
 
-# 260
+# 259
 ADCON1=0x0F;
 }
 
@@ -5436,13 +5435,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 275
+# 274
 PIR1bits.SSPIF=0;
 
-# 279
+# 278
 ADCON0=0;
 
-# 281
+# 280
 ADCON1=0x0F;
 }
 
@@ -5486,8 +5485,8 @@ CCP1CONbits.CCP1M2 = 1;
 
 TRISCbits.RC0 = 0;
 TRISCbits.RC1 = 0;
-PORTCbits.RC0 = 0;
-PORTCbits.RC1 = 1;
+PORTCbits.RC0 = 1;
+PORTCbits.RC1 = 0;
 }
 
 void setupTimer2(void) {
@@ -5508,6 +5507,26 @@ unsigned char motorOutLSB(float duty) {
 int buffer = 10.239*duty;
 unsigned char bufferChar = buffer & 0b00000011;
 return bufferChar;
+}
+
+float PID(float ref) {
+float duty = 0;
+float Kp = 2.5;
+float Ki = 0.017;
+float err = speed - ref;
+sum_err = sum_err + err;
+duty = Kp*err + Ki*sum_err;
+if(duty>100) duty = 100;
+if(duty<-100) duty = -100;
+if(duty<0) {
+PORTCbits.RC0 = 1;
+PORTCbits.RC1 = 0;
+}
+if(duty>0) {
+PORTCbits.RC0 = 0;
+PORTCbits.RC1 = 1;
+}
+return abs(duty);
 }
 
 char rx_char(void) {
