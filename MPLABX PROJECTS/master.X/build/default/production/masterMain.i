@@ -5266,6 +5266,8 @@ unsigned char digit = 0;
 unsigned char stringBuffer[20];
 int speedM1 = 0;
 int speedM2 = 0;
+int ATransmiting = 0;
+int BTransmiting = 1;
 
 
 void swap(char *, char *);
@@ -5332,6 +5334,7 @@ if ((int)tempM1==0)
 speedM1 = speedM1;
 else
 speedM1 = (int)tempM1;
+tx_char(0x41);
 itoa(stringBuffer,speedM1,10);
 int i = 0;
 while (stringBuffer[i]) {
@@ -5347,8 +5350,13 @@ if ((int)tempM2==0)
 speedM2 = speedM2;
 else
 speedM2 = (int)tempM2;
-
-# 178
+tx_char(0x42);
+itoa(stringBuffer,speedM2,10);
+int i = 0;
+while (stringBuffer[i]) {
+tx_char(stringBuffer[i]);
+i++;
+}
 tx_char(0x0a);
 }
 
@@ -5356,15 +5364,16 @@ tx_char(0x0a);
 void interrupt ISR() {
 if(INTCONbits.TMR0IF == 1) {
 count++;
-if (count == 40) {
+if (count == 199) {
+
+UARTM2();
+}
+if (count == 200) {
 
 UARTM1();
 count = 0;
 }
-if (count == 20) {
 
-UARTM2();
-}
 }
 
 if(RCIF == 1) {
@@ -5458,13 +5467,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x20;
 
-# 287
+# 292
 PIR1bits.SSPIF=0;
 
-# 291
+# 296
 ADCON0=0;
 
-# 293
+# 298
 ADCON1=0x0F;
 }
 
@@ -5480,13 +5489,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 308
+# 313
 PIR1bits.SSPIF=0;
 PIE1bits.SSPIE=1;
 
-# 313
+# 318
 ADCON0=0;
 
-# 315
+# 320
 ADCON1=0x0F;
 }

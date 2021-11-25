@@ -97,10 +97,9 @@ char *str;                          //Global variable used for interrupt
 unsigned int number = 100;
 unsigned char digit = 0;
 char stringBuffer[20];
-float speed = 0;
+float speed = 0; float a = 0; float b = 0;
 float sum_err = 0;
-char setNegative = 0;
-char setPositive = 0;
+int speedPID = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -140,6 +139,23 @@ unsigned char ReadSPI( void ) {
     return (SSPBUF);       // return with byte read
 }
 
+float medianF(float a, float b, float c) {
+    float middle;
+    if ((a <= b) && (a <= c))
+    {
+      middle = (b <= c) ? b : c;
+    }
+    else if ((b <= a) && (b <= c))
+    {
+      middle = (a <= c) ? a : c;
+    }
+    else
+    {
+      middle = (a <= b) ? a : b;
+    }
+    return middle;
+}
+
 void interrupt ISR() {
     
     if(IC2QEIE && IC2QEIF) {
@@ -147,21 +163,25 @@ void interrupt ISR() {
         IC2QEIF = 0;
     }
     if(INTCONbits.TMR0IF) {
-        speed = speed*16;
-        int speedInt = (int)speed;
-        CCPR1L = motorOutMSB(PID(180));
-        CCP1CONbits.DC1B = motorOutLSB(PID(180));
-        WriteSPI(speedInt);
-        
-        
-//        itoa(stringBuffer,speed,10);
-//        int i = 0;
-//        while (stringBuffer[i]) {
-//            tx_char(stringBuffer[i]);
-//            i++;
-//        }
-//        tx_char(0x0a);
-        speed = 0;
+        if (count == 1) {
+            a = speed;
+            speed = 0;
+        }
+        if (count == 2) {
+            b = speed;
+            speed = 0;
+        }
+        if (count == 3) {
+            count = 0;
+            speed = medianF(a,b,speed);
+            speedPID = (int)(speed*11.4);
+            WriteSPI(speedPID);
+            CCPR1L = motorOutMSB(PID(180));
+            CCP1CONbits.DC1B = motorOutLSB(PID(180));
+            speed = 0;
+            count = 0;
+        }
+        count++;
         INTCONbits.TMR0IF = 0;
     }
 }
@@ -183,8 +203,8 @@ void main(void) {
 
 
 void setupQEI(void) {
-    DFLTCONbits.FLT3EN = 1;
-    DFLTCONbits.FLT2EN = 1;
+    DFLTCONbits.FLT3EN = 0;
+    DFLTCONbits.FLT2EN = 0;
     DFLTCONbits.FLTCK = 0;
     
     QEICONbits.nVELM = 1; // Disable Velocity Mode
@@ -318,7 +338,7 @@ float PID(int ref) {
     float duty = 0;
     float Kp = 5;
     float Ki = 0.007;
-    float err = speed - ref;
+    float err = speedPID - ref;
     sum_err = sum_err + err;
     duty = Kp*err + Ki*sum_err;
     if(duty>100) duty = 100;

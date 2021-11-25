@@ -35,25 +35,25 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "91 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\Umul64.c
 [v ___omul __omul `(ul  1 e 4 0 ]
-"133 C:\Users\david\OneDrive\Desktop\Protheus Sim\MPLABX PROJECTS\master.X\masterMain.c
+"135 C:\Users\david\OneDrive\Desktop\Protheus Sim\MPLABX PROJECTS\master.X\masterMain.c
 [v _ReadSPI ReadSPI `(uc  1 e 1 0 ]
-"150
+"152
 [v _UARTM1 UARTM1 `(v  1 e 1 0 ]
-"165
+"168
 [v _UARTM2 UARTM2 `(v  1 e 1 0 ]
-"182
+"186
 [v _ISR ISR `II(v  1 e 1 0 ]
-"207
+"212
 [v _main main `(v  1 e 1 0 ]
-"224
+"229
 [v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
-"250
+"255
 [v _setupUART setupUART `(v  1 e 1 0 ]
-"263
-[v _rx_char rx_char `(uc  1 e 1 0 ]
 "268
-[v _tx_char tx_char `(v  1 e 1 0 ]
+[v _rx_char rx_char `(uc  1 e 1 0 ]
 "273
+[v _tx_char tx_char `(v  1 e 1 0 ]
+"278
 [v _SPI_Init_Master SPI_Init_Master `(v  1 e 1 0 ]
 [s S274 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
@@ -385,61 +385,63 @@
 [v _speedM1 speedM1 `i  1 e 2 0 ]
 "90
 [v _speedM2 speedM2 `i  1 e 2 0 ]
-"207
+"212
 [v _main main `(v  1 e 1 0 ]
 {
-"222
+"227
 } 0
-"250
+"255
 [v _setupUART setupUART `(v  1 e 1 0 ]
-{
-"261
-} 0
-"224
-[v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
-{
-"236
-} 0
-"273
-[v _SPI_Init_Master SPI_Init_Master `(v  1 e 1 0 ]
-{
-"294
-} 0
-"182
-[v _ISR ISR `II(v  1 e 1 0 ]
-{
-"197
-[v ISR@c c `uc  1 a 1 27 ]
-"205
-} 0
-"263
-[v _rx_char rx_char `(uc  1 e 1 0 ]
 {
 "266
 } 0
-"165
-[v _UARTM2 UARTM2 `(v  1 e 1 0 ]
+"229
+[v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
 {
-"166
-[v UARTM2@tempM2 tempM2 `uc  1 a 1 2 ]
-"179
+"241
 } 0
-"150
-[v _UARTM1 UARTM1 `(v  1 e 1 0 ]
+"278
+[v _SPI_Init_Master SPI_Init_Master `(v  1 e 1 0 ]
 {
-"158
-[v UARTM1@i i `i  1 a 2 22 ]
-"151
-[v UARTM1@tempM1 tempM1 `uc  1 a 1 24 ]
-"164
+"299
+} 0
+"186
+[v _ISR ISR `II(v  1 e 1 0 ]
+{
+"202
+[v ISR@c c `uc  1 a 1 27 ]
+"210
 } 0
 "268
+[v _rx_char rx_char `(uc  1 e 1 0 ]
+{
+"271
+} 0
+"168
+[v _UARTM2 UARTM2 `(v  1 e 1 0 ]
+{
+"177
+[v UARTM2@i i `i  1 a 2 22 ]
+"169
+[v UARTM2@tempM2 tempM2 `uc  1 a 1 24 ]
+"183
+} 0
+"152
+[v _UARTM1 UARTM1 `(v  1 e 1 0 ]
+{
+"161
+[v UARTM1@i i `i  1 a 2 22 ]
+"153
+[v UARTM1@tempM1 tempM1 `uc  1 a 1 24 ]
+"167
+} 0
+"273
 [v _tx_char tx_char `(v  1 e 1 0 ]
 {
 [v tx_char@a a `uc  1 a 1 wreg ]
 [v tx_char@a a `uc  1 a 1 wreg ]
 [v tx_char@a a `uc  1 a 1 0 ]
-"271
+"276
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\itoa.c
 [v _itoa itoa `(*.39uc  1 e 2 0 ]
@@ -484,9 +486,9 @@
 [v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
 "30
 } 0
-"133 C:\Users\david\OneDrive\Desktop\Protheus Sim\MPLABX PROJECTS\master.X\masterMain.c
+"135 C:\Users\david\OneDrive\Desktop\Protheus Sim\MPLABX PROJECTS\master.X\masterMain.c
 [v _ReadSPI ReadSPI `(uc  1 e 1 0 ]
 {
 [v ReadSPI@a a `i  1 p 2 0 ]
-"148
+"150
 } 0

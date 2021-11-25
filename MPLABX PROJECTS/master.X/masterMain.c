@@ -88,6 +88,8 @@ unsigned char digit = 0;
 unsigned char stringBuffer[20];
 int speedM1 = 0;
 int speedM2 = 0;
+int ATransmiting = 0;
+int BTransmiting = 1;
 
 
 void swap(char *, char *);
@@ -154,6 +156,7 @@ void UARTM1(void) {
         speedM1 = speedM1;
     else
         speedM1 = (int)tempM1;
+    tx_char(0x41);
     itoa(stringBuffer,speedM1,10);
     int i = 0;
     while (stringBuffer[i]) {
@@ -169,12 +172,13 @@ void UARTM2(void) {
         speedM2 = speedM2;
     else
         speedM2 = (int)tempM2;
-//    itoa(stringBuffer,speedM2,10);
-//    int i = 0;
-//    while (stringBuffer[i]) {
-//        tx_char(stringBuffer[i]);
-//        i++;
-//    }
+    tx_char(0x42);
+    itoa(stringBuffer,speedM2,10);
+    int i = 0;
+    while (stringBuffer[i]) {
+        tx_char(stringBuffer[i]);
+        i++;
+    }
     tx_char(0x0a);
 }
 
@@ -182,15 +186,16 @@ void UARTM2(void) {
 void interrupt ISR() {
     if(INTCONbits.TMR0IF == 1) {
         count++;
-        if (count == 40) {
+        if (count == 199) {
+            
+            UARTM2();
+        }
+        if (count == 200) {
             
             UARTM1();
             count = 0;
         }
-        if (count == 20) {
-            
-            UARTM2();
-        }
+        
     }
     
     if(RCIF == 1) {

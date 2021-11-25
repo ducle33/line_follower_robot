@@ -35,29 +35,31 @@
 [v ___omul __omul `(ul  1 e 4 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
 [v ___xxtofl __xxtofl `(d  1 e 4 0 ]
-"120 C:\Users\david\OneDrive\Desktop\Protheus Sim\MPLABX PROJECTS\motor.X\motorMain.c
+"119 C:\Users\david\OneDrive\Desktop\Protheus Sim\MPLABX PROJECTS\motor.X\motorMain.c
 [v _WriteSPI WriteSPI `(c  1 e 1 0 ]
-"143
+"142
+[v _medianF medianF `(f  1 e 4 0 ]
+"159
 [v _ISR ISR `II(v  1 e 1 0 ]
-"169
+"189
 [v _main main `(v  1 e 1 0 ]
-"185
+"205
 [v _setupQEI setupQEI `(v  1 e 1 0 ]
-"203
+"223
 [v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
-"217
+"237
 [v _setupTimer5 setupTimer5 `(v  1 e 1 0 ]
-"247
+"267
 [v _SPI_Init_Slave SPI_Init_Slave `(v  1 e 1 0 ]
-"281
+"301
 [v _setupPWM setupPWM `(v  1 e 1 0 ]
-"297
-[v _setupTimer2 setupTimer2 `(v  1 e 1 0 ]
-"305
-[v _motorOutMSB motorOutMSB `(uc  1 e 1 0 ]
-"311
-[v _motorOutLSB motorOutLSB `(uc  1 e 1 0 ]
 "317
+[v _setupTimer2 setupTimer2 `(v  1 e 1 0 ]
+"325
+[v _motorOutMSB motorOutMSB `(uc  1 e 1 0 ]
+"331
+[v _motorOutLSB motorOutLSB `(uc  1 e 1 0 ]
+"337
 [v _PID PID `(f  1 e 4 0 ]
 [s S207 . 1 `uc 1 FLTCK 1 0 :3:0 
 `uc 1 FLT1EN 1 0 :1:3 
@@ -471,97 +473,112 @@
 [v _RCIF RCIF `VEb  1 e 0 @31989 ]
 "9433
 [v _TRMT TRMT `VEb  1 e 0 @32097 ]
-"100 C:\Users\david\OneDrive\Desktop\Protheus Sim\MPLABX PROJECTS\motor.X\motorMain.c
+"94 C:\Users\david\OneDrive\Desktop\Protheus Sim\MPLABX PROJECTS\motor.X\motorMain.c
+[v _count count `ui  1 e 2 0 ]
+"100
 [v _speed speed `f  1 e 4 0 ]
+[v _a a `f  1 e 4 0 ]
+[v _b b `f  1 e 4 0 ]
 "101
 [v _sum_err sum_err `f  1 e 4 0 ]
-"169
+"102
+[v _speedPID speedPID `i  1 e 2 0 ]
+"189
 [v _main main `(v  1 e 1 0 ]
 {
-"182
+"202
 } 0
-"217
+"237
 [v _setupTimer5 setupTimer5 `(v  1 e 1 0 ]
 {
-"225
+"245
 } 0
-"203
+"223
 [v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
 {
-"215
+"235
 } 0
-"185
+"205
 [v _setupQEI setupQEI `(v  1 e 1 0 ]
 {
-"201
+"221
 } 0
-"281
+"301
 [v _setupPWM setupPWM `(v  1 e 1 0 ]
 {
-"295
-} 0
-"297
-[v _setupTimer2 setupTimer2 `(v  1 e 1 0 ]
-{
-"303
-} 0
-"247
-[v _SPI_Init_Slave SPI_Init_Slave `(v  1 e 1 0 ]
-{
-"266
-} 0
-"143
-[v _ISR ISR `II(v  1 e 1 0 ]
-{
-"151
-[v ISR@speedInt speedInt `i  1 a 2 0 ]
-"167
-} 0
-"305
-[v _motorOutMSB motorOutMSB `(uc  1 e 1 0 ]
-{
-"306
-[v motorOutMSB@buffer buffer `i  1 a 2 87 ]
-"307
-[v motorOutMSB@bufferChar bufferChar `uc  1 a 1 89 ]
-"305
-[v motorOutMSB@duty duty `f  1 p 4 81 ]
-"309
-} 0
-"311
-[v _motorOutLSB motorOutLSB `(uc  1 e 1 0 ]
-{
-"312
-[v motorOutLSB@buffer buffer `i  1 a 2 85 ]
-"313
-[v motorOutLSB@bufferChar bufferChar `uc  1 a 1 87 ]
-"311
-[v motorOutLSB@duty duty `f  1 p 4 81 ]
 "315
 } 0
-"120
+"317
+[v _setupTimer2 setupTimer2 `(v  1 e 1 0 ]
+{
+"323
+} 0
+"267
+[v _SPI_Init_Slave SPI_Init_Slave `(v  1 e 1 0 ]
+{
+"286
+} 0
+"159
+[v _ISR ISR `II(v  1 e 1 0 ]
+{
+"187
+} 0
+"325
+[v _motorOutMSB motorOutMSB `(uc  1 e 1 0 ]
+{
+"326
+[v motorOutMSB@buffer buffer `i  1 a 2 81 ]
+"327
+[v motorOutMSB@bufferChar bufferChar `uc  1 a 1 83 ]
+"325
+[v motorOutMSB@duty duty `f  1 p 4 75 ]
+"329
+} 0
+"331
+[v _motorOutLSB motorOutLSB `(uc  1 e 1 0 ]
+{
+"332
+[v motorOutLSB@buffer buffer `i  1 a 2 79 ]
+"333
+[v motorOutLSB@bufferChar bufferChar `uc  1 a 1 81 ]
+"331
+[v motorOutLSB@duty duty `f  1 p 4 75 ]
+"335
+} 0
+"142
+[v _medianF medianF `(f  1 e 4 0 ]
+{
+"143
+[v medianF@middle middle `f  1 a 4 24 ]
+"142
+[v medianF@a a `f  1 p 4 12 ]
+[v medianF@b b `f  1 p 4 16 ]
+[v medianF@c c `f  1 p 4 20 ]
+"157
+} 0
+"119
 [v _WriteSPI WriteSPI `(c  1 e 1 0 ]
 {
 [v WriteSPI@data_out data_out `uc  1 a 1 wreg ]
 [v WriteSPI@data_out data_out `uc  1 a 1 wreg ]
-"122
+"121
 [v WriteSPI@data_out data_out `uc  1 a 1 0 ]
-"131
+"130
 } 0
-"317
+"337
 [v _PID PID `(f  1 e 4 0 ]
 {
-"318
-[v PID@duty duty `f  1 a 4 77 ]
-"321
-[v PID@err err `f  1 a 4 73 ]
-"320
-[v PID@Ki Ki `f  1 a 4 69 ]
-"319
-[v PID@Kp Kp `f  1 a 4 65 ]
-"317
-[v PID@ref ref `i  1 p 2 61 ]
-"335
+"338
+[v PID@duty duty `f  1 a 4 71 ]
+"341
+[v PID@err err `f  1 a 4 67 ]
+"340
+[v PID@Ki Ki `f  1 a 4 63 ]
+"339
+[v PID@Kp Kp `f  1 a 4 59 ]
+"337
+[v PID@ref ref `i  1 p 2 53 ]
+"355
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
@@ -594,43 +611,20 @@
 [v ___fltol@f1 f1 `d  1 p 4 25 ]
 "70
 } 0
-"245 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcadd.c
-[v ___flsub __flsub `(d  1 e 4 0 ]
-{
-[v ___flsub@b b `d  1 p 4 53 ]
-[v ___flsub@a a `d  1 p 4 57 ]
-"250
-} 0
-"10
-[v ___fladd __fladd `(d  1 e 4 0 ]
-{
-"17
-[v ___fladd@grs grs `uc  1 a 1 40 ]
-"15
-[v ___fladd@bexp bexp `uc  1 a 1 39 ]
-"16
-[v ___fladd@aexp aexp `uc  1 a 1 38 ]
-"13
-[v ___fladd@signs signs `uc  1 a 1 37 ]
-"10
-[v ___fladd@b b `d  1 p 4 25 ]
-[v ___fladd@a a `d  1 p 4 29 ]
-"237
-} 0
 "8 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S1352 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S1358 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S1357 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S1360 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1352 1 fAsBytes 4 0 `S1357 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S1360  1 a 4 19 ]
+[s S1363 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S1366 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1358 1 fAsBytes 4 0 `S1363 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S1366  1 a 4 19 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 13 ]
-[s S1428 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S1434 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S1431 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1428 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1431  1 a 2 23 ]
+[u S1437 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1434 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1437  1 a 2 23 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 18 ]
 "11
@@ -648,4 +642,20 @@
 [v ___flge@ff1 ff1 `d  1 p 4 0 ]
 [v ___flge@ff2 ff2 `d  1 p 4 4 ]
 "19
+} 0
+"10 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+{
+"17
+[v ___fladd@grs grs `uc  1 a 1 40 ]
+"15
+[v ___fladd@bexp bexp `uc  1 a 1 39 ]
+"16
+[v ___fladd@aexp aexp `uc  1 a 1 38 ]
+"13
+[v ___fladd@signs signs `uc  1 a 1 37 ]
+"10
+[v ___fladd@b b `d  1 p 4 25 ]
+[v ___fladd@a a `d  1 p 4 29 ]
+"237
 } 0

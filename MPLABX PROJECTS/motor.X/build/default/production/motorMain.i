@@ -5265,10 +5265,9 @@ char *str;
 unsigned int number = 100;
 unsigned char digit = 0;
 char stringBuffer[20];
-float speed = 0;
+float speed = 0; float a = 0; float b = 0;
 float sum_err = 0;
-char setNegative = 0;
-char setPositive = 0;
+int speedPID = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -5308,6 +5307,23 @@ while(!PIR1bits.SSPIF);
 return (SSPBUF);
 }
 
+float medianF(float a, float b, float c) {
+float middle;
+if ((a <= b) && (a <= c))
+{
+middle = (b <= c) ? b : c;
+}
+else if ((b <= a) && (b <= c))
+{
+middle = (a <= c) ? a : c;
+}
+else
+{
+middle = (a <= b) ? a : b;
+}
+return middle;
+}
+
 void interrupt ISR() {
 
 if(IC2QEIE && IC2QEIF) {
@@ -5315,14 +5331,25 @@ speed = speed + 1;
 IC2QEIF = 0;
 }
 if(INTCONbits.TMR0IF) {
-speed = speed*16;
-int speedInt = (int)speed;
+if (count == 1) {
+a = speed;
+speed = 0;
+}
+if (count == 2) {
+b = speed;
+speed = 0;
+}
+if (count == 3) {
+count = 0;
+speed = medianF(a,b,speed);
+speedPID = (int)(speed*11.4);
+WriteSPI(speedPID);
 CCPR1L = motorOutMSB(PID(180));
 CCP1CONbits.DC1B = motorOutLSB(PID(180));
-WriteSPI(speedInt);
-
-# 164
 speed = 0;
+count = 0;
+}
+count++;
 INTCONbits.TMR0IF = 0;
 }
 }
@@ -5344,8 +5371,8 @@ return;
 
 
 void setupQEI(void) {
-DFLTCONbits.FLT3EN = 1;
-DFLTCONbits.FLT2EN = 1;
+DFLTCONbits.FLT3EN = 0;
+DFLTCONbits.FLT2EN = 0;
 DFLTCONbits.FLTCK = 0;
 
 QEICONbits.nVELM = 1;
@@ -5396,13 +5423,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 238
+# 258
 PIR1bits.SSPIF=0;
 
-# 242
+# 262
 ADCON0=0;
 
-# 244
+# 264
 ADCON1=0x0F;
 }
 
@@ -5418,13 +5445,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 259
+# 279
 PIR1bits.SSPIF=0;
 
-# 263
+# 283
 ADCON0=0;
 
-# 265
+# 285
 ADCON1=0x0F;
 }
 
@@ -5481,7 +5508,7 @@ float PID(int ref) {
 float duty = 0;
 float Kp = 5;
 float Ki = 0.007;
-float err = speed - ref;
+float err = speedPID - ref;
 sum_err = sum_err + err;
 duty = Kp*err + Ki*sum_err;
 if(duty>100) duty = 100;
