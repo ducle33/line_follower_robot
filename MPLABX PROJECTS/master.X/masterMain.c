@@ -85,7 +85,9 @@ unsigned int count2 = 0;
 char *str;                          //Global variable used for interrupt
 unsigned int number = 100;
 unsigned char digit = 0;
-char stringBuffer[20];
+unsigned char stringBuffer[20];
+int speedM1 = 0;
+int speedM2 = 0;
 
 
 void swap(char *, char *);
@@ -114,6 +116,7 @@ int countDigit(unsigned int n) {
 }
 
 signed char WriteSPI( unsigned char data_out ) {
+    PORTCbits.RC2 = 0;
     unsigned char TempVar;
     TempVar = SSPBUF;           // Clears BF
     PIR1bits.SSPIF = 0;         // Clear interrupt flag
@@ -123,55 +126,70 @@ signed char WriteSPI( unsigned char data_out ) {
         return -1;              // if WCOL bit is set return negative #
     else
         while( !PIR1bits.SSPIF );  // wait until bus cycle complete
+    PORTCbits.RC2 = 1;
     return 0;                // if WCOL bit is not set return non-negative#
 }
 
-unsigned char ReadSPI(void) {
+unsigned char ReadSPI(int a) {
+    if(a==1)
+        PORTCbits.RC2 = 0;
+    if(a==2)
+        PORTCbits.RC1 = 0;
     unsigned char TempVar;
     TempVar = SSPBUF;        // Clear BF
     PIR1bits.SSPIF = 0;      // Clear interrupt flag
     SSPBUF = 0x00;           // initiate bus cycle
     while(!PIR1bits.SSPIF);  // wait until cycle complete
+    if(a==1)
+        PORTCbits.RC2 = 1;
+    if(a==2)
+        PORTCbits.RC1 = 1;
     return (SSPBUF);       // return with byte read
 }
 
-char DataRdySPI( void ) {
-    if (SSPSTATbits.BF)
-        return 1;                // data in SSPBUF register
+void UARTM1(void) {
+    unsigned char tempM1;
+    tempM1 = ReadSPI(1);
+    if ((int)tempM1==0)
+        speedM1 = speedM1;
     else
-        return 0;                 // no data in SSPBUF register
+        speedM1 = (int)tempM1;
+    itoa(stringBuffer,speedM1,10);
+    int i = 0;
+    while (stringBuffer[i]) {
+        tx_char(stringBuffer[i]);
+        i++;
+    }
+    tx_char(0x0a);
+}
+void UARTM2(void) {
+    unsigned char tempM2;
+    tempM2 = ReadSPI(2);
+    if ((int)tempM2==0)
+        speedM2 = speedM2;
+    else
+        speedM2 = (int)tempM2;
+//    itoa(stringBuffer,speedM2,10);
+//    int i = 0;
+//    while (stringBuffer[i]) {
+//        tx_char(stringBuffer[i]);
+//        i++;
+//    }
+    tx_char(0x0a);
 }
 
-unsigned char transferDataSPI(void) {
-    PORTCbits.RC2 = 0;
-    unsigned char temp;
-    WriteSPI(0xEF);         // Send a byte
-    while(!DataRdySPI());   // wait for a data to arrive
-    temp = ReadSPI();
-    PORTCbits.RC2 = 1;
-    return temp;
-}
-
-void transferDataUART(char temp) {
-
-}
 
 void interrupt ISR() {
     if(INTCONbits.TMR0IF == 1) {
         count++;
-        if (count == 30000) {
-            char temp; 
-            temp = transferDataSPI();
-            PORTBbits.RB6 = 1 - PORTBbits.RB6;
-            itoa(stringBuffer,239,10);
-            int i = 0;
-            while (stringBuffer[i]) {
-                tx_char(stringBuffer[i]);
-                i++;
-            }
-            tx_char(0x0a);
-            tx_char(temp);
+        if (count == 40) {
+            
+            UARTM1();
             count = 0;
+        }
+        if (count == 20) {
+            
+            UARTM2();
         }
     }
     
@@ -194,10 +212,11 @@ void main(void) {
     PORTBbits.RB6 = 1;
     TRISCbits.RC2 = 0;
     PORTCbits.RC2 = 1;
+    TRISCbits.RC1 = 0;
+    PORTCbits.RC1 = 1;
     SPI_Init_Master();
     
     while(1) {
-        
     }
     return;
 }
@@ -294,21 +313,4 @@ void SPI_Init_Slave() {
     ADCON0=0;			/* This is for de-multiplexed the SCL
 				and SDI from analog pins*/
     ADCON1=0x0F;		/* This makes all pins as digital I/O */    
-}
-
-void SPI_Write(unsigned char x) {
-    unsigned char data_flush;
-    SSPBUF=x;			/* Copy data in SSBUF to transmit */
-
-    while(!PIR1bits.SSPIF);	/* Wait for complete 1 byte transmission */
-    PIR1bits.SSPIF=0;		/* Clear SSPIF flag */
-    data_flush=SSPBUF;		/* Flush the data */
-    
-}
-
-unsigned char SPI_Read() {    
-    SSPBUF=0xff;		/* Copy flush data in SSBUF */
-    while(!PIR1bits.SSPIF);	/* Wait for complete 1 byte transmission */
-    PIR1bits.SSPIF=0;
-    return(SSPBUF);		/* Return received data.*/   
 }

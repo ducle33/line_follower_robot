@@ -5267,6 +5267,8 @@ unsigned char digit = 0;
 char stringBuffer[20];
 float speed = 0;
 float sum_err = 0;
+char setNegative = 0;
+char setPositive = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -5276,13 +5278,11 @@ void setupTimer5(void);
 void setupTimer0(void);
 void SPI_Init_Slave();
 void SPI_Init_Master();
-void SPI_Write(unsigned char);
-unsigned char SPI_Read();
 void setupTimer2(void);
 void setupPWM(void);
 unsigned char motorOutMSB(float);
 unsigned char motorOutLSB(float);
-float PID(float);
+float PID(int);
 long RPM_CONSTANT_QEI = 93750;
 
 signed char WriteSPI( unsigned char data_out ) {
@@ -5303,40 +5303,25 @@ unsigned char ReadSPI( void ) {
 unsigned char TempVar;
 TempVar = SSPBUF;
 PIR1bits.SSPIF = 0;
-SSPBUF = 0xEF;
+SSPBUF = 0x00;
 while(!PIR1bits.SSPIF);
 return (SSPBUF);
 }
 
-unsigned char DataRdySPI( void ) {
-if (SSPSTATbits.BF)
-return 1;
-else
-return 0;
-}
-
 void interrupt ISR() {
 
-# 158
 if(IC2QEIE && IC2QEIF) {
 speed = speed + 1;
 IC2QEIF = 0;
 }
 if(INTCONbits.TMR0IF) {
-PORTBbits.RB6 = 1 - PORTBbits.RB6;
-speed = speed * 22.7;
-float refSpeed = 190;
-CCPR1L = motorOutMSB(PID(refSpeed));
-CCP1CONbits.DC1B = motorOutLSB(PID(refSpeed));
+speed = speed*16;
+int speedInt = (int)speed;
+CCPR1L = motorOutMSB(PID(180));
+CCP1CONbits.DC1B = motorOutLSB(PID(180));
+WriteSPI(speedInt);
 
-itoa(stringBuffer,speed,10);
-
-int i = 0;
-while (stringBuffer[i]) {
-tx_char(stringBuffer[i]);
-i++;
-}
-tx_char(0x0a);
+# 164
 speed = 0;
 INTCONbits.TMR0IF = 0;
 }
@@ -5345,14 +5330,12 @@ INTCONbits.TMR0IF = 0;
 void main(void) {
 
 INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
-TRISBbits.RB6 = 0;
-PORTBbits.RB6 = 1;
-setupUART();
+
 setupQEI();
 setupTimer5();
 setupTimer0();
 setupPWM();
-
+SPI_Init_Slave();
 while(1) {
 
 }
@@ -5413,13 +5396,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 253
+# 238
 PIR1bits.SSPIF=0;
 
-# 257
+# 242
 ADCON0=0;
 
-# 259
+# 244
 ADCON1=0x0F;
 }
 
@@ -5435,30 +5418,14 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 274
+# 259
 PIR1bits.SSPIF=0;
 
-# 278
+# 263
 ADCON0=0;
 
-# 280
+# 265
 ADCON1=0x0F;
-}
-
-void SPI_Write(unsigned char x) {
-unsigned char data_flush;
-SSPBUF=x;
-
-while(!PIR1bits.SSPIF);
-PIR1bits.SSPIF=0;
-data_flush=SSPBUF;
-}
-
-unsigned char SPI_Read() {
-SSPBUF=0xff;
-while(!PIR1bits.SSPIF);
-PIR1bits.SSPIF=0;
-return(SSPBUF);
 }
 
 void setupUART(void) {
@@ -5477,6 +5444,7 @@ SPBRG = 31;
 void setupPWM(void) {
 
 TRISCbits.RC2 = 0;
+TRISCbits.RC6 = 1;
 PR2 = 0xFF;
 setupTimer2();
 
@@ -5509,10 +5477,10 @@ unsigned char bufferChar = buffer & 0b00000011;
 return bufferChar;
 }
 
-float PID(float ref) {
+float PID(int ref) {
 float duty = 0;
-float Kp = 2.5;
-float Ki = 0.017;
+float Kp = 5;
+float Ki = 0.007;
 float err = speed - ref;
 sum_err = sum_err + err;
 duty = Kp*err + Ki*sum_err;

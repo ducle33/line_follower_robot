@@ -99,6 +99,8 @@ unsigned char digit = 0;
 char stringBuffer[20];
 float speed = 0;
 float sum_err = 0;
+char setNegative = 0;
+char setPositive = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -108,13 +110,11 @@ void setupTimer5(void);
 void setupTimer0(void);
 void SPI_Init_Slave();
 void SPI_Init_Master();
-void SPI_Write(unsigned char);
-unsigned char SPI_Read();
 void setupTimer2(void);
 void setupPWM(void);
 unsigned char motorOutMSB(float);
 unsigned char motorOutLSB(float);
-float PID(float);
+float PID(int);
 long RPM_CONSTANT_QEI = 93750;
 
 signed char WriteSPI( unsigned char data_out ) {
@@ -135,45 +135,32 @@ unsigned char ReadSPI( void ) {
     unsigned char TempVar;
     TempVar = SSPBUF;        // Clear BF
     PIR1bits.SSPIF = 0;      // Clear interrupt flag
-    SSPBUF = 0xEF;           // initiate bus cycle
+    SSPBUF = 0x00;           // initiate bus cycle
     while(!PIR1bits.SSPIF);  // wait until cycle complete
     return (SSPBUF);       // return with byte read
 }
 
-unsigned char DataRdySPI( void ) {
-    if (SSPSTATbits.BF)
-        return 1;                // data in SSPBUF register
-    else
-        return 0;                 // no data in SSPBUF register
-}
-
 void interrupt ISR() {
-    
-    // PWM duty cycle = (CCPR1L:CCP1CON,<5:4>)*Tosc*(TMR2_pre)
-    // CCP1CONbits.DC1B1 = 5;
-    // CCP1CONbits.DC1B0 = 4;
-    // => CCPR1L:CCP1CON,<5:4> =  PWM duty cycle / (Tosc*TMR2_pre)
-    // int motorOut(float duty) { return int(5.12*duty); }
     
     if(IC2QEIE && IC2QEIF) {
         speed = speed + 1;
         IC2QEIF = 0;
     }
     if(INTCONbits.TMR0IF) {
-        PORTBbits.RB6 = 1 - PORTBbits.RB6;
-        speed = speed * 22.7;
-        float refSpeed = 190;
-        CCPR1L = motorOutMSB(PID(refSpeed));
-        CCP1CONbits.DC1B = motorOutLSB(PID(refSpeed));
+        speed = speed*16;
+        int speedInt = (int)speed;
+        CCPR1L = motorOutMSB(PID(180));
+        CCP1CONbits.DC1B = motorOutLSB(PID(180));
+        WriteSPI(speedInt);
         
-        itoa(stringBuffer,speed,10);
-//        itoa(stringBuffer,(int)((float)speed*60.0/4.0),10);
-        int i = 0;
-        while (stringBuffer[i]) {
-            tx_char(stringBuffer[i]);
-            i++;
-        }
-        tx_char(0x0a);
+        
+//        itoa(stringBuffer,speed,10);
+//        int i = 0;
+//        while (stringBuffer[i]) {
+//            tx_char(stringBuffer[i]);
+//            i++;
+//        }
+//        tx_char(0x0a);
         speed = 0;
         INTCONbits.TMR0IF = 0;
     }
@@ -182,14 +169,12 @@ void interrupt ISR() {
 void main(void) {
     
     INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
-    TRISBbits.RB6 = 0;
-    PORTBbits.RB6 = 1;
-    setupUART();
+//    setupUART();
     setupQEI();
     setupTimer5();
     setupTimer0();
     setupPWM();
-    
+    SPI_Init_Slave();
     while(1) {
         
     }
@@ -280,22 +265,6 @@ void SPI_Init_Slave() {
     ADCON1=0x0F;		/* This makes all pins as digital I/O */    
 }
 
-void SPI_Write(unsigned char x) {
-    unsigned char data_flush;
-    SSPBUF=x;			/* Copy data in SSBUF to transmit */
-
-    while(!PIR1bits.SSPIF);	/* Wait for complete 1 byte transmission */
-    PIR1bits.SSPIF=0;		/* Clear SSPIF flag */
-    data_flush=SSPBUF;		/* Flush the data */
-}
-
-unsigned char SPI_Read() {    
-    SSPBUF=0xff;		/* Copy flush data in SSBUF */
-    while(!PIR1bits.SSPIF);	/* Wait for complete 1 byte transmission */
-    PIR1bits.SSPIF=0;
-    return(SSPBUF);		/* Return received data.*/   
-}
-
 void setupUART(void) {
     TRISCbits.RC6 = 0;       //direction of Tx and Rx pins
     TRISCbits.RC7 = 1;
@@ -312,6 +281,7 @@ void setupUART(void) {
 void setupPWM(void) {
     // PWM_period = [(PR2) + 1]*4*Tosc*(TMR2_pre)
     TRISCbits.RC2 = 0;
+    TRISCbits.RC6 = 1;
     PR2 = 0xFF;
     setupTimer2();
     // PWM mode on
@@ -344,10 +314,10 @@ unsigned char motorOutLSB(float duty) {
     return bufferChar;
 }
 
-float PID(float ref) {
+float PID(int ref) {
     float duty = 0;
-    float Kp = 2.5;
-    float Ki = 0.017;
+    float Kp = 5;
+    float Ki = 0.007;
     float err = speed - ref;
     sum_err = sum_err + err;
     duty = Kp*err + Ki*sum_err;
@@ -355,11 +325,11 @@ float PID(float ref) {
     if(duty<-100) duty = -100;
     if(duty<0) {
         PORTCbits.RC0 = 1;
-        PORTCbits.RC1 = 0;   
+        PORTCbits.RC1 = 0;
     }
     if(duty>0) {
         PORTCbits.RC0 = 0;
-        PORTCbits.RC1 = 1; 
+        PORTCbits.RC1 = 1;
     }
     return abs(duty);
 }

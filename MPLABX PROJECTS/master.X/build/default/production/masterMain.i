@@ -5263,7 +5263,9 @@ unsigned int count2 = 0;
 char *str;
 unsigned int number = 100;
 unsigned char digit = 0;
-char stringBuffer[20];
+unsigned char stringBuffer[20];
+int speedM1 = 0;
+int speedM2 = 0;
 
 
 void swap(char *, char *);
@@ -5292,6 +5294,7 @@ return count;
 }
 
 signed char WriteSPI( unsigned char data_out ) {
+PORTCbits.RC2 = 0;
 unsigned char TempVar;
 TempVar = SSPBUF;
 PIR1bits.SSPIF = 0;
@@ -5301,55 +5304,66 @@ if (SSPCON1 & 0x80)
 return -1;
 else
 while( !PIR1bits.SSPIF );
+PORTCbits.RC2 = 1;
 return 0;
 }
 
-unsigned char ReadSPI(void) {
+unsigned char ReadSPI(int a) {
+if(a==1)
+PORTCbits.RC2 = 0;
+if(a==2)
+PORTCbits.RC1 = 0;
 unsigned char TempVar;
 TempVar = SSPBUF;
 PIR1bits.SSPIF = 0;
 SSPBUF = 0x00;
 while(!PIR1bits.SSPIF);
+if(a==1)
+PORTCbits.RC2 = 1;
+if(a==2)
+PORTCbits.RC1 = 1;
 return (SSPBUF);
 }
 
-char DataRdySPI( void ) {
-if (SSPSTATbits.BF)
-return 1;
+void UARTM1(void) {
+unsigned char tempM1;
+tempM1 = ReadSPI(1);
+if ((int)tempM1==0)
+speedM1 = speedM1;
 else
-return 0;
-}
-
-unsigned char transferDataSPI(void) {
-PORTCbits.RC2 = 0;
-unsigned char temp;
-WriteSPI(0xEF);
-while(!DataRdySPI());
-temp = ReadSPI();
-PORTCbits.RC2 = 1;
-return temp;
-}
-
-void transferDataUART(char temp) {
-
-}
-
-void interrupt ISR() {
-if(INTCONbits.TMR0IF == 1) {
-count++;
-if (count == 30000) {
-char temp;
-temp = transferDataSPI();
-PORTBbits.RB6 = 1 - PORTBbits.RB6;
-itoa(stringBuffer,239,10);
+speedM1 = (int)tempM1;
+itoa(stringBuffer,speedM1,10);
 int i = 0;
 while (stringBuffer[i]) {
 tx_char(stringBuffer[i]);
 i++;
 }
 tx_char(0x0a);
-tx_char(temp);
+}
+void UARTM2(void) {
+unsigned char tempM2;
+tempM2 = ReadSPI(2);
+if ((int)tempM2==0)
+speedM2 = speedM2;
+else
+speedM2 = (int)tempM2;
+
+# 178
+tx_char(0x0a);
+}
+
+
+void interrupt ISR() {
+if(INTCONbits.TMR0IF == 1) {
+count++;
+if (count == 40) {
+
+UARTM1();
 count = 0;
+}
+if (count == 20) {
+
+UARTM2();
 }
 }
 
@@ -5372,10 +5386,11 @@ setupTimer0();
 PORTBbits.RB6 = 1;
 TRISCbits.RC2 = 0;
 PORTCbits.RC2 = 1;
+TRISCbits.RC1 = 0;
+PORTCbits.RC1 = 1;
 SPI_Init_Master();
 
 while(1) {
-
 }
 return;
 }
@@ -5443,13 +5458,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x20;
 
-# 268
+# 287
 PIR1bits.SSPIF=0;
 
-# 272
+# 291
 ADCON0=0;
 
-# 274
+# 293
 ADCON1=0x0F;
 }
 
@@ -5465,30 +5480,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 289
+# 308
 PIR1bits.SSPIF=0;
 PIE1bits.SSPIE=1;
 
-# 294
+# 313
 ADCON0=0;
 
-# 296
+# 315
 ADCON1=0x0F;
-}
-
-void SPI_Write(unsigned char x) {
-unsigned char data_flush;
-SSPBUF=x;
-
-while(!PIR1bits.SSPIF);
-PIR1bits.SSPIF=0;
-data_flush=SSPBUF;
-
-}
-
-unsigned char SPI_Read() {
-SSPBUF=0xff;
-while(!PIR1bits.SSPIF);
-PIR1bits.SSPIF=0;
-return(SSPBUF);
 }
