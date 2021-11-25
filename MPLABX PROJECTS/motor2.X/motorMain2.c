@@ -100,6 +100,9 @@ char stringBuffer[20];
 float speed = 0; float a = 0; float b = 0;
 float sum_err = 0;
 int speedPID = 0;
+int speedRef = 180;
+int countRef = 0;
+int countRef2 = 0;
 
 void setupUART(void);
 char rx_char(void);
@@ -181,7 +184,19 @@ void interrupt ISR() {
             speed = 0;
             count = 0;
         }
-        count++;
+        count++; countRef++;
+        if (countRef==30) {
+            countRef2++;
+            countRef = 0;
+        }
+        if (countRef2==4) {
+            speedRef = speedRef + 30;
+            countRef2++;
+        }
+        if (countRef2==9) {
+            speedRef = speedRef - 60;
+            countRef2 = 0;
+        }
         INTCONbits.TMR0IF = 0;
     }
     
@@ -349,13 +364,18 @@ unsigned char motorOutLSB(float duty) {
 
 float PID(int ref) {
     float duty = 0;
-    float Kp = 0.75;
+    float Kp = 0.7;
     float Ki = 0.045;
     float err = speedPID - ref;
     sum_err = sum_err + err;
+    // anti-windup
+    if (sum_err > 2000) sum_err = 2000;
+    if (sum_err < -2000) sum_err = -2000;
     duty = Kp*err + Ki*sum_err;
+    // cut-off
     if(duty>100) duty = 100;
     if(duty<-100) duty = -100;
+    // direction change
     if(duty<0) {
         PORTCbits.RC0 = 1;
         PORTCbits.RC1 = 0;

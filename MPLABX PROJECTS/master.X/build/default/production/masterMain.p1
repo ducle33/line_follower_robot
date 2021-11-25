@@ -3910,9 +3910,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;masterMain.c: 188: count++;
 "188
 [e ++ _count -> -> 1 `i `ui ]
-[; ;masterMain.c: 189: if (count == 199) {
+[; ;masterMain.c: 189: if (count == 290) {
 "189
-[e $ ! == _count -> -> 199 `i `ui 346  ]
+[e $ ! == _count -> -> 290 `i `ui 346  ]
 {
 [; ;masterMain.c: 191: UARTM2();
 "191
@@ -3921,9 +3921,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 346 ]
 [; ;masterMain.c: 192: }
-[; ;masterMain.c: 193: if (count == 200) {
+[; ;masterMain.c: 193: if (count == 300) {
 "193
-[e $ ! == _count -> -> 200 `i `ui 347  ]
+[e $ ! == _count -> -> 300 `i `ui 347  ]
 {
 [; ;masterMain.c: 195: UARTM1();
 "195

@@ -186,11 +186,11 @@ void UARTM2(void) {
 void interrupt ISR() {
     if(INTCONbits.TMR0IF == 1) {
         count++;
-        if (count == 199) {
+        if (count == 290) {
             
             UARTM2();
         }
-        if (count == 200) {
+        if (count == 300) {
             
             UARTM1();
             count = 0;

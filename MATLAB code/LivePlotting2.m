@@ -8,9 +8,9 @@ xLabel = 'Elapsed Time (s)';    % x-axis label
 yLabel = 'Wheel Velocity (RPM)';                % y-axis label
 plotGrid = 'on';                % 'off' to turn off grid
 min = 0;                     % set y-min
-max = 200;                      % set y-max
-scrollWidth = 50;               % display period in plot, plot entire data log if <= 0
-delay = .00001;                    % make sure sample faster than resolution
+max = 250;                      % set y-max
+scrollWidth = 5;               % display period in plot, plot entire data log if <= 0
+delay = .0000000001;                    % make sure sample faster than resolution
 
 %Define Function Variables
 time = 0;
@@ -40,15 +40,19 @@ s = serial(serialPort, 'BaudRate', 9600)
 disp('Close Plot to End Session');
 fopen(s);
 
-tic
+firstTime=1;
 
 while ishandle(plotGraph2) && ishandle(plotGraph1)  %Loop when Plot is Active
 
 dat = fscanf(s,'%s'); %Read Data from Serial as Float
 
 if(~isempty(dat) && ischar(dat)) %Make sure Data Type is Correct        
+    if (firstTime)
+        tic
+        firstTime = 0;
+    end
     count = count + 1;    
-    time(count) = toc;    %Extract Elapsed Time in seconds
+    time(count) = toc/10;    %Extract Elapsed Time in seconds
     
     if(dat(1)=='A')
         dat(1) = '0';
@@ -82,7 +86,7 @@ if(~isempty(dat) && ischar(dat)) %Make sure Data Type is Correct
     end
 
     %Allow MATLAB to Update Plot
-    pause(delay);
+    pause(0);
 end
 end
 

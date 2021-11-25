@@ -48,9 +48,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INTCONbits `VS302 ~T0 @X0 0 e@4082 ]
 "5420
 [v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
-"114 motorMain.c
+"117 motorMain.c
 [v _motorOutMSB `(uc ~T0 @X0 0 ef1`f ]
-"116
+"119
 [v _PID `(f ~T0 @X0 0 ef1`i ]
 "5340 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4431.h
 [s S210 :4 `uc 1 :2 `uc 1 ]
@@ -66,18 +66,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S209 . . . . ]
 "5358
 [v _CCP1CONbits `VS209 ~T0 @X0 0 e@4029 ]
-"115 motorMain.c
+"118 motorMain.c
 [v _motorOutLSB `(uc ~T0 @X0 0 ef1`f ]
 [p mainexit ]
-"107
-[v _setupQEI `(v ~T0 @X0 0 ef ]
-"108
-[v _setupTimer5 `(v ~T0 @X0 0 ef ]
-"109
-[v _setupTimer0 `(v ~T0 @X0 0 ef ]
-"113
-[v _setupPWM `(v ~T0 @X0 0 ef ]
 "110
+[v _setupQEI `(v ~T0 @X0 0 ef ]
+"111
+[v _setupTimer5 `(v ~T0 @X0 0 ef ]
+"112
+[v _setupTimer0 `(v ~T0 @X0 0 ef ]
+"116
+[v _setupPWM `(v ~T0 @X0 0 ef ]
+"113
 [v _SPI_Init_Slave `(v ~T0 @X0 0 ef ]
 "58 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4431.h
 [s S2 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -263,7 +263,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
 "6217
 [v _PR2 `Vuc ~T0 @X0 0 e@4043 ]
-"112 motorMain.c
+"115 motorMain.c
 [v _setupTimer2 `(v ~T0 @X0 0 ef ]
 "1274 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4431.h
 [s S45 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -3691,762 +3691,833 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `i
 ]
 [; ;motorMain.c: 102: int speedPID = 0;
-[; ;motorMain.c: 104: void setupUART(void);
-[; ;motorMain.c: 105: char rx_char(void);
-[; ;motorMain.c: 106: void tx_char(char );
-[; ;motorMain.c: 107: void setupQEI(void);
-[; ;motorMain.c: 108: void setupTimer5(void);
-[; ;motorMain.c: 109: void setupTimer0(void);
-[; ;motorMain.c: 110: void SPI_Init_Slave();
-[; ;motorMain.c: 111: void SPI_Init_Master();
-[; ;motorMain.c: 112: void setupTimer2(void);
-[; ;motorMain.c: 113: void setupPWM(void);
-[; ;motorMain.c: 114: unsigned char motorOutMSB(float);
-[; ;motorMain.c: 115: unsigned char motorOutLSB(float);
-[; ;motorMain.c: 116: float PID(int);
-"117
+"103
+[v _speedRef `i ~T0 @X0 1 e ]
+[i _speedRef
+-> 180 `i
+]
+[; ;motorMain.c: 103: int speedRef = 180;
+"104
+[v _countRef `i ~T0 @X0 1 e ]
+[i _countRef
+-> 0 `i
+]
+[; ;motorMain.c: 104: int countRef = 0;
+"105
+[v _countRef2 `i ~T0 @X0 1 e ]
+[i _countRef2
+-> 0 `i
+]
+[; ;motorMain.c: 105: int countRef2 = 0;
+[; ;motorMain.c: 107: void setupUART(void);
+[; ;motorMain.c: 108: char rx_char(void);
+[; ;motorMain.c: 109: void tx_char(char );
+[; ;motorMain.c: 110: void setupQEI(void);
+[; ;motorMain.c: 111: void setupTimer5(void);
+[; ;motorMain.c: 112: void setupTimer0(void);
+[; ;motorMain.c: 113: void SPI_Init_Slave();
+[; ;motorMain.c: 114: void SPI_Init_Master();
+[; ;motorMain.c: 115: void setupTimer2(void);
+[; ;motorMain.c: 116: void setupPWM(void);
+[; ;motorMain.c: 117: unsigned char motorOutMSB(float);
+[; ;motorMain.c: 118: unsigned char motorOutLSB(float);
+[; ;motorMain.c: 119: float PID(int);
+"120
 [v _RPM_CONSTANT_QEI `l ~T0 @X0 1 e ]
 [i _RPM_CONSTANT_QEI
 -> 93750 `l
 ]
-[; ;motorMain.c: 117: long RPM_CONSTANT_QEI = 93750;
-"119
+[; ;motorMain.c: 120: long RPM_CONSTANT_QEI = 93750;
+"122
 [v _WriteSPI `(c ~T0 @X0 1 ef1`uc ]
 {
-[; ;motorMain.c: 119: signed char WriteSPI( unsigned char data_out ) {
+[; ;motorMain.c: 122: signed char WriteSPI( unsigned char data_out ) {
 [e :U _WriteSPI ]
 [v _data_out `uc ~T0 @X0 1 r1 ]
 [f ]
-"120
-[v _TempVar `uc ~T0 @X0 1 a ]
-[; ;motorMain.c: 120: unsigned char TempVar;
-[; ;motorMain.c: 121: TempVar = SSPBUF;
-"121
-[e = _TempVar _SSPBUF ]
-[; ;motorMain.c: 122: PIR1bits.SSPIF = 0;
-"122
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-[; ;motorMain.c: 123: SSPCON1bits.WCOL = 0;
 "123
-[e = . . _SSPCON1bits 0 4 -> -> 0 `i `uc ]
-[; ;motorMain.c: 124: SSPBUF = data_out;
+[v _TempVar `uc ~T0 @X0 1 a ]
+[; ;motorMain.c: 123: unsigned char TempVar;
+[; ;motorMain.c: 124: TempVar = SSPBUF;
 "124
-[e = _SSPBUF _data_out ]
-[; ;motorMain.c: 125: if (SSPCON1 & 0x80)
+[e = _TempVar _SSPBUF ]
+[; ;motorMain.c: 125: PIR1bits.SSPIF = 0;
 "125
-[e $ ! != & -> _SSPCON1 `i -> 128 `i -> 0 `i 315  ]
-[; ;motorMain.c: 126: return -1;
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+[; ;motorMain.c: 126: SSPCON1bits.WCOL = 0;
 "126
+[e = . . _SSPCON1bits 0 4 -> -> 0 `i `uc ]
+[; ;motorMain.c: 127: SSPBUF = data_out;
+"127
+[e = _SSPBUF _data_out ]
+[; ;motorMain.c: 128: if (SSPCON1 & 0x80)
+"128
+[e $ ! != & -> _SSPCON1 `i -> 128 `i -> 0 `i 315  ]
+[; ;motorMain.c: 129: return -1;
+"129
 [e ) -> -U -> 1 `i `c ]
 [e $UE 314  ]
 [e $U 316  ]
-"127
+"130
 [e :U 315 ]
-[; ;motorMain.c: 127: else
-[; ;motorMain.c: 128: while( !PIR1bits.SSPIF );
-"128
+[; ;motorMain.c: 130: else
+[; ;motorMain.c: 131: while( !PIR1bits.SSPIF );
+"131
 [e $U 317  ]
 [e :U 318 ]
 [e :U 317 ]
 [e $ ! != -> . . _PIR1bits 0 3 `i -> -> -> 0 `i `Vuc `i 318  ]
 [e :U 319 ]
 [e :U 316 ]
-[; ;motorMain.c: 129: return 0;
-"129
+[; ;motorMain.c: 132: return 0;
+"132
 [e ) -> -> 0 `i `c ]
 [e $UE 314  ]
-[; ;motorMain.c: 130: }
-"130
+[; ;motorMain.c: 133: }
+"133
 [e :UE 314 ]
 }
-"133
+"136
 [v _ReadSPI `(uc ~T0 @X0 1 ef ]
 {
-[; ;motorMain.c: 133: unsigned char ReadSPI( void ) {
+[; ;motorMain.c: 136: unsigned char ReadSPI( void ) {
 [e :U _ReadSPI ]
 [f ]
-"134
-[v _TempVar `uc ~T0 @X0 1 a ]
-[; ;motorMain.c: 134: unsigned char TempVar;
-[; ;motorMain.c: 135: TempVar = SSPBUF;
-"135
-[e = _TempVar _SSPBUF ]
-[; ;motorMain.c: 136: PIR1bits.SSPIF = 0;
-"136
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-[; ;motorMain.c: 137: SSPBUF = 0x00;
 "137
-[e = _SSPBUF -> -> 0 `i `uc ]
-[; ;motorMain.c: 138: while(!PIR1bits.SSPIF);
+[v _TempVar `uc ~T0 @X0 1 a ]
+[; ;motorMain.c: 137: unsigned char TempVar;
+[; ;motorMain.c: 138: TempVar = SSPBUF;
 "138
+[e = _TempVar _SSPBUF ]
+[; ;motorMain.c: 139: PIR1bits.SSPIF = 0;
+"139
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+[; ;motorMain.c: 140: SSPBUF = 0x00;
+"140
+[e = _SSPBUF -> -> 0 `i `uc ]
+[; ;motorMain.c: 141: while(!PIR1bits.SSPIF);
+"141
 [e $U 321  ]
 [e :U 322 ]
 [e :U 321 ]
 [e $ ! != -> . . _PIR1bits 0 3 `i -> -> -> 0 `i `Vuc `i 322  ]
 [e :U 323 ]
-[; ;motorMain.c: 139: return (SSPBUF);
-"139
+[; ;motorMain.c: 142: return (SSPBUF);
+"142
 [e ) _SSPBUF ]
 [e $UE 320  ]
-[; ;motorMain.c: 140: }
-"140
+[; ;motorMain.c: 143: }
+"143
 [e :UE 320 ]
 }
-"142
+"145
 [v _medianF `(f ~T0 @X0 1 ef3`f`f`f ]
 {
-[; ;motorMain.c: 142: float medianF(float a, float b, float c) {
+[; ;motorMain.c: 145: float medianF(float a, float b, float c) {
 [e :U _medianF ]
 [v _a `f ~T0 @X0 1 r1 ]
 [v _b `f ~T0 @X0 1 r2 ]
 [v _c `f ~T0 @X0 1 r3 ]
 [f ]
-"143
-[v _middle `f ~T0 @X0 1 a ]
-[; ;motorMain.c: 143: float middle;
-[; ;motorMain.c: 144: if ((a <= b) && (a <= c))
-"144
-[e $ ! && <= _a _b <= _a _c 325  ]
-[; ;motorMain.c: 145: {
-"145
-{
-[; ;motorMain.c: 146: middle = (b <= c) ? b : c;
 "146
-[e = _middle ? <= _b _c : _b _c ]
+[v _middle `f ~T0 @X0 1 a ]
+[; ;motorMain.c: 146: float middle;
+[; ;motorMain.c: 147: if ((a <= b) && (a <= c))
 "147
-}
-[; ;motorMain.c: 147: }
-[e $U 326  ]
+[e $ ! && <= _a _b <= _a _c 325  ]
+[; ;motorMain.c: 148: {
 "148
-[e :U 325 ]
-[; ;motorMain.c: 148: else if ((b <= a) && (b <= c))
-[e $ ! && <= _b _a <= _b _c 327  ]
-[; ;motorMain.c: 149: {
+{
+[; ;motorMain.c: 149: middle = (b <= c) ? b : c;
 "149
-{
-[; ;motorMain.c: 150: middle = (a <= c) ? a : c;
+[e = _middle ? <= _b _c : _b _c ]
 "150
-[e = _middle ? <= _a _c : _a _c ]
-"151
 }
-[; ;motorMain.c: 151: }
-[e $U 328  ]
+[; ;motorMain.c: 150: }
+[e $U 326  ]
+"151
+[e :U 325 ]
+[; ;motorMain.c: 151: else if ((b <= a) && (b <= c))
+[e $ ! && <= _b _a <= _b _c 327  ]
+[; ;motorMain.c: 152: {
 "152
-[e :U 327 ]
-[; ;motorMain.c: 152: else
-[; ;motorMain.c: 153: {
-"153
 {
-[; ;motorMain.c: 154: middle = (a <= b) ? a : b;
+[; ;motorMain.c: 153: middle = (a <= c) ? a : c;
+"153
+[e = _middle ? <= _a _c : _a _c ]
 "154
-[e = _middle ? <= _a _b : _a _b ]
+}
+[; ;motorMain.c: 154: }
+[e $U 328  ]
 "155
+[e :U 327 ]
+[; ;motorMain.c: 155: else
+[; ;motorMain.c: 156: {
+"156
+{
+[; ;motorMain.c: 157: middle = (a <= b) ? a : b;
+"157
+[e = _middle ? <= _a _b : _a _b ]
+"158
 }
 [e :U 328 ]
 [e :U 326 ]
-[; ;motorMain.c: 155: }
-[; ;motorMain.c: 156: return middle;
-"156
+[; ;motorMain.c: 158: }
+[; ;motorMain.c: 159: return middle;
+"159
 [e ) _middle ]
 [e $UE 324  ]
-[; ;motorMain.c: 157: }
-"157
+[; ;motorMain.c: 160: }
+"160
 [e :UE 324 ]
 }
 [v $root$_ISR `(v ~T0 @X0 0 e ]
-[v F2864 `(v ~T0 @X0 1 tf ]
-"159
-[v _ISR `IF2864 ~T0 @X0 1 e ]
+[v F2867 `(v ~T0 @X0 1 tf ]
+"162
+[v _ISR `IF2867 ~T0 @X0 1 e ]
 {
-[; ;motorMain.c: 159: void interrupt ISR() {
+[; ;motorMain.c: 162: void interrupt ISR() {
 [e :U _ISR ]
 [f ]
-[; ;motorMain.c: 161: if(IC2QEIE && IC2QEIF) {
-"161
+[; ;motorMain.c: 164: if(IC2QEIE && IC2QEIF) {
+"164
 [e $ ! && _IC2QEIE _IC2QEIF 330  ]
 {
-[; ;motorMain.c: 162: speed = speed + 1;
-"162
+[; ;motorMain.c: 165: speed = speed + 1;
+"165
 [e = _speed + _speed -> -> 1 `i `f ]
-[; ;motorMain.c: 163: IC2QEIF = 0;
-"163
+[; ;motorMain.c: 166: IC2QEIF = 0;
+"166
 [e = _IC2QEIF -> -> 0 `i `b ]
-"164
+"167
 }
 [e :U 330 ]
-[; ;motorMain.c: 164: }
-[; ;motorMain.c: 165: if(INTCONbits.TMR0IF) {
-"165
+[; ;motorMain.c: 167: }
+[; ;motorMain.c: 168: if(INTCONbits.TMR0IF) {
+"168
 [e $ ! != -> . . _INTCONbits 0 2 `i -> -> -> 0 `i `Vuc `i 331  ]
 {
-[; ;motorMain.c: 166: if (count == 1) {
-"166
+[; ;motorMain.c: 169: if (count == 1) {
+"169
 [e $ ! == _count -> -> 1 `i `ui 332  ]
 {
-[; ;motorMain.c: 167: a = speed;
-"167
+[; ;motorMain.c: 170: a = speed;
+"170
 [e = _a _speed ]
-[; ;motorMain.c: 168: speed = 0;
-"168
+[; ;motorMain.c: 171: speed = 0;
+"171
 [e = _speed -> -> 0 `i `f ]
-"169
+"172
 }
 [e :U 332 ]
-[; ;motorMain.c: 169: }
-[; ;motorMain.c: 170: if (count == 2) {
-"170
+[; ;motorMain.c: 172: }
+[; ;motorMain.c: 173: if (count == 2) {
+"173
 [e $ ! == _count -> -> 2 `i `ui 333  ]
 {
-[; ;motorMain.c: 171: b = speed;
-"171
+[; ;motorMain.c: 174: b = speed;
+"174
 [e = _b _speed ]
-[; ;motorMain.c: 172: speed = 0;
-"172
+[; ;motorMain.c: 175: speed = 0;
+"175
 [e = _speed -> -> 0 `i `f ]
-"173
+"176
 }
 [e :U 333 ]
-[; ;motorMain.c: 173: }
-[; ;motorMain.c: 174: if (count == 3) {
-"174
+[; ;motorMain.c: 176: }
+[; ;motorMain.c: 177: if (count == 3) {
+"177
 [e $ ! == _count -> -> 3 `i `ui 334  ]
 {
-[; ;motorMain.c: 175: count = 0;
-"175
-[e = _count -> -> 0 `i `ui ]
-[; ;motorMain.c: 176: speed = medianF(a,b,speed);
-"176
-[e = _speed ( _medianF (3 , , _a _b _speed ]
-[; ;motorMain.c: 177: speedPID = (int)(speed*11.4);
-"177
-[e = _speedPID -> * -> _speed `d .11.4 `i ]
-[; ;motorMain.c: 178: WriteSPI(speedPID);
+[; ;motorMain.c: 178: count = 0;
 "178
-[e ( _WriteSPI (1 -> _speedPID `uc ]
-[; ;motorMain.c: 179: CCPR1L = motorOutMSB(PID(180));
-"179
-[e = _CCPR1L ( _motorOutMSB (1 ( _PID (1 -> 180 `i ]
-[; ;motorMain.c: 180: CCP1CONbits.DC1B = motorOutLSB(PID(180));
-"180
-[e = . . _CCP1CONbits 0 1 ( _motorOutLSB (1 ( _PID (1 -> 180 `i ]
-[; ;motorMain.c: 181: speed = 0;
-"181
-[e = _speed -> -> 0 `i `f ]
-[; ;motorMain.c: 182: count = 0;
-"182
 [e = _count -> -> 0 `i `ui ]
+[; ;motorMain.c: 179: speed = medianF(a,b,speed);
+"179
+[e = _speed ( _medianF (3 , , _a _b _speed ]
+[; ;motorMain.c: 180: speedPID = (int)(speed*11.4);
+"180
+[e = _speedPID -> * -> _speed `d .11.4 `i ]
+[; ;motorMain.c: 181: WriteSPI(speedPID);
+"181
+[e ( _WriteSPI (1 -> _speedPID `uc ]
+[; ;motorMain.c: 182: CCPR1L = motorOutMSB(PID(180));
+"182
+[e = _CCPR1L ( _motorOutMSB (1 ( _PID (1 -> 180 `i ]
+[; ;motorMain.c: 183: CCP1CONbits.DC1B = motorOutLSB(PID(180));
 "183
-}
-[e :U 334 ]
-[; ;motorMain.c: 183: }
-[; ;motorMain.c: 184: count++;
+[e = . . _CCP1CONbits 0 1 ( _motorOutLSB (1 ( _PID (1 -> 180 `i ]
+[; ;motorMain.c: 184: speed = 0;
 "184
-[e ++ _count -> -> 1 `i `ui ]
-[; ;motorMain.c: 185: INTCONbits.TMR0IF = 0;
+[e = _speed -> -> 0 `i `f ]
+[; ;motorMain.c: 185: count = 0;
 "185
-[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+[e = _count -> -> 0 `i `ui ]
 "186
 }
-[e :U 331 ]
+[e :U 334 ]
 [; ;motorMain.c: 186: }
-[; ;motorMain.c: 187: }
+[; ;motorMain.c: 187: count++; countRef++;
 "187
+[e ++ _count -> -> 1 `i `ui ]
+[e ++ _countRef -> 1 `i ]
+[; ;motorMain.c: 188: if (countRef==30) {
+"188
+[e $ ! == _countRef -> 30 `i 335  ]
+{
+[; ;motorMain.c: 189: countRef2++;
+"189
+[e ++ _countRef2 -> 1 `i ]
+[; ;motorMain.c: 190: countRef = 0;
+"190
+[e = _countRef -> 0 `i ]
+"191
+}
+[e :U 335 ]
+[; ;motorMain.c: 191: }
+[; ;motorMain.c: 192: if (countRef2==4) {
+"192
+[e $ ! == _countRef2 -> 4 `i 336  ]
+{
+[; ;motorMain.c: 193: speedRef = speedRef + 30;
+"193
+[e = _speedRef + _speedRef -> 30 `i ]
+[; ;motorMain.c: 194: countRef2++;
+"194
+[e ++ _countRef2 -> 1 `i ]
+"195
+}
+[e :U 336 ]
+[; ;motorMain.c: 195: }
+[; ;motorMain.c: 196: if (countRef2==9) {
+"196
+[e $ ! == _countRef2 -> 9 `i 337  ]
+{
+[; ;motorMain.c: 197: speedRef = speedRef - 60;
+"197
+[e = _speedRef - _speedRef -> 60 `i ]
+[; ;motorMain.c: 198: countRef2 = 0;
+"198
+[e = _countRef2 -> 0 `i ]
+"199
+}
+[e :U 337 ]
+[; ;motorMain.c: 199: }
+[; ;motorMain.c: 200: INTCONbits.TMR0IF = 0;
+"200
+[e = . . _INTCONbits 0 2 -> -> 0 `i `uc ]
+"201
+}
+[e :U 331 ]
+[; ;motorMain.c: 201: }
+[; ;motorMain.c: 202: }
+"202
 [e :UE 329 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"189
+"204
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;motorMain.c: 189: void main(void) {
+[; ;motorMain.c: 204: void main(void) {
 [e :U _main ]
 [f ]
-[; ;motorMain.c: 191: INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
-"191
+[; ;motorMain.c: 206: INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
+"206
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;motorMain.c: 193: setupQEI();
-"193
+[; ;motorMain.c: 208: setupQEI();
+"208
 [e ( _setupQEI ..  ]
-[; ;motorMain.c: 194: setupTimer5();
-"194
+[; ;motorMain.c: 209: setupTimer5();
+"209
 [e ( _setupTimer5 ..  ]
-[; ;motorMain.c: 195: setupTimer0();
-"195
+[; ;motorMain.c: 210: setupTimer0();
+"210
 [e ( _setupTimer0 ..  ]
-[; ;motorMain.c: 196: setupPWM();
-"196
+[; ;motorMain.c: 211: setupPWM();
+"211
 [e ( _setupPWM ..  ]
-[; ;motorMain.c: 197: SPI_Init_Slave();
-"197
+[; ;motorMain.c: 212: SPI_Init_Slave();
+"212
 [e ( _SPI_Init_Slave ..  ]
-[; ;motorMain.c: 198: while(1) {
-"198
-[e :U 337 ]
+[; ;motorMain.c: 213: while(1) {
+"213
+[e :U 340 ]
 {
-"200
+"215
 }
-[e :U 336 ]
-"198
-[e $U 337  ]
-[e :U 338 ]
-[; ;motorMain.c: 200: }
-[; ;motorMain.c: 201: return;
-"201
-[e $UE 335  ]
-[; ;motorMain.c: 202: }
-"202
-[e :UE 335 ]
+[e :U 339 ]
+"213
+[e $U 340  ]
+[e :U 341 ]
+[; ;motorMain.c: 215: }
+[; ;motorMain.c: 216: return;
+"216
+[e $UE 338  ]
+[; ;motorMain.c: 217: }
+"217
+[e :UE 338 ]
 }
-"205
+"220
 [v _setupQEI `(v ~T0 @X0 1 ef ]
 {
-[; ;motorMain.c: 205: void setupQEI(void) {
+[; ;motorMain.c: 220: void setupQEI(void) {
 [e :U _setupQEI ]
 [f ]
-[; ;motorMain.c: 206: DFLTCONbits.FLT3EN = 0;
-"206
+[; ;motorMain.c: 221: DFLTCONbits.FLT3EN = 0;
+"221
 [e = . . _DFLTCONbits 0 3 -> -> 0 `i `uc ]
-[; ;motorMain.c: 207: DFLTCONbits.FLT2EN = 0;
-"207
+[; ;motorMain.c: 222: DFLTCONbits.FLT2EN = 0;
+"222
 [e = . . _DFLTCONbits 0 2 -> -> 0 `i `uc ]
-[; ;motorMain.c: 208: DFLTCONbits.FLTCK = 0;
-"208
+[; ;motorMain.c: 223: DFLTCONbits.FLTCK = 0;
+"223
 [e = . . _DFLTCONbits 0 0 -> -> 0 `i `uc ]
-[; ;motorMain.c: 210: QEICONbits.nVELM = 1;
-"210
+[; ;motorMain.c: 225: QEICONbits.nVELM = 1;
+"225
 [e = . . _QEICONbits 2 4 -> -> 1 `i `uc ]
-[; ;motorMain.c: 212: QEICONbits.QEIM2 = 1;
-"212
+[; ;motorMain.c: 227: QEICONbits.QEIM2 = 1;
+"227
 [e = . . _QEICONbits 3 4 -> -> 1 `i `uc ]
-[; ;motorMain.c: 213: QEICONbits.QEIM1 = 1;
-"213
+[; ;motorMain.c: 228: QEICONbits.QEIM1 = 1;
+"228
 [e = . . _QEICONbits 3 3 -> -> 1 `i `uc ]
-[; ;motorMain.c: 214: QEICONbits.QEIM0 = 0;
-"214
+[; ;motorMain.c: 229: QEICONbits.QEIM0 = 0;
+"229
 [e = . . _QEICONbits 3 2 -> -> 0 `i `uc ]
-[; ;motorMain.c: 215: CAP3BUFH = 0x00; CAP3BUFL = 1;
-"215
+[; ;motorMain.c: 230: CAP3BUFH = 0x00; CAP3BUFL = 1;
+"230
 [e = _CAP3BUFH -> -> 0 `i `uc ]
 [e = _CAP3BUFL -> -> 1 `i `uc ]
-[; ;motorMain.c: 217: QEICONbits.PDEC0 = 0;
-"217
-[e = . . _QEICONbits 3 0 -> -> 0 `i `uc ]
-[; ;motorMain.c: 218: QEICONbits.PDEC1 = 0;
-"218
-[e = . . _QEICONbits 3 1 -> -> 0 `i `uc ]
-[; ;motorMain.c: 219: PIE3bits.IC2QEIE = 1;
-"219
-[e = . . _PIE3bits 0 2 -> -> 1 `i `uc ]
-[; ;motorMain.c: 221: }
-"221
-[e :UE 339 ]
-}
-"223
-[v _setupTimer0 `(v ~T0 @X0 1 ef ]
-{
-[; ;motorMain.c: 223: void setupTimer0(void) {
-[e :U _setupTimer0 ]
-[f ]
-[; ;motorMain.c: 224: INTCONbits.TMR0IE = 1;
-"224
-[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;motorMain.c: 225: T0CONbits.T016BIT = 1;
-"225
-[e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
-[; ;motorMain.c: 226: T0CONbits.T0CS = 0;
-"226
-[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;motorMain.c: 229: T0CONbits.PSA = 0;
-"229
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;motorMain.c: 230: T0CONbits.T0PS2 = 1;
-"230
-[e = . . _T0CONbits 1 2 -> -> 1 `i `uc ]
-[; ;motorMain.c: 231: T0CONbits.T0PS1 = 1;
-"231
-[e = . . _T0CONbits 1 1 -> -> 1 `i `uc ]
-[; ;motorMain.c: 232: T0CONbits.T0PS0 = 1;
+[; ;motorMain.c: 232: QEICONbits.PDEC0 = 0;
 "232
-[e = . . _T0CONbits 1 0 -> -> 1 `i `uc ]
-[; ;motorMain.c: 233: TMR0 = 0;
+[e = . . _QEICONbits 3 0 -> -> 0 `i `uc ]
+[; ;motorMain.c: 233: QEICONbits.PDEC1 = 0;
 "233
-[e = _TMR0 -> -> 0 `i `us ]
-[; ;motorMain.c: 234: T0CONbits.TMR0ON = 1;
+[e = . . _QEICONbits 3 1 -> -> 0 `i `uc ]
+[; ;motorMain.c: 234: PIE3bits.IC2QEIE = 1;
 "234
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-[; ;motorMain.c: 235: }
-"235
-[e :UE 340 ]
-}
-"237
-[v _setupTimer5 `(v ~T0 @X0 1 ef ]
-{
-[; ;motorMain.c: 237: void setupTimer5(void) {
-[e :U _setupTimer5 ]
-[f ]
-[; ;motorMain.c: 238: T5CONbits.TMR5CS = 0;
-"238
-[e = . . _T5CONbits 2 1 -> -> 0 `i `uc ]
-[; ;motorMain.c: 239: T5CONbits.T5PS0 = 0;
-"239
-[e = . . _T5CONbits 3 2 -> -> 0 `i `uc ]
-[; ;motorMain.c: 240: T5CONbits.T5PS1 = 0;
-"240
-[e = . . _T5CONbits 3 3 -> -> 0 `i `uc ]
-[; ;motorMain.c: 241: T5CONbits.T5MOD = 0;
-"241
-[e = . . _T5CONbits 2 4 -> -> 0 `i `uc ]
-[; ;motorMain.c: 242: TMR5 = 0;
-"242
-[e = _TMR5 -> -> 0 `i `us ]
-[; ;motorMain.c: 243: T5CONbits.TMR5ON = 1;
-"243
-[e = . . _T5CONbits 2 0 -> -> 1 `i `uc ]
-[; ;motorMain.c: 245: }
-"245
-[e :UE 341 ]
-}
-"247
-[v _SPI_Init_Master `(v ~T0 @X0 1 ef ]
-{
-[; ;motorMain.c: 247: void SPI_Init_Master() {
-[e :U _SPI_Init_Master ]
-[f ]
-[; ;motorMain.c: 249: TRISDbits.TRISD2 = 1;
-"249
-[e = . . _TRISDbits 0 2 -> -> 1 `i `uc ]
-[; ;motorMain.c: 250: TRISDbits.TRISD3 = 0;
-"250
-[e = . . _TRISDbits 0 3 -> -> 0 `i `uc ]
-[; ;motorMain.c: 251: TRISDbits.TRISD1 = 0;
-"251
-[e = . . _TRISDbits 0 1 -> -> 0 `i `uc ]
-[; ;motorMain.c: 254: CS = 1;
-"254
-[e = _CS -> -> 1 `i `b ]
-[; ;motorMain.c: 255: SSPSTAT=0x40;
-"255
-[e = _SSPSTAT -> -> 64 `i `uc ]
-[; ;motorMain.c: 256: SSPCON1=0x24;
-"256
-[e = _SSPCON1 -> -> 36 `i `uc ]
-[; ;motorMain.c: 258: PIR1bits.SSPIF=0;
-"258
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-[; ;motorMain.c: 262: ADCON0=0;
-"262
-[e = _ADCON0 -> -> 0 `i `uc ]
-[; ;motorMain.c: 264: ADCON1=0x0F;
-"264
-[e = _ADCON1 -> -> 15 `i `uc ]
-[; ;motorMain.c: 265: }
-"265
+[e = . . _PIE3bits 0 2 -> -> 1 `i `uc ]
+[; ;motorMain.c: 236: }
+"236
 [e :UE 342 ]
 }
-"267
-[v _SPI_Init_Slave `(v ~T0 @X0 1 ef ]
+"238
+[v _setupTimer0 `(v ~T0 @X0 1 ef ]
 {
-[; ;motorMain.c: 267: void SPI_Init_Slave() {
-[e :U _SPI_Init_Slave ]
+[; ;motorMain.c: 238: void setupTimer0(void) {
+[e :U _setupTimer0 ]
 [f ]
-[; ;motorMain.c: 269: TRISCbits.TRISC4 = 1;
-"269
-[e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
-[; ;motorMain.c: 270: TRISCbits.TRISC5 = 1;
-"270
-[e = . . _TRISCbits 0 5 -> -> 1 `i `uc ]
-[; ;motorMain.c: 271: TRISCbits.TRISC6 = 1;
-"271
-[e = . . _TRISCbits 0 6 -> -> 1 `i `uc ]
-[; ;motorMain.c: 272: TRISCbits.TRISC7 = 0;
-"272
-[e = . . _TRISCbits 0 7 -> -> 0 `i `uc ]
-[; ;motorMain.c: 275: CS = 1;
-"275
-[e = _CS -> -> 1 `i `b ]
-[; ;motorMain.c: 276: SSPSTAT=0x40;
-"276
-[e = _SSPSTAT -> -> 64 `i `uc ]
-[; ;motorMain.c: 277: SSPCON1=0x24;
-"277
-[e = _SSPCON1 -> -> 36 `i `uc ]
-[; ;motorMain.c: 279: PIR1bits.SSPIF=0;
-"279
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-[; ;motorMain.c: 283: ADCON0=0;
-"283
-[e = _ADCON0 -> -> 0 `i `uc ]
-[; ;motorMain.c: 285: ADCON1=0x0F;
-"285
-[e = _ADCON1 -> -> 15 `i `uc ]
-[; ;motorMain.c: 286: }
-"286
+[; ;motorMain.c: 239: INTCONbits.TMR0IE = 1;
+"239
+[e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
+[; ;motorMain.c: 240: T0CONbits.T016BIT = 1;
+"240
+[e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
+[; ;motorMain.c: 241: T0CONbits.T0CS = 0;
+"241
+[e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
+[; ;motorMain.c: 244: T0CONbits.PSA = 0;
+"244
+[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
+[; ;motorMain.c: 245: T0CONbits.T0PS2 = 1;
+"245
+[e = . . _T0CONbits 1 2 -> -> 1 `i `uc ]
+[; ;motorMain.c: 246: T0CONbits.T0PS1 = 1;
+"246
+[e = . . _T0CONbits 1 1 -> -> 1 `i `uc ]
+[; ;motorMain.c: 247: T0CONbits.T0PS0 = 1;
+"247
+[e = . . _T0CONbits 1 0 -> -> 1 `i `uc ]
+[; ;motorMain.c: 248: TMR0 = 0;
+"248
+[e = _TMR0 -> -> 0 `i `us ]
+[; ;motorMain.c: 249: T0CONbits.TMR0ON = 1;
+"249
+[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
+[; ;motorMain.c: 250: }
+"250
 [e :UE 343 ]
 }
-"288
-[v _setupUART `(v ~T0 @X0 1 ef ]
+"252
+[v _setupTimer5 `(v ~T0 @X0 1 ef ]
 {
-[; ;motorMain.c: 288: void setupUART(void) {
-[e :U _setupUART ]
+[; ;motorMain.c: 252: void setupTimer5(void) {
+[e :U _setupTimer5 ]
 [f ]
-[; ;motorMain.c: 289: TRISCbits.RC6 = 0;
-"289
-[e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
-[; ;motorMain.c: 290: TRISCbits.RC7 = 1;
-"290
-[e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
-[; ;motorMain.c: 291: TXSTAbits.BRGH = 0;
-"291
-[e = . . _TXSTAbits 0 2 -> -> 0 `i `uc ]
-[; ;motorMain.c: 292: TXSTAbits.SYNC = 0;
-"292
-[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
-[; ;motorMain.c: 293: TXSTAbits.TXEN = 1;
-"293
-[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
-[; ;motorMain.c: 294: RCSTAbits.SPEN = 1;
-"294
-[e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-[; ;motorMain.c: 295: RCSTAbits.CREN = 1;
-"295
-[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-[; ;motorMain.c: 296: PIE1bits.RCIE = 1;
-"296
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-[; ;motorMain.c: 297: PIE1bits.TXIE = 0;
-"297
-[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
-[; ;motorMain.c: 298: SPBRG = 31;
-"298
-[e = _SPBRG -> -> 31 `i `uc ]
-[; ;motorMain.c: 299: }
-"299
+[; ;motorMain.c: 253: T5CONbits.TMR5CS = 0;
+"253
+[e = . . _T5CONbits 2 1 -> -> 0 `i `uc ]
+[; ;motorMain.c: 254: T5CONbits.T5PS0 = 0;
+"254
+[e = . . _T5CONbits 3 2 -> -> 0 `i `uc ]
+[; ;motorMain.c: 255: T5CONbits.T5PS1 = 0;
+"255
+[e = . . _T5CONbits 3 3 -> -> 0 `i `uc ]
+[; ;motorMain.c: 256: T5CONbits.T5MOD = 0;
+"256
+[e = . . _T5CONbits 2 4 -> -> 0 `i `uc ]
+[; ;motorMain.c: 257: TMR5 = 0;
+"257
+[e = _TMR5 -> -> 0 `i `us ]
+[; ;motorMain.c: 258: T5CONbits.TMR5ON = 1;
+"258
+[e = . . _T5CONbits 2 0 -> -> 1 `i `uc ]
+[; ;motorMain.c: 260: }
+"260
 [e :UE 344 ]
 }
-"301
-[v _setupPWM `(v ~T0 @X0 1 ef ]
+"262
+[v _SPI_Init_Master `(v ~T0 @X0 1 ef ]
 {
-[; ;motorMain.c: 301: void setupPWM(void) {
-[e :U _setupPWM ]
+[; ;motorMain.c: 262: void SPI_Init_Master() {
+[e :U _SPI_Init_Master ]
 [f ]
-[; ;motorMain.c: 303: TRISCbits.RC2 = 0;
-"303
-[e = . . _TRISCbits 1 2 -> -> 0 `i `uc ]
-[; ;motorMain.c: 304: TRISCbits.RC6 = 1;
-"304
-[e = . . _TRISCbits 1 6 -> -> 1 `i `uc ]
-[; ;motorMain.c: 305: PR2 = 0xFF;
-"305
-[e = _PR2 -> -> 255 `i `uc ]
-[; ;motorMain.c: 306: setupTimer2();
-"306
-[e ( _setupTimer2 ..  ]
-[; ;motorMain.c: 308: CCP1CONbits.CCP1M3 = 1;
-"308
-[e = . . _CCP1CONbits 1 3 -> -> 1 `i `uc ]
-[; ;motorMain.c: 309: CCP1CONbits.CCP1M2 = 1;
-"309
-[e = . . _CCP1CONbits 1 2 -> -> 1 `i `uc ]
-[; ;motorMain.c: 311: TRISCbits.RC0 = 0;
-"311
-[e = . . _TRISCbits 1 0 -> -> 0 `i `uc ]
-[; ;motorMain.c: 312: TRISCbits.RC1 = 0;
-"312
-[e = . . _TRISCbits 1 1 -> -> 0 `i `uc ]
-[; ;motorMain.c: 313: PORTCbits.RC0 = 1;
-"313
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;motorMain.c: 314: PORTCbits.RC1 = 0;
-"314
-[e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
-[; ;motorMain.c: 315: }
-"315
+[; ;motorMain.c: 264: TRISDbits.TRISD2 = 1;
+"264
+[e = . . _TRISDbits 0 2 -> -> 1 `i `uc ]
+[; ;motorMain.c: 265: TRISDbits.TRISD3 = 0;
+"265
+[e = . . _TRISDbits 0 3 -> -> 0 `i `uc ]
+[; ;motorMain.c: 266: TRISDbits.TRISD1 = 0;
+"266
+[e = . . _TRISDbits 0 1 -> -> 0 `i `uc ]
+[; ;motorMain.c: 269: CS = 1;
+"269
+[e = _CS -> -> 1 `i `b ]
+[; ;motorMain.c: 270: SSPSTAT=0x40;
+"270
+[e = _SSPSTAT -> -> 64 `i `uc ]
+[; ;motorMain.c: 271: SSPCON1=0x24;
+"271
+[e = _SSPCON1 -> -> 36 `i `uc ]
+[; ;motorMain.c: 273: PIR1bits.SSPIF=0;
+"273
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+[; ;motorMain.c: 277: ADCON0=0;
+"277
+[e = _ADCON0 -> -> 0 `i `uc ]
+[; ;motorMain.c: 279: ADCON1=0x0F;
+"279
+[e = _ADCON1 -> -> 15 `i `uc ]
+[; ;motorMain.c: 280: }
+"280
 [e :UE 345 ]
 }
-"317
-[v _setupTimer2 `(v ~T0 @X0 1 ef ]
+"282
+[v _SPI_Init_Slave `(v ~T0 @X0 1 ef ]
 {
-[; ;motorMain.c: 317: void setupTimer2(void) {
-[e :U _setupTimer2 ]
+[; ;motorMain.c: 282: void SPI_Init_Slave() {
+[e :U _SPI_Init_Slave ]
 [f ]
-[; ;motorMain.c: 319: T2CON = 0;
-"319
-[e = _T2CON -> -> 0 `i `uc ]
-[; ;motorMain.c: 320: T2CONbits.T2CKPS0 = 1;
-"320
-[e = . . _T2CONbits 1 0 -> -> 1 `i `uc ]
-[; ;motorMain.c: 321: T2CONbits.T2CKPS1 = 1;
-"321
-[e = . . _T2CONbits 1 1 -> -> 1 `i `uc ]
-[; ;motorMain.c: 322: T2CONbits.TMR2ON = 1;
-"322
-[e = . . _T2CONbits 0 1 -> -> 1 `i `uc ]
-[; ;motorMain.c: 323: }
-"323
+[; ;motorMain.c: 284: TRISCbits.TRISC4 = 1;
+"284
+[e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
+[; ;motorMain.c: 285: TRISCbits.TRISC5 = 1;
+"285
+[e = . . _TRISCbits 0 5 -> -> 1 `i `uc ]
+[; ;motorMain.c: 286: TRISCbits.TRISC6 = 1;
+"286
+[e = . . _TRISCbits 0 6 -> -> 1 `i `uc ]
+[; ;motorMain.c: 287: TRISCbits.TRISC7 = 0;
+"287
+[e = . . _TRISCbits 0 7 -> -> 0 `i `uc ]
+[; ;motorMain.c: 290: CS = 1;
+"290
+[e = _CS -> -> 1 `i `b ]
+[; ;motorMain.c: 291: SSPSTAT=0x40;
+"291
+[e = _SSPSTAT -> -> 64 `i `uc ]
+[; ;motorMain.c: 292: SSPCON1=0x24;
+"292
+[e = _SSPCON1 -> -> 36 `i `uc ]
+[; ;motorMain.c: 294: PIR1bits.SSPIF=0;
+"294
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+[; ;motorMain.c: 298: ADCON0=0;
+"298
+[e = _ADCON0 -> -> 0 `i `uc ]
+[; ;motorMain.c: 300: ADCON1=0x0F;
+"300
+[e = _ADCON1 -> -> 15 `i `uc ]
+[; ;motorMain.c: 301: }
+"301
 [e :UE 346 ]
 }
-"325
+"303
+[v _setupUART `(v ~T0 @X0 1 ef ]
+{
+[; ;motorMain.c: 303: void setupUART(void) {
+[e :U _setupUART ]
+[f ]
+[; ;motorMain.c: 304: TRISCbits.RC6 = 0;
+"304
+[e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
+[; ;motorMain.c: 305: TRISCbits.RC7 = 1;
+"305
+[e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
+[; ;motorMain.c: 306: TXSTAbits.BRGH = 0;
+"306
+[e = . . _TXSTAbits 0 2 -> -> 0 `i `uc ]
+[; ;motorMain.c: 307: TXSTAbits.SYNC = 0;
+"307
+[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
+[; ;motorMain.c: 308: TXSTAbits.TXEN = 1;
+"308
+[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
+[; ;motorMain.c: 309: RCSTAbits.SPEN = 1;
+"309
+[e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
+[; ;motorMain.c: 310: RCSTAbits.CREN = 1;
+"310
+[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
+[; ;motorMain.c: 311: PIE1bits.RCIE = 1;
+"311
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;motorMain.c: 312: PIE1bits.TXIE = 0;
+"312
+[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
+[; ;motorMain.c: 313: SPBRG = 31;
+"313
+[e = _SPBRG -> -> 31 `i `uc ]
+[; ;motorMain.c: 314: }
+"314
+[e :UE 347 ]
+}
+"316
+[v _setupPWM `(v ~T0 @X0 1 ef ]
+{
+[; ;motorMain.c: 316: void setupPWM(void) {
+[e :U _setupPWM ]
+[f ]
+[; ;motorMain.c: 318: TRISCbits.RC2 = 0;
+"318
+[e = . . _TRISCbits 1 2 -> -> 0 `i `uc ]
+[; ;motorMain.c: 319: TRISCbits.RC6 = 1;
+"319
+[e = . . _TRISCbits 1 6 -> -> 1 `i `uc ]
+[; ;motorMain.c: 320: PR2 = 0xFF;
+"320
+[e = _PR2 -> -> 255 `i `uc ]
+[; ;motorMain.c: 321: setupTimer2();
+"321
+[e ( _setupTimer2 ..  ]
+[; ;motorMain.c: 323: CCP1CONbits.CCP1M3 = 1;
+"323
+[e = . . _CCP1CONbits 1 3 -> -> 1 `i `uc ]
+[; ;motorMain.c: 324: CCP1CONbits.CCP1M2 = 1;
+"324
+[e = . . _CCP1CONbits 1 2 -> -> 1 `i `uc ]
+[; ;motorMain.c: 326: TRISCbits.RC0 = 0;
+"326
+[e = . . _TRISCbits 1 0 -> -> 0 `i `uc ]
+[; ;motorMain.c: 327: TRISCbits.RC1 = 0;
+"327
+[e = . . _TRISCbits 1 1 -> -> 0 `i `uc ]
+[; ;motorMain.c: 328: PORTCbits.RC0 = 1;
+"328
+[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
+[; ;motorMain.c: 329: PORTCbits.RC1 = 0;
+"329
+[e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
+[; ;motorMain.c: 330: }
+"330
+[e :UE 348 ]
+}
+"332
+[v _setupTimer2 `(v ~T0 @X0 1 ef ]
+{
+[; ;motorMain.c: 332: void setupTimer2(void) {
+[e :U _setupTimer2 ]
+[f ]
+[; ;motorMain.c: 334: T2CON = 0;
+"334
+[e = _T2CON -> -> 0 `i `uc ]
+[; ;motorMain.c: 335: T2CONbits.T2CKPS0 = 1;
+"335
+[e = . . _T2CONbits 1 0 -> -> 1 `i `uc ]
+[; ;motorMain.c: 336: T2CONbits.T2CKPS1 = 1;
+"336
+[e = . . _T2CONbits 1 1 -> -> 1 `i `uc ]
+[; ;motorMain.c: 337: T2CONbits.TMR2ON = 1;
+"337
+[e = . . _T2CONbits 0 1 -> -> 1 `i `uc ]
+[; ;motorMain.c: 338: }
+"338
+[e :UE 349 ]
+}
+"340
 [v _motorOutMSB `(uc ~T0 @X0 1 ef1`f ]
 {
-[; ;motorMain.c: 325: unsigned char motorOutMSB(float duty) {
+[; ;motorMain.c: 340: unsigned char motorOutMSB(float duty) {
 [e :U _motorOutMSB ]
 [v _duty `f ~T0 @X0 1 r1 ]
 [f ]
-"326
+"341
 [v _buffer `i ~T0 @X0 1 a ]
-[; ;motorMain.c: 326: int buffer = 10.239*duty;
+[; ;motorMain.c: 341: int buffer = 10.239*duty;
 [e = _buffer -> * .10.239 -> _duty `d `i ]
-"327
+"342
 [v _bufferChar `uc ~T0 @X0 1 a ]
-[; ;motorMain.c: 327: unsigned char bufferChar = buffer >> 2;
+[; ;motorMain.c: 342: unsigned char bufferChar = buffer >> 2;
 [e = _bufferChar -> >> _buffer -> 2 `i `uc ]
-[; ;motorMain.c: 328: return bufferChar;
-"328
+[; ;motorMain.c: 343: return bufferChar;
+"343
 [e ) _bufferChar ]
-[e $UE 347  ]
-[; ;motorMain.c: 329: }
-"329
-[e :UE 347 ]
+[e $UE 350  ]
+[; ;motorMain.c: 344: }
+"344
+[e :UE 350 ]
 }
-"331
+"346
 [v _motorOutLSB `(uc ~T0 @X0 1 ef1`f ]
 {
-[; ;motorMain.c: 331: unsigned char motorOutLSB(float duty) {
+[; ;motorMain.c: 346: unsigned char motorOutLSB(float duty) {
 [e :U _motorOutLSB ]
 [v _duty `f ~T0 @X0 1 r1 ]
 [f ]
-"332
+"347
 [v _buffer `i ~T0 @X0 1 a ]
-[; ;motorMain.c: 332: int buffer = 10.239*duty;
+[; ;motorMain.c: 347: int buffer = 10.239*duty;
 [e = _buffer -> * .10.239 -> _duty `d `i ]
-"333
+"348
 [v _bufferChar `uc ~T0 @X0 1 a ]
-[; ;motorMain.c: 333: unsigned char bufferChar = buffer & 0b00000011;
+[; ;motorMain.c: 348: unsigned char bufferChar = buffer & 0b00000011;
 [e = _bufferChar -> & _buffer -> 3 `i `uc ]
-[; ;motorMain.c: 334: return bufferChar;
-"334
+[; ;motorMain.c: 349: return bufferChar;
+"349
 [e ) _bufferChar ]
-[e $UE 348  ]
-[; ;motorMain.c: 335: }
-"335
-[e :UE 348 ]
+[e $UE 351  ]
+[; ;motorMain.c: 350: }
+"350
+[e :UE 351 ]
 }
-"337
+"352
 [v _PID `(f ~T0 @X0 1 ef1`i ]
 {
-[; ;motorMain.c: 337: float PID(int ref) {
+[; ;motorMain.c: 352: float PID(int ref) {
 [e :U _PID ]
 [v _ref `i ~T0 @X0 1 r1 ]
 [f ]
-"338
-[v _duty `f ~T0 @X0 1 a ]
-[; ;motorMain.c: 338: float duty = 0;
-[e = _duty -> -> 0 `i `f ]
-"339
-[v _Kp `f ~T0 @X0 1 a ]
-[; ;motorMain.c: 339: float Kp = 0.75;
-[e = _Kp -> .0.75 `f ]
-"340
-[v _Ki `f ~T0 @X0 1 a ]
-[; ;motorMain.c: 340: float Ki = 0.045;
-[e = _Ki -> .0.045 `f ]
-"341
-[v _err `f ~T0 @X0 1 a ]
-[; ;motorMain.c: 341: float err = speedPID - ref;
-[e = _err -> - _speedPID _ref `f ]
-[; ;motorMain.c: 342: sum_err = sum_err + err;
-"342
-[e = _sum_err + _sum_err _err ]
-[; ;motorMain.c: 343: duty = Kp*err + Ki*sum_err;
-"343
-[e = _duty + * _Kp _err * _Ki _sum_err ]
-[; ;motorMain.c: 344: if(duty>100) duty = 100;
-"344
-[e $ ! > _duty -> -> 100 `i `f 350  ]
-[e = _duty -> -> 100 `i `f ]
-[e :U 350 ]
-[; ;motorMain.c: 345: if(duty<-100) duty = -100;
-"345
-[e $ ! < _duty -> -U -> 100 `i `f 351  ]
-[e = _duty -> -U -> 100 `i `f ]
-[e :U 351 ]
-[; ;motorMain.c: 346: if(duty<0) {
-"346
-[e $ ! < _duty -> -> 0 `i `f 352  ]
-{
-[; ;motorMain.c: 347: PORTCbits.RC0 = 1;
-"347
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;motorMain.c: 348: PORTCbits.RC1 = 0;
-"348
-[e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
-"349
-}
-[e :U 352 ]
-[; ;motorMain.c: 349: }
-[; ;motorMain.c: 350: if(duty>0) {
-"350
-[e $ ! > _duty -> -> 0 `i `f 353  ]
-{
-[; ;motorMain.c: 351: PORTCbits.RC0 = 0;
-"351
-[e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
-[; ;motorMain.c: 352: PORTCbits.RC1 = 1;
-"352
-[e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
 "353
-}
-[e :U 353 ]
-[; ;motorMain.c: 353: }
-[; ;motorMain.c: 354: return abs(duty);
+[v _duty `f ~T0 @X0 1 a ]
+[; ;motorMain.c: 353: float duty = 0;
+[e = _duty -> -> 0 `i `f ]
 "354
-[e ) -> ( _abs (1 -> _duty `i `f ]
-[e $UE 349  ]
-[; ;motorMain.c: 355: }
+[v _Kp `f ~T0 @X0 1 a ]
+[; ;motorMain.c: 354: float Kp = 0.7;
+[e = _Kp -> .0.7 `f ]
 "355
-[e :UE 349 ]
-}
+[v _Ki `f ~T0 @X0 1 a ]
+[; ;motorMain.c: 355: float Ki = 0.045;
+[e = _Ki -> .0.045 `f ]
+"356
+[v _err `f ~T0 @X0 1 a ]
+[; ;motorMain.c: 356: float err = speedPID - ref;
+[e = _err -> - _speedPID _ref `f ]
+[; ;motorMain.c: 357: sum_err = sum_err + err;
 "357
+[e = _sum_err + _sum_err _err ]
+[; ;motorMain.c: 359: if (sum_err > 2000) sum_err = 2000;
+"359
+[e $ ! > _sum_err -> -> 2000 `i `f 353  ]
+[e = _sum_err -> -> 2000 `i `f ]
+[e :U 353 ]
+[; ;motorMain.c: 360: if (sum_err < -2000) sum_err = -2000;
+"360
+[e $ ! < _sum_err -> -U -> 2000 `i `f 354  ]
+[e = _sum_err -> -U -> 2000 `i `f ]
+[e :U 354 ]
+[; ;motorMain.c: 361: duty = Kp*err + Ki*sum_err;
+"361
+[e = _duty + * _Kp _err * _Ki _sum_err ]
+[; ;motorMain.c: 363: if(duty>100) duty = 100;
+"363
+[e $ ! > _duty -> -> 100 `i `f 355  ]
+[e = _duty -> -> 100 `i `f ]
+[e :U 355 ]
+[; ;motorMain.c: 364: if(duty<-100) duty = -100;
+"364
+[e $ ! < _duty -> -U -> 100 `i `f 356  ]
+[e = _duty -> -U -> 100 `i `f ]
+[e :U 356 ]
+[; ;motorMain.c: 366: if(duty<0) {
+"366
+[e $ ! < _duty -> -> 0 `i `f 357  ]
+{
+[; ;motorMain.c: 367: PORTCbits.RC0 = 1;
+"367
+[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
+[; ;motorMain.c: 368: PORTCbits.RC1 = 0;
+"368
+[e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
+"369
+}
+[e :U 357 ]
+[; ;motorMain.c: 369: }
+[; ;motorMain.c: 370: if(duty>0) {
+"370
+[e $ ! > _duty -> -> 0 `i `f 358  ]
+{
+[; ;motorMain.c: 371: PORTCbits.RC0 = 0;
+"371
+[e = . . _PORTCbits 0 0 -> -> 0 `i `uc ]
+[; ;motorMain.c: 372: PORTCbits.RC1 = 1;
+"372
+[e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
+"373
+}
+[e :U 358 ]
+[; ;motorMain.c: 373: }
+[; ;motorMain.c: 374: return abs(duty);
+"374
+[e ) -> ( _abs (1 -> _duty `i `f ]
+[e $UE 352  ]
+[; ;motorMain.c: 375: }
+"375
+[e :UE 352 ]
+}
+"377
 [v _rx_char `(uc ~T0 @X0 1 ef ]
 {
-[; ;motorMain.c: 357: char rx_char(void) {
+[; ;motorMain.c: 377: char rx_char(void) {
 [e :U _rx_char ]
 [f ]
-[; ;motorMain.c: 358: while(!RCIF);
-"358
-[e $U 355  ]
-[e :U 356 ]
-[e :U 355 ]
-[e $ ! _RCIF 356  ]
-[e :U 357 ]
-[; ;motorMain.c: 359: return RCREG;
-"359
+[; ;motorMain.c: 378: while(!RCIF);
+"378
+[e $U 360  ]
+[e :U 361 ]
+[e :U 360 ]
+[e $ ! _RCIF 361  ]
+[e :U 362 ]
+[; ;motorMain.c: 379: return RCREG;
+"379
 [e ) _RCREG ]
-[e $UE 354  ]
-[; ;motorMain.c: 360: }
-"360
-[e :UE 354 ]
+[e $UE 359  ]
+[; ;motorMain.c: 380: }
+"380
+[e :UE 359 ]
 }
-"362
+"382
 [v _tx_char `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;motorMain.c: 362: void tx_char(char a) {
+[; ;motorMain.c: 382: void tx_char(char a) {
 [e :U _tx_char ]
 [v _a `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;motorMain.c: 363: TXREG=a;
-"363
+[; ;motorMain.c: 383: TXREG=a;
+"383
 [e = _TXREG _a ]
-[; ;motorMain.c: 364: while(!TRMT);
-"364
-[e $U 359  ]
-[e :U 360 ]
-[e :U 359 ]
-[e $ ! _TRMT 360  ]
-[e :U 361 ]
-[; ;motorMain.c: 365: }
-"365
-[e :UE 358 ]
+[; ;motorMain.c: 384: while(!TRMT);
+"384
+[e $U 364  ]
+[e :U 365 ]
+[e :U 364 ]
+[e $ ! _TRMT 365  ]
+[e :U 366 ]
+[; ;motorMain.c: 385: }
+"385
+[e :UE 363 ]
 }
 [a 1C 117 0 ]
 
