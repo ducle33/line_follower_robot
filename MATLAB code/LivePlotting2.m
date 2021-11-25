@@ -8,8 +8,8 @@ xLabel = 'Elapsed Time (s)';    % x-axis label
 yLabel = 'Wheel Velocity (RPM)';                % y-axis label
 plotGrid = 'on';                % 'off' to turn off grid
 min = 0;                     % set y-min
-max = 250;                      % set y-max
-scrollWidth = 5;               % display period in plot, plot entire data log if <= 0
+max = 200;                      % set y-max
+scrollWidth = 2;               % display period in plot, plot entire data log if <= 0
 delay = .0000000001;                    % make sure sample faster than resolution
 
 %Define Function Variables
