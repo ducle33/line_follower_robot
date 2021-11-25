@@ -4397,12 +4397,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _duty -> -> 0 `i `f ]
 "352
 [v _Kp `f ~T0 @X0 1 a ]
-[; ;motorMain2.c: 352: float Kp = 5;
-[e = _Kp -> -> 5 `i `f ]
+[; ;motorMain2.c: 352: float Kp = 0.75;
+[e = _Kp -> .0.75 `f ]
 "353
 [v _Ki `f ~T0 @X0 1 a ]
-[; ;motorMain2.c: 353: float Ki = 0.007;
-[e = _Ki -> .0.007 `f ]
+[; ;motorMain2.c: 353: float Ki = 0.045;
+[e = _Ki -> .0.045 `f ]
 "354
 [v _err `f ~T0 @X0 1 a ]
 [; ;motorMain2.c: 354: float err = speedPID - ref;

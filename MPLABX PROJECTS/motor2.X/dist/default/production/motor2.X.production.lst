@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
-                                                                                               Thu Nov 25 10:03:00 2021
+                                                                                               Thu Nov 25 11:56:42 2021
 
 Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1 
      1                           	processor	18F4431
@@ -1681,24 +1681,24 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1666  000BEE                     _PID:
   1667                           	callstack 26
   1668  000BEE                     
-  1669                           ;motorMain2.c: 352: float Kp = 5;
+  1669                           ;motorMain2.c: 352: float Kp = 0.75;
   1670  000BEE  0E00               	movlw	0
   1671  000BF0  6E3C               	movwf	PID@Kp^0,c
   1672  000BF2  0E00               	movlw	0
   1673  000BF4  6E3D               	movwf	(PID@Kp+1)^0,c
-  1674  000BF6  0EA0               	movlw	160
+  1674  000BF6  0E40               	movlw	64
   1675  000BF8  6E3E               	movwf	(PID@Kp+2)^0,c
-  1676  000BFA  0E40               	movlw	64
+  1676  000BFA  0E3F               	movlw	63
   1677  000BFC  6E3F               	movwf	(PID@Kp+3)^0,c
   1678                           
-  1679                           ;motorMain2.c: 353: float Ki = 0.007;
-  1680  000BFE  0E42               	movlw	66
+  1679                           ;motorMain2.c: 353: float Ki = 0.045;
+  1680  000BFE  0EEC               	movlw	236
   1681  000C00  6E40               	movwf	PID@Ki^0,c
-  1682  000C02  0E60               	movlw	96
+  1682  000C02  0E51               	movlw	81
   1683  000C04  6E41               	movwf	(PID@Ki+1)^0,c
-  1684  000C06  0EE5               	movlw	229
+  1684  000C06  0E38               	movlw	56
   1685  000C08  6E42               	movwf	(PID@Ki+2)^0,c
-  1686  000C0A  0E3B               	movlw	59
+  1686  000C0A  0E3D               	movlw	61
   1687  000C0C  6E43               	movwf	(PID@Ki+3)^0,c
   1688  000C0E                     
   1689                           ;motorMain2.c: 354: float err = speedPID - ref;
@@ -4111,7 +4111,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.32 build 20210201212658 
-Symbol Table                                                                                   Thu Nov 25 10:03:00 2021
+Symbol Table                                                                                   Thu Nov 25 11:56:42 2021
 
                       _a 007C                        _b 0078                        _w 005E  
                      _CS 007C22                      l200 158E                      l170 14F8  

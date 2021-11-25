@@ -5519,8 +5519,8 @@ return bufferChar;
 
 float PID(int ref) {
 float duty = 0;
-float Kp = 5;
-float Ki = 0.007;
+float Kp = 0.75;
+float Ki = 0.045;
 float err = speedPID - ref;
 sum_err = sum_err + err;
 duty = Kp*err + Ki*sum_err;

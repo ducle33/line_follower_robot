@@ -3,7 +3,7 @@ clc
 
 %User Defined Properties 
 serialPort = 'COM2';            % define COM port #
-plotTitle = 'Serial Data Log';  % plot title
+%plotTitle = 'Serial Data Log';  % plot title
 xLabel = 'Elapsed Time (s)';    % x-axis label
 yLabel = 'Wheel Velocity (RPM)';                % y-axis label
 plotGrid = 'on';                % 'off' to turn off grid
@@ -27,8 +27,9 @@ plotGraph2 = plot(time,data(2,:),'-b',...
             'LineWidth',1,...
             'MarkerFaceColor','w',...
             'MarkerSize',2);
-legend('Left','Right')
-title(plotTitle,'FontSize',25);
+yline(180,'--','Color','black');
+legend('Left','Right','Reference','Location','southeast')
+%title(plotTitle,'FontSize',25);
 xlabel(xLabel,'FontSize',15);
 ylabel(yLabel,'FontSize',15);
 axis([0 scrollWidth min max]);

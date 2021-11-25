@@ -382,7 +382,7 @@ text18 304 1596 CODE 304 0
 %locals
 dist/default/production\motor.X.production.o
 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4431.h
-C:\Users\david\AppData\Local\Temp\xcAsbbhk.s
+C:\Users\david\AppData\Local\Temp\xcAsc550.s
 651 137C 0 CODE 0
 653 137C 0 CODE 0
 656 137C 0 CODE 0
@@ -508,7 +508,7 @@ motorMain.c
 283 1534 0 CODE 0
 285 1538 0 CODE 0
 286 153C 0 CODE 0
-C:\Users\david\AppData\Local\Temp\xcAsbbhk.s
+C:\Users\david\AppData\Local\Temp\xcAsc550.s
 1842 8 0 CODE 0
 motorMain.c
 159 8 0 CODE 0
