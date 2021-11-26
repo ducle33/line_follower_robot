@@ -6,8 +6,8 @@ global v omega n d pre_error_PID_r pre_pre_error_PID_r integral_r ...
 format long;
 %% Thong so xe
 r           = 0.085/2;                                          % ban kinh banh xe
-d           = 0.115; %0.08                                      % khoang cach tam 2 banh xe den tam he cam bien
-b           = 0.18;                                             % khoang cach giua 2 xe
+d           = 0.045; %0.08                                      % khoang cach tam 2 banh xe den tam he cam bien
+b           = 0.172;                                             % khoang cach giua 2 xe
 vr          = 0.8;                                              % van toc mong muon
 omega_r_ref = 0;                                                % van toc quay banh phai reference
 omega_l_ref = 0;                                                % van toc quay banh trai reference
