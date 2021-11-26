@@ -56,33 +56,25 @@ if(~isempty(dat1) && isnumeric(dat1) && ~isempty(dat2) && isnumeric(dat2)) %Make
         tic
         firstTime = 0;
     end
+%     addpoints(h,now,dat1);
+%     drawnow;
     count = count + 1;    
-    time(count) = toc/10;    %Extract Elapsed Time in seconds
+    time = toc/10;    %Extract Elapsed Time in seconds
     
-    if (time(count)>2 && time(count)<2.5)
+    if (time>2 && time<2.5)
         fprintf(s,"A150");
     end
     
-    if (time(count)>3 && time(count)<3.5)
+    if (time>3 && time<3.5)
         fprintf(s,"B110");
-    end
-        
-    data(1,count) = dat1;
-    data(2,count) = dat2;
-    
-    if(data(1,count)<10 && count > 1)
-        data(1,count) = data(1,count-1);
-    end
-    if(data(2,count)<10 && count > 1)
-        data(2,count) = data(2,count-1);
     end
 
     %Set Axis according to Scroll Width
     if(scrollWidth > 0)
-        set(plotGraph1,'XData',time(time > time(count)-scrollWidth),...
-            'YData', data(1,time > time(count)-scrollWidth));
-        set(plotGraph2,'XData',time(time > time(count)-scrollWidth),...
-            'YData', data(2,time > time(count)-scrollWidth));
+        set(plotGraph1,'XData',time(time > time-scrollWidth),...
+            'YData', data(1,time > time-scrollWidth));
+        set(plotGraph2,'XData',time(time > time-scrollWidth),...
+            'YData', data(2,time > time-scrollWidth));
 
         axis([time(count)-scrollWidth time(count) min max]);
     else
@@ -91,7 +83,7 @@ if(~isempty(dat1) && isnumeric(dat1) && ~isempty(dat2) && isnumeric(dat2)) %Make
 
         axis([0 time(count) min max]);
     end
-    pause(0.0000001);
+    pause(0.001);
 end
 end
 
