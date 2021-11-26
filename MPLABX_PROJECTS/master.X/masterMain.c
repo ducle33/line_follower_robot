@@ -77,27 +77,32 @@
 #include <xc.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #define _XTAL_FREQ 20000000
 
 
 unsigned int count = 0;
-unsigned int count2 = 0;
-char *str;                          //Global variable used for interrupt
+char str[4] = "180";                          //Global variable used for interrupt
 unsigned int number = 100;
 unsigned char digit = 0;
 unsigned char stringBuffer[20];
 int speedM1 = 0;
 int speedM2 = 0;
-int ATransmiting = 0;
-int BTransmiting = 1;
+char speed4M1 = 0;
+char speed4M2 = 0;
+char transRdy1 = 0;
+char transRdy2 = 0;
+char incStr1 = 0;
+char incStr2 = 0;
+unsigned char speedRef1 = 180;
+unsigned char speedRef2 = 180;
 
 
 void swap(char *, char *);
 char* reverse(char *, int , int );
 void setupUART(void);
-char rx_char(void);
+unsigned char rx_char(void);
 void tx_char(char );
-void tx_str(char *);
 void setupTimer0(void);
 void setupTimer1(void);
 void setupTimer5(void);
@@ -105,20 +110,12 @@ void SPI_Init_Slave();
 void SPI_Init_Master();
 void SPI_Write(unsigned char);
 unsigned char SPI_Read();
-void UART_Send(unsigned char []);
 
-int countDigit(unsigned int n) {
-    int count = 0;
-    while (n != 0)
-    {
-        n = n / 10;
-        ++count;
-    }
-    return count;
-}
-
-signed char WriteSPI( unsigned char data_out ) {
-    PORTCbits.RC2 = 0;
+signed char WriteSPI(unsigned char data_out, char a) {
+    if(a==1)
+        PORTCbits.RC1 = 0;
+    if(a==2)
+        PORTCbits.RC2 = 0;
     unsigned char TempVar;
     TempVar = SSPBUF;           // Clears BF
     PIR1bits.SSPIF = 0;         // Clear interrupt flag
@@ -128,34 +125,38 @@ signed char WriteSPI( unsigned char data_out ) {
         return -1;              // if WCOL bit is set return negative #
     else
         while( !PIR1bits.SSPIF );  // wait until bus cycle complete
-    PORTCbits.RC2 = 1;
+    if(a==1)
+        PORTCbits.RC1 = 1;
+    if(a==2)
+        PORTCbits.RC2 = 1;
     return 0;                // if WCOL bit is not set return non-negative#
 }
 
 unsigned char ReadSPI(int a) {
     if(a==1)
-        PORTCbits.RC2 = 0;
-    if(a==2)
         PORTCbits.RC1 = 0;
+    if(a==2)
+        PORTCbits.RC2 = 0;
     unsigned char TempVar;
     TempVar = SSPBUF;        // Clear BF
     PIR1bits.SSPIF = 0;      // Clear interrupt flag
     SSPBUF = 0x00;           // initiate bus cycle
     while(!PIR1bits.SSPIF);  // wait until cycle complete
     if(a==1)
-        PORTCbits.RC2 = 1;
-    if(a==2)
         PORTCbits.RC1 = 1;
+    if(a==2)
+        PORTCbits.RC2 = 1;
     return (SSPBUF);       // return with byte read
 }
 
 void UARTM1(void) {
     unsigned char tempM1;
     tempM1 = ReadSPI(1);
-    if ((int)tempM1==0)
+    if ((int)tempM1==0 || (int)tempM1==(int)speedRef1)
         speedM1 = speedM1;
     else
         speedM1 = (int)tempM1;
+    __delay_ms(1);
     tx_char(0x41);
     itoa(stringBuffer,speedM1,10);
     int i = 0;
@@ -168,10 +169,11 @@ void UARTM1(void) {
 void UARTM2(void) {
     unsigned char tempM2;
     tempM2 = ReadSPI(2);
-    if ((int)tempM2==0)
+    if ((int)tempM2==0 || (int)tempM2==(int)speedRef2)
         speedM2 = speedM2;
     else
         speedM2 = (int)tempM2;
+    __delay_ms(1);
     tx_char(0x42);
     itoa(stringBuffer,speedM2,10);
     int i = 0;
@@ -182,29 +184,76 @@ void UARTM2(void) {
     tx_char(0x0a);
 }
 
+void gets_UART(char string[]) {
+    int i;
+    for(i=0;i++;i<4) {
+        string[i] = rx_char();
+    }
+}
 
 void interrupt ISR() {
     if(INTCONbits.TMR0IF == 1) {
         count++;
-        if (count == 290) {
-            
+        __delay_ms(1);
+        if (count == 100) {
             UARTM2();
         }
-        if (count == 300) {
-            
+        if (count == 200) {
             UARTM1();
+        }
+        if (count == 10) {
+            
+            gets_UART(str);
+            WriteSPI(speedRef1,1);
+            WriteSPI(speedRef2,2);
+            if(incStr1==0 && transRdy1 == 1) {
+                speedRef1 = (unsigned char)atoi(str);
+                
+                transRdy1 = 0;
+                PORTBbits.RB3 = 1 - PORTBbits.RB3;
+            }
+            
+            if(incStr2==0 && transRdy2 == 1) {
+                speedRef2 = (unsigned char)atoi(str);
+
+                transRdy2 = 0;
+                PORTBbits.RB4 = 1 - PORTBbits.RB4;
+            }
             count = 0;
         }
-        
     }
     
     if(RCIF == 1) {
+        
         char c = rx_char();
-        if (c == 'a') {
-            PORTBbits.RB7 = 1;
+        // Velocity Reference string for Motor1 (Left)
+        if(speed4M1 && incStr1 < 3) {
+            str[incStr1] = c;
+            incStr1++;
         }
-        if (c == 'b') {
-            PORTBbits.RB7 = 0;
+        if(speed4M1 && incStr1 >= 3) {
+            incStr1 = 0;
+            PORTBbits.RB0 = 1 - PORTBbits.RB0;
+            speed4M1 = 0;
+            transRdy1 = 1;
+        }
+        // Velocity Reference string for Motor2 (Right)
+        if(speed4M2 && incStr2 < 3) {
+            str[incStr2] = c;
+            incStr2++;
+        }
+        if(speed4M2 && incStr2 >= 3) {
+            incStr2 = 0;
+            PORTBbits.RB0 = 1 - PORTBbits.RB0;
+            speed4M2 = 0;
+            transRdy2 = 1;
+        }
+        if(c=='A') {
+            speed4M1 = 1;
+            PORTBbits.RB3 = 1 - PORTBbits.RB3;
+        }
+        if(c=='B') {
+            speed4M2 = 1;
         }
     }
 }

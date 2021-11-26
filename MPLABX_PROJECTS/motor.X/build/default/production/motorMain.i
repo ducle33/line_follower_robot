@@ -5268,9 +5268,9 @@ char stringBuffer[20];
 float speed = 0; float a = 0; float b = 0;
 float sum_err = 0;
 int speedPID = 0;
-int speedRef = 180;
-int countRef = 0;
-int countRef2 = 0;
+unsigned char speedRef = 180;
+unsigned char bufferRef = 0;
+
 
 void setupUART(void);
 char rx_char(void);
@@ -5343,36 +5343,28 @@ b = speed;
 speed = 0;
 }
 if (count == 3) {
-count = 0;
 speed = medianF(a,b,speed);
 speedPID = (int)(speed*11.4);
+PORTB = speedPID;
 WriteSPI(speedPID);
-CCPR1L = motorOutMSB(PID(180));
-CCP1CONbits.DC1B = motorOutLSB(PID(180));
+bufferRef = ReadSPI();
+if (bufferRef==0) {
+speedRef = speedRef;
+}
+else speedRef = bufferRef;
+CCPR1L = motorOutMSB(PID(speedRef));
+CCP1CONbits.DC1B = motorOutLSB(PID(speedRef));
 speed = 0;
 count = 0;
 }
-count++; countRef++;
-if (countRef==30) {
-countRef2++;
-countRef = 0;
-}
-if (countRef2==4) {
-speedRef = speedRef + 30;
-countRef2++;
-}
-if (countRef2==9) {
-speedRef = speedRef - 60;
-countRef2 = 0;
-}
+count++;
 INTCONbits.TMR0IF = 0;
 }
 }
 
 void main(void) {
-
+TRISB = 0;
 INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
-
 setupQEI();
 setupTimer5();
 setupTimer0();
@@ -5438,13 +5430,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 273
+# 265
 PIR1bits.SSPIF=0;
 
-# 277
+# 269
 ADCON0=0;
 
-# 279
+# 271
 ADCON1=0x0F;
 }
 
@@ -5460,13 +5452,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 294
+# 286
 PIR1bits.SSPIF=0;
 
-# 298
+# 290
 ADCON0=0;
 
-# 300
+# 292
 ADCON1=0x0F;
 }
 
