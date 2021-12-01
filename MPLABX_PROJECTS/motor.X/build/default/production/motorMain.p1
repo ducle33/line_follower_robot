@@ -4382,12 +4382,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _duty -> -> 0 `i `f ]
 "346
 [v _Kp `f ~T0 @X0 1 a ]
-[; ;motorMain.c: 346: float Kp = 0.7;
-[e = _Kp -> .0.7 `f ]
+[; ;motorMain.c: 346: float Kp = 0.5;
+[e = _Kp -> .0.5 `f ]
 "347
 [v _Ki `f ~T0 @X0 1 a ]
-[; ;motorMain.c: 347: float Ki = 0.045;
-[e = _Ki -> .0.045 `f ]
+[; ;motorMain.c: 347: float Ki = 0.03;
+[e = _Ki -> .0.03 `f ]
 "348
 [v _err `f ~T0 @X0 1 a ]
 [; ;motorMain.c: 348: float err = speedPID - ref;
@@ -4395,32 +4395,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;motorMain.c: 349: sum_err = sum_err + err;
 "349
 [e = _sum_err + _sum_err _err ]
-[; ;motorMain.c: 351: if (sum_err > 2000) sum_err = 2000;
-"351
-[e $ ! > _sum_err -> -> 2000 `i `f 352  ]
-[e = _sum_err -> -> 2000 `i `f ]
-[e :U 352 ]
-[; ;motorMain.c: 352: if (sum_err < -2000) sum_err = -2000;
-"352
-[e $ ! < _sum_err -> -U -> 2000 `i `f 353  ]
-[e = _sum_err -> -U -> 2000 `i `f ]
-[e :U 353 ]
 [; ;motorMain.c: 353: duty = Kp*err + Ki*sum_err;
 "353
 [e = _duty + * _Kp _err * _Ki _sum_err ]
 [; ;motorMain.c: 355: if(duty>100) duty = 100;
 "355
-[e $ ! > _duty -> -> 100 `i `f 354  ]
+[e $ ! > _duty -> -> 100 `i `f 352  ]
 [e = _duty -> -> 100 `i `f ]
-[e :U 354 ]
+[e :U 352 ]
 [; ;motorMain.c: 356: if(duty<-100) duty = -100;
 "356
-[e $ ! < _duty -> -U -> 100 `i `f 355  ]
+[e $ ! < _duty -> -U -> 100 `i `f 353  ]
 [e = _duty -> -U -> 100 `i `f ]
-[e :U 355 ]
+[e :U 353 ]
 [; ;motorMain.c: 358: if(duty<0) {
 "358
-[e $ ! < _duty -> -> 0 `i `f 356  ]
+[e $ ! < _duty -> -> 0 `i `f 354  ]
 {
 [; ;motorMain.c: 359: PORTCbits.RC0 = 1;
 "359
@@ -4430,11 +4420,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
 "361
 }
-[e :U 356 ]
+[e :U 354 ]
 [; ;motorMain.c: 361: }
 [; ;motorMain.c: 362: if(duty>0) {
 "362
-[e $ ! > _duty -> -> 0 `i `f 357  ]
+[e $ ! > _duty -> -> 0 `i `f 355  ]
 {
 [; ;motorMain.c: 363: PORTCbits.RC0 = 0;
 "363
@@ -4444,7 +4434,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
 "365
 }
-[e :U 357 ]
+[e :U 355 ]
 [; ;motorMain.c: 365: }
 [; ;motorMain.c: 366: return abs(duty);
 "366
@@ -4462,18 +4452,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;motorMain.c: 370: while(!RCIF);
 "370
-[e $U 359  ]
-[e :U 360 ]
+[e $U 357  ]
+[e :U 358 ]
+[e :U 357 ]
+[e $ ! _RCIF 358  ]
 [e :U 359 ]
-[e $ ! _RCIF 360  ]
-[e :U 361 ]
 [; ;motorMain.c: 371: return RCREG;
 "371
 [e ) _RCREG ]
-[e $UE 358  ]
+[e $UE 356  ]
 [; ;motorMain.c: 372: }
 "372
-[e :UE 358 ]
+[e :UE 356 ]
 }
 "374
 [v _tx_char `(v ~T0 @X0 1 ef1`uc ]
@@ -4487,14 +4477,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _TXREG _a ]
 [; ;motorMain.c: 376: while(!TRMT);
 "376
-[e $U 363  ]
-[e :U 364 ]
+[e $U 361  ]
+[e :U 362 ]
+[e :U 361 ]
+[e $ ! _TRMT 362  ]
 [e :U 363 ]
-[e $ ! _TRMT 364  ]
-[e :U 365 ]
 [; ;motorMain.c: 377: }
 "377
-[e :UE 362 ]
+[e :UE 360 ]
 }
 [a 1C 117 0 ]
 

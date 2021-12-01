@@ -78,11 +78,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
+#include <ctype.h>
 #define _XTAL_FREQ 20000000
 
 
 unsigned int count = 0;
-char str[4] = "180";                          //Global variable used for interrupt
+char str[4] = "180";
 unsigned int number = 100;
 unsigned char digit = 0;
 unsigned char stringBuffer[20];
@@ -94,8 +96,12 @@ char transRdy1 = 0;
 char transRdy2 = 0;
 char incStr1 = 0;
 char incStr2 = 0;
-unsigned char speedRef1 = 180;
-unsigned char speedRef2 = 180;
+unsigned char speedRef1 = 100;
+unsigned char speedRef2 = 100;
+unsigned char vel = 0;
+unsigned char omega = 0;
+float r = 0.085/2;
+float b = 0.172; 
 
 
 void swap(char *, char *);
@@ -156,15 +162,14 @@ void UARTM1(void) {
         speedM1 = speedM1;
     else
         speedM1 = (int)tempM1;
-    __delay_ms(1);
-    tx_char(0x41);
-    itoa(stringBuffer,speedM1,10);
-    int i = 0;
-    while (stringBuffer[i]) {
-        tx_char(stringBuffer[i]);
-        i++;
-    }
-    tx_char(0x0a);
+//    tx_char(0x41);
+//    itoa(stringBuffer,speedM1,10);
+//    int i = 0;
+//    while (stringBuffer[i]) {
+//        tx_char(stringBuffer[i]);
+//        i++;
+//    }
+//    tx_char(0x0a);
 }
 void UARTM2(void) {
     unsigned char tempM2;
@@ -173,97 +178,116 @@ void UARTM2(void) {
         speedM2 = speedM2;
     else
         speedM2 = (int)tempM2;
-    __delay_ms(1);
-    tx_char(0x42);
-    itoa(stringBuffer,speedM2,10);
-    int i = 0;
-    while (stringBuffer[i]) {
-        tx_char(stringBuffer[i]);
-        i++;
-    }
-    tx_char(0x0a);
+//    tx_char(0x42);
+//    itoa(stringBuffer,speedM2,10);
+//    int i = 0;
+//    while (stringBuffer[i]) {
+//        tx_char(stringBuffer[i]);
+//        i++;
+//    }
+//    tx_char(0x0a);
 }
 
 void gets_UART(char string[]) {
-    int i;
-    for(i=0;i++;i<4) {
+    for(int i=0;i++;i<4) {
         string[i] = rx_char();
     }
 }
 
 void interrupt ISR() {
-    if(INTCONbits.TMR0IF == 1) {
-        count++;
-        __delay_ms(1);
-        if (count == 100) {
-            UARTM2();
-        }
-        if (count == 200) {
-            UARTM1();
-        }
-        if (count == 10) {
-            
-            gets_UART(str);
-            WriteSPI(speedRef1,1);
-            WriteSPI(speedRef2,2);
-            if(incStr1==0 && transRdy1 == 1) {
-                speedRef1 = (unsigned char)atoi(str);
-                
-                transRdy1 = 0;
-                PORTBbits.RB3 = 1 - PORTBbits.RB3;
-            }
-            
-            if(incStr2==0 && transRdy2 == 1) {
-                speedRef2 = (unsigned char)atoi(str);
-
-                transRdy2 = 0;
-                PORTBbits.RB4 = 1 - PORTBbits.RB4;
-            }
-            count = 0;
-        }
-    }
     
     if(RCIF == 1) {
         
         char c = rx_char();
+        
         // Velocity Reference string for Motor1 (Left)
-        if(speed4M1 && incStr1 < 3) {
+        if(speed4M1 && incStr1 < 3 && isdigit(c)) {
             str[incStr1] = c;
             incStr1++;
         }
-        if(speed4M1 && incStr1 >= 3) {
+        
+        if(speed4M1 && incStr1 >= 3 && isdigit(c)) {
             incStr1 = 0;
-            PORTBbits.RB0 = 1 - PORTBbits.RB0;
             speed4M1 = 0;
             transRdy1 = 1;
         }
         // Velocity Reference string for Motor2 (Right)
-        if(speed4M2 && incStr2 < 3) {
+        if(speed4M2 && incStr2 < 3 && isdigit(c)) {
             str[incStr2] = c;
             incStr2++;
         }
-        if(speed4M2 && incStr2 >= 3) {
+        if(speed4M2 && incStr2 >= 3 && isdigit(c)) {
             incStr2 = 0;
-            PORTBbits.RB0 = 1 - PORTBbits.RB0;
             speed4M2 = 0;
             transRdy2 = 1;
         }
-        if(c=='A') {
-            speed4M1 = 1;
-            PORTBbits.RB3 = 1 - PORTBbits.RB3;
-        }
         if(c=='B') {
             speed4M2 = 1;
+            PORTDbits.RD6 = 1-PORTDbits.RD6;
         }
+        if(c=='A') {
+            speed4M1 = 1;
+            PORTDbits.RD6 = 1-PORTDbits.RD6;
+        }
+    }
+    
+    
+    if(INTCONbits.TMR0IF == 1) {
+        count++;
+        if(count==1) {
+            UARTM2();
+        }
+        if(count==2) {
+            UARTM1();
+        }
+        if(count==3) {
+            vel = (unsigned char)round( (((float)(speedM2+speedM1))*0.104719*r/2) * 256 );
+            omega = (unsigned char)round( (((float)(abs((speedM2-speedM1))))*0.104719/(2*b)) * 5.12 ); 
+            PORTB = vel;
+
+            if (speedM2-speedM1 < 0)
+                PORTDbits.RD7 = 1;
+            else
+                PORTDbits.RD7 = 0;
+
+            PORTA = omega;
+            PORTE = omega >> 6;
+        }
+        if(count==4) {
+            WriteSPI(speedRef1,1);
+            WriteSPI(speedRef2,2);
+        }
+        if(count==5) {
+        }
+        if(count==6) {
+            if(incStr1==0 && transRdy1 == 1) {
+                transRdy1 = 0;
+                speedRef1 = (unsigned char)atoi(str);
+                PORTDbits.RD5 = 1-PORTDbits.RD5;
+            }
+            if(incStr2==0 && transRdy2 == 1) {
+                transRdy2 = 0;
+                speedRef2 = (unsigned char)atoi(str);
+                PORTDbits.RD4 = 1-PORTDbits.RD4;
+            }
+            count=0;
+        }
+        __delay_us(2500);
     }
 }
 
 void main(void) {
-    
-    INTCONbits.GIE = 1; INTCONbits.PEIE = 1; TRISB = 0;
+    TRISB = 0;
+    TRISA = 0xC0;
+    TRISDbits.RD7 = 0;
+    TRISDbits.RD4 = 0;
+    TRISDbits.RD5 = 0;
+    TRISDbits.RD6 = 0;
+    TRISE = 0;
+    ADON = 0;
+    INTCONbits.GIE = 1; INTCONbits.PEIE = 1; 
     setupUART();
     setupTimer0();
-    PORTBbits.RB6 = 1;
     TRISCbits.RC2 = 0;
     PORTCbits.RC2 = 1;
     TRISCbits.RC1 = 0;
@@ -282,9 +306,9 @@ void setupTimer0(void) {
     
     // Set Prescaler to 1:256
     T0CONbits.PSA = 0;
-    T0CONbits.T0PS2 = 1;
+    T0CONbits.T0PS2 = 0;
     T0CONbits.T0PS1 = 0;
-    T0CONbits.T0PS0 = 1;
+    T0CONbits.T0PS0 = 0;
     TMR0 = 0;
     T0CONbits.TMR0ON = 1; // Turns on Timer0
 }

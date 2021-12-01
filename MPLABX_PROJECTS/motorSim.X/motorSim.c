@@ -108,10 +108,6 @@ void interrupt ISR() {
             count = 0;
         }
     }
-    
-    if(RCIF == 1) {
-        char c = rx_char();
-    }
 }
 
 void main(void) {
@@ -120,6 +116,7 @@ void main(void) {
     setupUART();
     setupTimer0();
     while(1) {
+        
     }
     return;
 }
@@ -132,9 +129,9 @@ void setupTimer0(void) {
     // Set Prescaler to 1:256
     T0CONbits.PSA = 0;
     T0CONbits.T0PS2 = 1;
-    T0CONbits.T0PS1 = 0;
-    T0CONbits.T0PS0 = 1;
-    TMR0 = 0;
+    T0CONbits.T0PS1 = 1;
+    T0CONbits.T0PS0 = 0;
+    TMR0 = 250;
     T0CONbits.TMR0ON = 1; // Turns on Timer0
 }
 

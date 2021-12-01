@@ -91,6 +91,7 @@ omega_store = 0;
 theta_reset = 0;
 reset1 = 0;
 reset0 = 1;
+theta_store = 0;
 
 for i = 1 : n
     if (i==n1+n2+n3+n4)
@@ -123,6 +124,8 @@ for i = 1 : n
         v = (omega_r+omega_l)*r/2;                                                                       % tính giá tri velocity hien tai
         omega =(omega_r-omega_l)/(2*b);                                                                 % tính giá tri omega hien tai
           
+        theta_store = [theta_store omega];
+        
         counter_motor = 0;
         theta_dot = omega;
     else

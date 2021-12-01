@@ -37,15 +37,7 @@ while ~isequal(datestr(now,'mm/DD HH:MM'),stopTime)
         fisrtTime = 0;
     end
 
-    t =  milliseconds(datetime('now') - begTime)/17000 - 0.5
-    
-    if (t > 1.5 && t < 1.9)
-       fprintf(s,"A150");
-    end
-    
-    if (t > 2.5 && t < 2.9)
-       fprintf(s,"B220");
-    end
+    t =  milliseconds(datetime('now') - begTime)/10000 - 0.5
     
     addpoints(T_Line,t,fscanf(s1,'%d')); 
     addpoints(P_Line,t,fscanf(s2,'%d'));

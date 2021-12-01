@@ -92,6 +92,19 @@ theta_reset = 0;
 reset1 = 0;
 reset0 = 1;
 
+while(1)
+   % Save wheel velocities in containers  omega_value = [omega_value;
+   % omega_r' omega_l'];  // omega_r = fscanf(s1,'%d')
+   
+   % Save wheel velocities ref in contaniers
+   
+   % Save v, omega from master simulation microcontroller
+    
+    
+end
+
+
+
 for i = 1 : n
     if (i==n1+n2+n3+n4)
         theta_reset = theta;

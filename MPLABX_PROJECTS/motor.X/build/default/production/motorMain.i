@@ -5513,13 +5513,13 @@ return bufferChar;
 
 float PID(int ref) {
 float duty = 0;
-float Kp = 0.7;
-float Ki = 0.045;
+float Kp = 0.5;
+float Ki = 0.03;
 float err = speedPID - ref;
 sum_err = sum_err + err;
 
-if (sum_err > 2000) sum_err = 2000;
-if (sum_err < -2000) sum_err = -2000;
+
+
 duty = Kp*err + Ki*sum_err;
 
 if(duty>100) duty = 100;

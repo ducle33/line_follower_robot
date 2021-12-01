@@ -11,43 +11,43 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-idloc IDLOC 5 200000 200000 8 1
-init CODE 0 214 214 4 1
-reset_vec CODE 0 0 0 4 1
-config CONFIG 4 300000 300000 E 1
 $dist/default/production\motor.X.production.o
-cinit CODE 0 1404 1404 60 1
+cinit CODE 0 137C 137C 60 1
 idloc IDLOC 5 200000 200000 8 1
-text0 CODE 0 156C 156C 24 1
-text1 CODE 0 161A 161A 14 1
-text2 CODE 0 15CE 15CE 1A 1
-text3 CODE 0 1590 1590 20 1
-text4 CODE 0 1602 1602 18 1
-text5 CODE 0 162E 162E C 1
-text6 CODE 0 15B0 15B0 1E 1
-text8 CODE 0 1464 1464 5C 1
-text9 CODE 0 14C0 14C0 4A 1
-text10 CODE 0 E92 E92 1B4 1
-text11 CODE 0 153E 153E 2E 1
-text12 CODE 0 15E8 15E8 1A 1
-text13 CODE 0 BEE BEE 2A4 1
-text14 CODE 0 150A 150A 34 1
-text15 CODE 0 1046 1046 1B4 1
-text16 CODE 0 11FA 11FA 106 1
+text0 CODE 0 14E4 14E4 24 1
+text1 CODE 0 1592 1592 14 1
+text2 CODE 0 1546 1546 1A 1
+text3 CODE 0 1508 1508 20 1
+text4 CODE 0 157A 157A 18 1
+text5 CODE 0 15A6 15A6 C 1
+text6 CODE 0 1528 1528 1E 1
+text8 CODE 0 13DC 13DC 5C 1
+text9 CODE 0 1438 1438 4A 1
+text10 CODE 0 E0A E0A 1B4 1
+text11 CODE 0 14B6 14B6 2E 1
+text12 CODE 0 1560 1560 1A 1
+text13 CODE 0 BEE BEE 21C 1
+text14 CODE 0 1482 1482 34 1
+text15 CODE 0 FBE FBE 1B4 1
+text16 CODE 0 1172 1172 106 1
 text17 CODE 0 7C4 7C4 42A 1
-text18 CODE 0 1300 1300 104 1
+text18 CODE 0 1278 1278 104 1
 text19 CODE 0 304 304 4C0 1
-idataCOMRAM CODE 0 1640 1640 2 1
+idataCOMRAM CODE 0 15B8 15B8 2 1
 cstackCOMRAM COMRAM 1 1 1 57 1
 temp COMRAM 1 5F 5F 1 1
 bssBANK0 BANK0 1 60 60 29 1
 intcode CODE 0 8 8 20C 1
 smallconst SMALLCONST 0 300 300 4 1
-idataBANK0 CODE 0 163A 163A 6 1
+idataBANK0 CODE 0 15B2 15B2 6 1
 dataBANK0 BANK0 1 89 89 6 1
 dataCOMRAM COMRAM 1 5D 5D 2 1
 bssCOMRAM COMRAM 1 58 58 5 1
+config CONFIG 4 300000 300000 E 1
+$C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+idloc IDLOC 5 200000 200000 8 1
+init CODE 0 214 214 4 1
+reset_vec CODE 0 0 0 4 1
 config CONFIG 4 300000 300000 E 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
@@ -62,15 +62,15 @@ BANK1 100-1FF 1
 BANK2 200-2FF 1
 CONST 4-7 1
 CONST 218-2FF 1
-CONST 1642-3FFF 1
+CONST 15BA-3FFF 1
 STACK 8F-2FF 1
-SMALLCONST 1642-3FFF 1
+SMALLCONST 15BA-3FFF 1
 CODE 4-7 1
 CODE 218-2FF 1
-CODE 1642-3FFF 1
+CODE 15BA-3FFF 1
 BIGRAM 8F-2FF 1
 EEDATA F00000-F000FF 1
-MEDIUMCONST 1642-3FFF 1
+MEDIUMCONST 15BA-3FFF 1
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -85,7 +85,7 @@ MEDIUMCONST 1642-3FFF 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\motor.X.production.o
-8 intcode CODE >1886:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
+8 intcode CODE >1886:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
 8 intcode CODE >162:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 12 intcode CODE >164:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 2E intcode CODE >165:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
@@ -233,19 +233,19 @@ EE intcode CODE >178:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECT
 7B0 text19 CODE >234:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcadd.c
 7B2 text19 CODE >236:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcadd.c
 7C2 text19 CODE >237:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcadd.c
-1300 text18 CODE >4:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-1300 text18 CODE >7:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-132E text18 CODE >8:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-133E text18 CODE >9:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-136C text18 CODE >10:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-137C text18 CODE >12:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-138A text18 CODE >13:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-139C text18 CODE >14:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-13AA text18 CODE >15:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-13BC text18 CODE >16:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-13CC text18 CODE >17:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-13DC text18 CODE >18:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
-1402 text18 CODE >19:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+1278 text18 CODE >4:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+1278 text18 CODE >7:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+12A6 text18 CODE >8:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+12B6 text18 CODE >9:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+12E4 text18 CODE >10:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+12F4 text18 CODE >12:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+1302 text18 CODE >13:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+1314 text18 CODE >14:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+1322 text18 CODE >15:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+1334 text18 CODE >16:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+1344 text18 CODE >17:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+1354 text18 CODE >18:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
+137A text18 CODE >19:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
 7C4 text17 CODE >8:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
 7C4 text17 CODE >17:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
 7CA text17 CODE >18:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
@@ -333,231 +333,229 @@ BD2 text17 CODE >199:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common
 BD8 text17 CODE >201:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
 BDC text17 CODE >203:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
 BEC text17 CODE >205:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
-11FA text16 CODE >43:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-11FA text16 CODE >47:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-1210 text16 CODE >48:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-1224 text16 CODE >49:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-124E text16 CODE >50:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-1250 text16 CODE >51:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-1260 text16 CODE >52:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-1264 text16 CODE >53:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-1272 text16 CODE >54:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-128A text16 CODE >57:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-1294 text16 CODE >58:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-129E text16 CODE >60:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-12B2 text16 CODE >63:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-12BC text16 CODE >64:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-12BE text16 CODE >62:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-12CE text16 CODE >67:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-12DE text16 CODE >68:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-12EE text16 CODE >69:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-12FE text16 CODE >70:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
-1046 text15 CODE >10:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1048 text15 CODE >15:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1066 text15 CODE >16:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1098 text15 CODE >17:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-109C text15 CODE >18:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-109C text15 CODE >19:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-10AC text15 CODE >21:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-10C2 text15 CODE >22:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-10D6 text15 CODE >23:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-10DA text15 CODE >24:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-10DE text15 CODE >25:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-10E0 text15 CODE >26:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-10EA text15 CODE >24:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-111C text15 CODE >29:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-111E text15 CODE >30:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-112A text15 CODE >31:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1134 text15 CODE >28:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1134 text15 CODE >32:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1166 text15 CODE >34:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1168 text15 CODE >35:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1172 text15 CODE >33:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-1190 text15 CODE >37:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-119E text15 CODE >38:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-11A0 text15 CODE >39:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-11A4 text15 CODE >40:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-11C8 text15 CODE >41:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-11E6 text15 CODE >42:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-11E8 text15 CODE >43:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-11F8 text15 CODE >44:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
-150A text14 CODE >4:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
-150A text14 CODE >6:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
-1518 text14 CODE >7:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
-1534 text14 CODE >8:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
-153C text14 CODE >9:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
+1172 text16 CODE >43:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1172 text16 CODE >47:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1188 text16 CODE >48:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+119C text16 CODE >49:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+11C6 text16 CODE >50:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+11C8 text16 CODE >51:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+11D8 text16 CODE >52:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+11DC text16 CODE >53:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+11EA text16 CODE >54:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1202 text16 CODE >57:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+120C text16 CODE >58:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1216 text16 CODE >60:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+122A text16 CODE >63:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1234 text16 CODE >64:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1236 text16 CODE >62:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1246 text16 CODE >67:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1256 text16 CODE >68:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1266 text16 CODE >69:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+1276 text16 CODE >70:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fltol.c
+FBE text15 CODE >10:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+FC0 text15 CODE >15:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+FDE text15 CODE >16:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1010 text15 CODE >17:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1014 text15 CODE >18:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1014 text15 CODE >19:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1024 text15 CODE >21:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+103A text15 CODE >22:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+104E text15 CODE >23:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1052 text15 CODE >24:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1056 text15 CODE >25:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1058 text15 CODE >26:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1062 text15 CODE >24:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1094 text15 CODE >29:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1096 text15 CODE >30:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+10A2 text15 CODE >31:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+10AC text15 CODE >28:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+10AC text15 CODE >32:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+10DE text15 CODE >34:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+10E0 text15 CODE >35:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+10EA text15 CODE >33:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1108 text15 CODE >37:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1116 text15 CODE >38:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1118 text15 CODE >39:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+111C text15 CODE >40:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1140 text15 CODE >41:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+115E text15 CODE >42:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1160 text15 CODE >43:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1170 text15 CODE >44:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
+1482 text14 CODE >4:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
+1482 text14 CODE >6:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
+1490 text14 CODE >7:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
+14AC text14 CODE >8:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
+14B4 text14 CODE >9:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
 BEE text13 CODE >344:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 BEE text13 CODE >345:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 BEE text13 CODE >346:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 BFE text13 CODE >347:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 C0E text13 CODE >348:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 C44 text13 CODE >349:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-C78 text13 CODE >351:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-CBC text13 CODE >352:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-D00 text13 CODE >353:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-D7C text13 CODE >355:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-DBE text13 CODE >356:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E00 text13 CODE >358:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E0E text13 CODE >359:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E10 text13 CODE >360:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E12 text13 CODE >362:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E44 text13 CODE >363:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E46 text13 CODE >364:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E48 text13 CODE >366:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E90 text13 CODE >367:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15E8 text12 CODE >136:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15E8 text12 CODE >138:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15EA text12 CODE >139:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15EC text12 CODE >140:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15F0 text12 CODE >141:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15FE text12 CODE >142:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1600 text12 CODE >143:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-153E text11 CODE >122:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1540 text11 CODE >124:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1542 text11 CODE >125:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1544 text11 CODE >126:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1546 text11 CODE >127:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-154A text11 CODE >128:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-155C text11 CODE >131:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-156A text11 CODE >133:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E92 text10 CODE >145:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-E92 text10 CODE >147:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-EF6 text10 CODE >149:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-F50 text10 CODE >151:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-FB4 text10 CODE >153:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-FFE text10 CODE >157:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1034 text10 CODE >158:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1034 text10 CODE >159:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1044 text10 CODE >160:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-14C0 text9 CODE >338:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-14C0 text9 CODE >339:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1500 text9 CODE >340:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1506 text9 CODE >341:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1508 text9 CODE >342:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1464 text8 CODE >332:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1464 text8 CODE >333:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-14A4 text8 CODE >334:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-14BC text8 CODE >335:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-14BE text8 CODE >336:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15B0 text6 CODE >274:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15B0 text6 CODE >276:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15B2 text6 CODE >277:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15B4 text6 CODE >278:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15B6 text6 CODE >279:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15B8 text6 CODE >282:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15BA text6 CODE >283:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15BE text6 CODE >284:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15C2 text6 CODE >286:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15C4 text6 CODE >290:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15C8 text6 CODE >292:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15CC text6 CODE >293:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-162E text5 CODE >324:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-162E text5 CODE >326:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1632 text5 CODE >327:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1634 text5 CODE >328:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1636 text5 CODE >329:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1638 text5 CODE >330:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1602 text4 CODE >308:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1602 text4 CODE >310:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1604 text4 CODE >311:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1606 text4 CODE >312:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1608 text4 CODE >313:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-160C text4 CODE >315:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-160E text4 CODE >316:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1610 text4 CODE >318:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1612 text4 CODE >319:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1614 text4 CODE >320:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1616 text4 CODE >321:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1618 text4 CODE >322:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1590 text3 CODE >212:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1590 text3 CODE >213:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1592 text3 CODE >214:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1594 text3 CODE >215:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1598 text3 CODE >217:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-159A text3 CODE >219:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-159C text3 CODE >220:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-159E text3 CODE >221:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15A0 text3 CODE >222:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15A8 text3 CODE >224:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15AA text3 CODE >225:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15AC text3 CODE >226:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15AE text3 CODE >228:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15CE text2 CODE >230:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15CE text2 CODE >231:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15D0 text2 CODE >232:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15D2 text2 CODE >233:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15D4 text2 CODE >236:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15D6 text2 CODE >237:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15D8 text2 CODE >238:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15DA text2 CODE >239:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15DC text2 CODE >240:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15E4 text2 CODE >241:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-15E6 text2 CODE >242:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-161A text1 CODE >244:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-161A text1 CODE >245:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-161C text1 CODE >246:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-161E text1 CODE >247:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1620 text1 CODE >248:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1622 text1 CODE >249:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-162A text1 CODE >250:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-162C text1 CODE >252:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-156C text0 CODE >197:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-156C text0 CODE >198:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1570 text0 CODE >199:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1574 text0 CODE >200:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1578 text0 CODE >201:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-157C text0 CODE >202:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1580 text0 CODE >203:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1584 text0 CODE >204:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1588 text0 CODE >205:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1588 text0 CODE >207:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-1404 cinit CODE >662:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1404 cinit CODE >664:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1404 cinit CODE >667:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1404 cinit CODE >747:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1406 cinit CODE >748:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1408 cinit CODE >749:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-140A cinit CODE >750:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-140C cinit CODE >751:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-140E cinit CODE >752:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1410 cinit CODE >753:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1414 cinit CODE >754:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1418 cinit CODE >755:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1418 cinit CODE >756:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-141A cinit CODE >757:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-141E cinit CODE >758:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1420 cinit CODE >759:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1422 cinit CODE >760:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1424 cinit CODE >764:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1426 cinit CODE >765:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1428 cinit CODE >766:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-142A cinit CODE >767:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-142C cinit CODE >768:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-142E cinit CODE >769:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1430 cinit CODE >770:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1432 cinit CODE >771:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1436 cinit CODE >772:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1438 cinit CODE >773:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-143C cinit CODE >777:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1440 cinit CODE >778:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1442 cinit CODE >779:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1442 cinit CODE >780:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1444 cinit CODE >781:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1446 cinit CODE >782:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1448 cinit CODE >785:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-144A cinit CODE >786:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-144C cinit CODE >787:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-144E cinit CODE >788:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1450 cinit CODE >789:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1452 cinit CODE >795:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1452 cinit CODE >797:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1454 cinit CODE >798:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1456 cinit CODE >800:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1458 cinit CODE >801:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-145A cinit CODE >802:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-145C cinit CODE >803:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-145E cinit CODE >804:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
-1460 cinit CODE >805:C:\Users\david\AppData\Local\Temp\xcAs5ubs.s
+C78 text13 CODE >353:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+CF4 text13 CODE >355:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+D36 text13 CODE >356:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+D78 text13 CODE >358:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+D86 text13 CODE >359:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+D88 text13 CODE >360:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+D8A text13 CODE >362:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+DBC text13 CODE >363:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+DBE text13 CODE >364:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+DC0 text13 CODE >366:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+E08 text13 CODE >367:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1560 text12 CODE >136:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1560 text12 CODE >138:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1562 text12 CODE >139:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1564 text12 CODE >140:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1568 text12 CODE >141:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1576 text12 CODE >142:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1578 text12 CODE >143:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14B6 text11 CODE >122:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14B8 text11 CODE >124:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14BA text11 CODE >125:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14BC text11 CODE >126:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14BE text11 CODE >127:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14C2 text11 CODE >128:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14D4 text11 CODE >131:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14E2 text11 CODE >133:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+E0A text10 CODE >145:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+E0A text10 CODE >147:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+E6E text10 CODE >149:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+EC8 text10 CODE >151:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+F2C text10 CODE >153:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+F76 text10 CODE >157:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+FAC text10 CODE >158:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+FAC text10 CODE >159:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+FBC text10 CODE >160:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1438 text9 CODE >338:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1438 text9 CODE >339:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1478 text9 CODE >340:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+147E text9 CODE >341:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1480 text9 CODE >342:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+13DC text8 CODE >332:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+13DC text8 CODE >333:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+141C text8 CODE >334:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1434 text8 CODE >335:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1436 text8 CODE >336:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1528 text6 CODE >274:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1528 text6 CODE >276:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+152A text6 CODE >277:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+152C text6 CODE >278:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+152E text6 CODE >279:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1530 text6 CODE >282:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1532 text6 CODE >283:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1536 text6 CODE >284:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+153A text6 CODE >286:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+153C text6 CODE >290:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1540 text6 CODE >292:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1544 text6 CODE >293:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+15A6 text5 CODE >324:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+15A6 text5 CODE >326:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+15AA text5 CODE >327:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+15AC text5 CODE >328:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+15AE text5 CODE >329:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+15B0 text5 CODE >330:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+157A text4 CODE >308:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+157A text4 CODE >310:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+157C text4 CODE >311:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+157E text4 CODE >312:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1580 text4 CODE >313:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1584 text4 CODE >315:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1586 text4 CODE >316:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1588 text4 CODE >318:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+158A text4 CODE >319:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+158C text4 CODE >320:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+158E text4 CODE >321:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1590 text4 CODE >322:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1508 text3 CODE >212:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1508 text3 CODE >213:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+150A text3 CODE >214:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+150C text3 CODE >215:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1510 text3 CODE >217:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1512 text3 CODE >219:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1514 text3 CODE >220:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1516 text3 CODE >221:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1518 text3 CODE >222:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1520 text3 CODE >224:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1522 text3 CODE >225:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1524 text3 CODE >226:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1526 text3 CODE >228:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1546 text2 CODE >230:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1546 text2 CODE >231:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1548 text2 CODE >232:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+154A text2 CODE >233:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+154C text2 CODE >236:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+154E text2 CODE >237:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1550 text2 CODE >238:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1552 text2 CODE >239:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1554 text2 CODE >240:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+155C text2 CODE >241:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+155E text2 CODE >242:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1592 text1 CODE >244:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1592 text1 CODE >245:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1594 text1 CODE >246:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1596 text1 CODE >247:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1598 text1 CODE >248:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+159A text1 CODE >249:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+15A2 text1 CODE >250:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+15A4 text1 CODE >252:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14E4 text0 CODE >197:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14E4 text0 CODE >198:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14E8 text0 CODE >199:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14EC text0 CODE >200:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14F0 text0 CODE >201:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14F4 text0 CODE >202:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14F8 text0 CODE >203:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+14FC text0 CODE >204:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1500 text0 CODE >205:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+1500 text0 CODE >207:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
+137C cinit CODE >662:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+137C cinit CODE >664:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+137C cinit CODE >667:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+137C cinit CODE >747:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+137E cinit CODE >748:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1380 cinit CODE >749:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1382 cinit CODE >750:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1384 cinit CODE >751:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1386 cinit CODE >752:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1388 cinit CODE >753:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+138C cinit CODE >754:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1390 cinit CODE >755:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1390 cinit CODE >756:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1392 cinit CODE >757:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1396 cinit CODE >758:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+1398 cinit CODE >759:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+139A cinit CODE >760:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+139C cinit CODE >764:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+139E cinit CODE >765:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13A0 cinit CODE >766:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13A2 cinit CODE >767:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13A4 cinit CODE >768:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13A6 cinit CODE >769:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13A8 cinit CODE >770:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13AA cinit CODE >771:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13AE cinit CODE >772:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13B0 cinit CODE >773:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13B4 cinit CODE >777:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13B8 cinit CODE >778:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13BA cinit CODE >779:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13BA cinit CODE >780:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13BC cinit CODE >781:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13BE cinit CODE >782:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13C0 cinit CODE >785:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13C2 cinit CODE >786:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13C4 cinit CODE >787:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13C6 cinit CODE >788:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13C8 cinit CODE >789:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13CA cinit CODE >795:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13CA cinit CODE >797:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13CC cinit CODE >798:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13CE cinit CODE >800:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13D0 cinit CODE >801:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13D2 cinit CODE >802:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13D4 cinit CODE >803:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13D6 cinit CODE >804:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
+13D8 cinit CODE >805:C:\Users\david\AppData\Local\Temp\xcAsheqk.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -576,13 +574,13 @@ _w 5E 0 COMRAM 1 dataCOMRAM dist/default/production\motor.X.production.o
 __LdataBANK0 0 0 ABS 0 dataBANK0 dist/default/production\motor.X.production.o
 __Lmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\motor.X.production.o
 ?_medianF D 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
-__Hspace_0 1642 0 ABS 0 - dist/default/production\motor.X.production.o
+__Hspace_0 15BA 0 ABS 0 - dist/default/production\motor.X.production.o
 __Hspace_1 8F 0 ABS 0 - dist/default/production\motor.X.production.o
 __Hspace_2 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __Hspace_4 60000E 0 ABS 0 - dist/default/production\motor.X.production.o
 __HidataBANK0 0 0 ABS 0 idataBANK0 dist/default/production\motor.X.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\motor.X.production.o
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\david\AppData\Local\Temp\xcAsheqk.o
 _DFLTCONbits F60 0 ABS 0 - dist/default/production\motor.X.production.o
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\motor.X.production.o
 _CS 7C22 0 ABS 0 - dist/default/production\motor.X.production.o
@@ -593,11 +591,11 @@ _RCIF 7CF5 0 ABS 0 - dist/default/production\motor.X.production.o
 _TMR0 FD6 0 ABS 0 - dist/default/production\motor.X.production.o
 _TMR5 F87 0 ABS 0 - dist/default/production\motor.X.production.o
 _TRMT 7D61 0 ABS 0 - dist/default/production\motor.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-_main 156C 0 CODE 0 text0 dist/default/production\motor.X.production.o
+___sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+_main 14E4 0 CODE 0 text0 dist/default/production\motor.X.production.o
 abs@a 24 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 btemp 5F 0 COMRAM 1 temp dist/default/production\motor.X.production.o
-start 214 0 CODE 0 init C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
+start 214 0 CODE 0 init C:\Users\david\AppData\Local\Temp\xcAsheqk.o
 ___flmul@aexp 12 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 ___flmul@bexp 13 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 ___flmul@prod 14 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
@@ -616,37 +614,37 @@ ttemp5 60 0 COMRAM 1 temp dist/default/production\motor.X.production.o
 ttemp6 63 0 COMRAM 1 temp dist/default/production\motor.X.production.o
 ttemp7 67 0 COMRAM 1 temp dist/default/production\motor.X.production.o
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\motor.X.production.o
-__accesstop 60 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-intlevel0 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-intlevel1 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-intlevel2 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-intlevel3 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
+__accesstop 60 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+intlevel0 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+intlevel1 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+intlevel2 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+intlevel3 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAsheqk.o
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\motor.X.production.o
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\motor.X.production.o
 wtemp8 60 0 COMRAM 1 temp dist/default/production\motor.X.production.o
 __Hifardata 0 0 CODE 0 ifardata dist/default/production\motor.X.production.o
 __Hclrtext 0 0 ABS 0 clrtext dist/default/production\motor.X.production.o
-__pidataCOMRAM 1640 0 CODE 0 idataCOMRAM dist/default/production\motor.X.production.o
+__pidataCOMRAM 15B8 0 CODE 0 idataCOMRAM dist/default/production\motor.X.production.o
 _ADCON0 FC2 0 ABS 0 - dist/default/production\motor.X.production.o
 _ADCON1 FC1 0 ABS 0 - dist/default/production\motor.X.production.o
 motorOutLSB@bufferChar 52 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAsheqk.o
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\motor.X.production.o
 _CCPR1L FBE 0 ABS 0 - dist/default/production\motor.X.production.o
 __size_of_ReadSPI 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\motor.X.production.o
-__end_of___flge 1404 0 CODE 0 text18 dist/default/production\motor.X.production.o
+__end_of___flge 137C 0 CODE 0 text18 dist/default/production\motor.X.production.o
 motorOutMSB@duty 4C 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\motor.X.production.o
 __Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\motor.X.production.o
 __Hintcodelo 214 0 CODE 0 intcodelo dist/default/production\motor.X.production.o
-_setupTimer0 15CE 0 CODE 0 text2 dist/default/production\motor.X.production.o
-_setupTimer2 162E 0 CODE 0 text5 dist/default/production\motor.X.production.o
-_setupTimer5 161A 0 CODE 0 text1 dist/default/production\motor.X.production.o
+_setupTimer0 1546 0 CODE 0 text2 dist/default/production\motor.X.production.o
+_setupTimer2 15A6 0 CODE 0 text5 dist/default/production\motor.X.production.o
+_setupTimer5 1592 0 CODE 0 text1 dist/default/production\motor.X.production.o
 __end_of___fladd 7C4 0 CODE 0 text19 dist/default/production\motor.X.production.o
 __end_of___flmul BEE 0 CODE 0 text17 dist/default/production\motor.X.production.o
-__end_of___fltol 1300 0 CODE 0 text16 dist/default/production\motor.X.production.o
+__end_of___fltol 1278 0 CODE 0 text16 dist/default/production\motor.X.production.o
 __LidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/production\motor.X.production.o
 ___fladd@a 1E 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 ___fladd@b 1A 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
@@ -656,10 +654,10 @@ ___flmul@a 5 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.
 ___flmul@b 1 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 motorOutLSB@duty 4C 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 WriteSPI@data_out 1 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
-_motorOutLSB 14C0 0 CODE 0 text9 dist/default/production\motor.X.production.o
-_motorOutMSB 1464 0 CODE 0 text8 dist/default/production\motor.X.production.o
+_motorOutLSB 1438 0 CODE 0 text9 dist/default/production\motor.X.production.o
+_motorOutMSB 13DC 0 CODE 0 text8 dist/default/production\motor.X.production.o
 __Lintcodelo 214 0 CODE 0 intcodelo dist/default/production\motor.X.production.o
-start_initialization 1404 0 CODE 0 cinit dist/default/production\motor.X.production.o
+start_initialization 137C 0 CODE 0 cinit dist/default/production\motor.X.production.o
 __HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\motor.X.production.o
 __size_of_medianF 0 0 ABS 0 - dist/default/production\motor.X.production.o
 _TRISCbits F94 0 ABS 0 - dist/default/production\motor.X.production.o
@@ -668,8 +666,8 @@ _QEICONbits FB6 0 ABS 0 - dist/default/production\motor.X.production.o
 ___rparam_used 1 0 ABS 0 - dist/default/production\motor.X.production.o
 __pcstackBANK0 0 0 BANK0 1 cstackBANK0 dist/default/production\motor.X.production.o
 _SSPBUF FC9 0 ABS 0 - dist/default/production\motor.X.production.o
-isa$xinst 0 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-__end_of_ReadSPI 1602 0 CODE 0 text12 dist/default/production\motor.X.production.o
+isa$xinst 0 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+__end_of_ReadSPI 157A 0 CODE 0 text12 dist/default/production\motor.X.production.o
 __Hbank0 0 0 ABS 0 bank0 dist/default/production\motor.X.production.o
 __Hbank1 0 0 ABS 0 bank1 dist/default/production\motor.X.production.o
 __Hbank2 0 0 ABS 0 bank2 dist/default/production\motor.X.production.o
@@ -693,7 +691,7 @@ __Htext9 0 0 ABS 0 text9 dist/default/production\motor.X.production.o
 __size_of___xxtofl 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\motor.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\motor.X.production.o
-__smallconst 300 0 SMALLCONST 0 smallconst C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
+__smallconst 300 0 SMALLCONST 0 smallconst C:\Users\david\AppData\Local\Temp\xcAsheqk.o
 ___xxtofl@arg 32 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 ___xxtofl@exp 31 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 ___xxtofl@val 28 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
@@ -740,7 +738,7 @@ __Lrbss 0 0 COMRAM 1 rbss dist/default/production\motor.X.production.o
 __Ltemp 5F 0 COMRAM 1 temp dist/default/production\motor.X.production.o
 __Ltext 0 0 ABS 0 text dist/default/production\motor.X.production.o
 motorOutLSB@buffer 50 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
-___flge 1300 0 CODE 0 text18 dist/default/production\motor.X.production.o
+___flge 1278 0 CODE 0 text18 dist/default/production\motor.X.production.o
 __LcstackBANK0 0 0 ABS 0 cstackBANK0 dist/default/production\motor.X.production.o
 int$flags 5F 0 COMRAM 1 temp dist/default/production\motor.X.production.o
 __HcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\motor.X.production.o
@@ -749,28 +747,28 @@ __Hirdata 0 0 CODE 0 irdata dist/default/production\motor.X.production.o
 _ISR 8 0 CODE 0 intcode dist/default/production\motor.X.production.o
 _PID BEE 0 CODE 0 text13 dist/default/production\motor.X.production.o
 _PR2 FCB 0 ABS 0 - dist/default/production\motor.X.production.o
-__S0 1642 0 ABS 0 - dist/default/production\motor.X.production.o
+__S0 15BA 0 ABS 0 - dist/default/production\motor.X.production.o
 __S1 8F 0 ABS 0 - dist/default/production\motor.X.production.o
 __S2 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __S4 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __S5 0 0 ABS 0 - dist/default/production\motor.X.production.o
-_abs 150A 0 CODE 0 text14 dist/default/production\motor.X.production.o
+_abs 1482 0 CODE 0 text14 dist/default/production\motor.X.production.o
 _str 82 0 BANK0 1 bssBANK0 dist/default/production\motor.X.production.o
 motorOutMSB@buffer 52 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 _count2 84 0 BANK0 1 bssBANK0 dist/default/production\motor.X.production.o
-__end_of_medianF 1046 0 CODE 0 text10 dist/default/production\motor.X.production.o
+__end_of_medianF FBE 0 CODE 0 text10 dist/default/production\motor.X.production.o
 __HidataCOMRAM 0 0 ABS 0 idataCOMRAM dist/default/production\motor.X.production.o
 __Lbigdata 0 0 BIGRAM 1 bigdata dist/default/production\motor.X.production.o
-_SPI_Init_Slave 15B0 0 CODE 0 text6 dist/default/production\motor.X.production.o
+_SPI_Init_Slave 1528 0 CODE 0 text6 dist/default/production\motor.X.production.o
 __Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\motor.X.production.o
-___xxtofl 1046 0 CODE 0 text15 dist/default/production\motor.X.production.o
+___xxtofl FBE 0 CODE 0 text15 dist/default/production\motor.X.production.o
 __end_of_ISR 214 0 CODE 0 intcode dist/default/production\motor.X.production.o
-__end_of_PID E92 0 CODE 0 text13 dist/default/production\motor.X.production.o
-__end_of_abs 153E 0 CODE 0 text14 dist/default/production\motor.X.production.o
+__end_of_PID E0A 0 CODE 0 text13 dist/default/production\motor.X.production.o
+__end_of_abs 14B6 0 CODE 0 text14 dist/default/production\motor.X.production.o
 __Lintentry 0 0 ABS 0 intentry dist/default/production\motor.X.production.o
 __Hramtop 300 0 RAM 0 ramtop dist/default/production\motor.X.production.o
 __Hrparam 0 0 COMRAM 1 rparam dist/default/production\motor.X.production.o
-__end_of___xxtofl 11FA 0 CODE 0 text15 dist/default/production\motor.X.production.o
+__end_of___xxtofl 1172 0 CODE 0 text15 dist/default/production\motor.X.production.o
 __pdataBANK0 89 0 BANK0 1 dataBANK0 dist/default/production\motor.X.production.o
 __activetblptr 1 0 ABS 0 - dist/default/production\motor.X.production.o
 __Hstruct 0 0 COMRAM 1 struct dist/default/production\motor.X.production.o
@@ -791,41 +789,41 @@ _PIE1bits F9D 0 ABS 0 - dist/default/production\motor.X.production.o
 _PIE3bits FA3 0 ABS 0 - dist/default/production\motor.X.production.o
 ___fladd@signs 26 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 __size_of_WriteSPI 0 0 ABS 0 - dist/default/production\motor.X.production.o
-__ptext10 E92 0 CODE 0 text10 dist/default/production\motor.X.production.o
-__ptext11 153E 0 CODE 0 text11 dist/default/production\motor.X.production.o
-__ptext12 15E8 0 CODE 0 text12 dist/default/production\motor.X.production.o
+__ptext10 E0A 0 CODE 0 text10 dist/default/production\motor.X.production.o
+__ptext11 14B6 0 CODE 0 text11 dist/default/production\motor.X.production.o
+__ptext12 1560 0 CODE 0 text12 dist/default/production\motor.X.production.o
 __ptext13 BEE 0 CODE 0 text13 dist/default/production\motor.X.production.o
-__ptext14 150A 0 CODE 0 text14 dist/default/production\motor.X.production.o
-__ptext15 1046 0 CODE 0 text15 dist/default/production\motor.X.production.o
-__ptext16 11FA 0 CODE 0 text16 dist/default/production\motor.X.production.o
+__ptext14 1482 0 CODE 0 text14 dist/default/production\motor.X.production.o
+__ptext15 FBE 0 CODE 0 text15 dist/default/production\motor.X.production.o
+__ptext16 1172 0 CODE 0 text16 dist/default/production\motor.X.production.o
 __ptext17 7C4 0 CODE 0 text17 dist/default/production\motor.X.production.o
-__ptext18 1300 0 CODE 0 text18 dist/default/production\motor.X.production.o
+__ptext18 1278 0 CODE 0 text18 dist/default/production\motor.X.production.o
 __ptext19 304 0 CODE 0 text19 dist/default/production\motor.X.production.o
 _number 8D 0 BANK0 1 dataBANK0 dist/default/production\motor.X.production.o
 ___fladd 304 0 CODE 0 text19 dist/default/production\motor.X.production.o
 ___flmul 7C4 0 CODE 0 text17 dist/default/production\motor.X.production.o
-___fltol 11FA 0 CODE 0 text16 dist/default/production\motor.X.production.o
+___fltol 1172 0 CODE 0 text16 dist/default/production\motor.X.production.o
 __Lbigbss 0 0 BIGRAM 1 bigbss dist/default/production\motor.X.production.o
 __Lbigram 0 0 ABS 0 bigram dist/default/production\motor.X.production.o
 __Lcomram 0 0 ABS 0 comram dist/default/production\motor.X.production.o
 __Lconfig 0 0 CONFIG 4 config dist/default/production\motor.X.production.o
 __size_of_setupPWM 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __size_of_setupQEI 0 0 ABS 0 - dist/default/production\motor.X.production.o
-__end_of_setupTimer0 15E8 0 CODE 0 text2 dist/default/production\motor.X.production.o
-__end_of_setupTimer2 163A 0 CODE 0 text5 dist/default/production\motor.X.production.o
-__end_of_setupTimer5 162E 0 CODE 0 text1 dist/default/production\motor.X.production.o
-__end_of_SPI_Init_Slave 15CE 0 CODE 0 text6 dist/default/production\motor.X.production.o
+__end_of_setupTimer0 1560 0 CODE 0 text2 dist/default/production\motor.X.production.o
+__end_of_setupTimer2 15B2 0 CODE 0 text5 dist/default/production\motor.X.production.o
+__end_of_setupTimer5 15A6 0 CODE 0 text1 dist/default/production\motor.X.production.o
+__end_of_SPI_Init_Slave 1546 0 CODE 0 text6 dist/default/production\motor.X.production.o
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\motor.X.production.o
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\motor.X.production.o
-isa$std 1 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-stackhi 2FF 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-stacklo 8F 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
+isa$std 1 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+stackhi 2FF 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+stacklo 8F 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAsheqk.o
 __Lintcode 8 0 CODE 0 intcode dist/default/production\motor.X.production.o
 __Lintret 0 0 ABS 0 intret dist/default/production\motor.X.production.o
 __Lirdata 0 0 CODE 0 irdata dist/default/production\motor.X.production.o
 ___fladd@grs 29 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
-__end_of_motorOutLSB 150A 0 CODE 0 text9 dist/default/production\motor.X.production.o
-__end_of_motorOutMSB 14C0 0 CODE 0 text8 dist/default/production\motor.X.production.o
+__end_of_motorOutLSB 1482 0 CODE 0 text9 dist/default/production\motor.X.production.o
+__end_of_motorOutMSB 1438 0 CODE 0 text8 dist/default/production\motor.X.production.o
 __Lspace_0 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __Lspace_1 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __Lspace_2 0 0 ABS 0 - dist/default/production\motor.X.production.o
@@ -837,8 +835,8 @@ ___flge@ff2 5 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production
 _PIR1bits F9E 0 ABS 0 - dist/default/production\motor.X.production.o
 __LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\motor.X.production.o
 ___fltol@exp1 23 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
-end_of_initialization 1452 0 CODE 0 cinit dist/default/production\motor.X.production.o
-_WriteSPI 153E 0 CODE 0 text11 dist/default/production\motor.X.production.o
+end_of_initialization 13CA 0 CODE 0 cinit dist/default/production\motor.X.production.o
+_WriteSPI 14B6 0 CODE 0 text11 dist/default/production\motor.X.production.o
 _IC2QEIE 7D1A 0 ABS 0 - dist/default/production\motor.X.production.o
 _IC2QEIF 7D22 0 ABS 0 - dist/default/production\motor.X.production.o
 _T5CONbits FB7 0 ABS 0 - dist/default/production\motor.X.production.o
@@ -851,23 +849,23 @@ __Hreset_vec 4 0 CODE 0 reset_vec dist/default/production\motor.X.production.o
 PID@err 44 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 PID@ref 36 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 __HbssBANK0 0 0 ABS 0 bssBANK0 dist/default/production\motor.X.production.o
-__end_of_WriteSPI 156C 0 CODE 0 text11 dist/default/production\motor.X.production.o
-_ReadSPI 15E8 0 CODE 0 text12 dist/default/production\motor.X.production.o
-_setupPWM 1602 0 CODE 0 text4 dist/default/production\motor.X.production.o
-_setupQEI 1590 0 CODE 0 text3 dist/default/production\motor.X.production.o
+__end_of_WriteSPI 14E4 0 CODE 0 text11 dist/default/production\motor.X.production.o
+_ReadSPI 1560 0 CODE 0 text12 dist/default/production\motor.X.production.o
+_setupPWM 157A 0 CODE 0 text4 dist/default/production\motor.X.production.o
+_setupQEI 1508 0 CODE 0 text3 dist/default/production\motor.X.production.o
 __Lramtop 300 0 RAM 0 ramtop dist/default/production\motor.X.production.o
 __Lrparam 0 0 COMRAM 1 rparam dist/default/production\motor.X.production.o
-__pcinit 1404 0 CODE 0 cinit dist/default/production\motor.X.production.o
+__pcinit 137C 0 CODE 0 cinit dist/default/production\motor.X.production.o
 _SSPCON1bits FC6 0 ABS 0 - dist/default/production\motor.X.production.o
-__ptext0 156C 0 CODE 0 text0 dist/default/production\motor.X.production.o
-__ptext1 161A 0 CODE 0 text1 dist/default/production\motor.X.production.o
-__ptext2 15CE 0 CODE 0 text2 dist/default/production\motor.X.production.o
-__ptext3 1590 0 CODE 0 text3 dist/default/production\motor.X.production.o
-__ptext4 1602 0 CODE 0 text4 dist/default/production\motor.X.production.o
-__ptext5 162E 0 CODE 0 text5 dist/default/production\motor.X.production.o
-__ptext6 15B0 0 CODE 0 text6 dist/default/production\motor.X.production.o
-__ptext8 1464 0 CODE 0 text8 dist/default/production\motor.X.production.o
-__ptext9 14C0 0 CODE 0 text9 dist/default/production\motor.X.production.o
+__ptext0 14E4 0 CODE 0 text0 dist/default/production\motor.X.production.o
+__ptext1 1592 0 CODE 0 text1 dist/default/production\motor.X.production.o
+__ptext2 1546 0 CODE 0 text2 dist/default/production\motor.X.production.o
+__ptext3 1508 0 CODE 0 text3 dist/default/production\motor.X.production.o
+__ptext4 157A 0 CODE 0 text4 dist/default/production\motor.X.production.o
+__ptext5 15A6 0 CODE 0 text5 dist/default/production\motor.X.production.o
+__ptext6 1528 0 CODE 0 text6 dist/default/production\motor.X.production.o
+__ptext8 13DC 0 CODE 0 text8 dist/default/production\motor.X.production.o
+__ptext9 1438 0 CODE 0 text9 dist/default/production\motor.X.production.o
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\motor.X.production.o
 PID@Ki 40 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 PID@Kp 3C 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
@@ -881,9 +879,9 @@ __Ltext16 0 0 ABS 0 text16 dist/default/production\motor.X.production.o
 __Ltext17 0 0 ABS 0 text17 dist/default/production\motor.X.production.o
 __Ltext18 0 0 ABS 0 text18 dist/default/production\motor.X.production.o
 __Ltext19 0 0 ABS 0 text19 dist/default/production\motor.X.production.o
-__ramtop 300 0 RAM 0 ramtop C:\Users\david\AppData\Local\Temp\xcAs5ubs.o
-__end_of_setupPWM 161A 0 CODE 0 text4 dist/default/production\motor.X.production.o
-__end_of_setupQEI 15B0 0 CODE 0 text3 dist/default/production\motor.X.production.o
+__ramtop 300 0 RAM 0 ramtop C:\Users\david\AppData\Local\Temp\xcAsheqk.o
+__end_of_setupPWM 1592 0 CODE 0 text4 dist/default/production\motor.X.production.o
+__end_of_setupQEI 1528 0 CODE 0 text3 dist/default/production\motor.X.production.o
 __Lpowerup 214 0 CODE 0 powerup dist/default/production\motor.X.production.o
 ?___xxtofl 28 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\motor.X.production.o
@@ -899,18 +897,18 @@ _sum_err 74 0 BANK0 1 bssBANK0 dist/default/production\motor.X.production.o
 ___fltol@f1 1A 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 ___param_bank 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __Hbigdata 0 0 BIGRAM 1 bigdata dist/default/production\motor.X.production.o
-__end_of__initialization 1452 0 CODE 0 cinit dist/default/production\motor.X.production.o
+__end_of__initialization 13CA 0 CODE 0 cinit dist/default/production\motor.X.production.o
 __Libigdata 0 0 CODE 0 ibigdata dist/default/production\motor.X.production.o
-__pidataBANK0 163A 0 CODE 0 idataBANK0 dist/default/production\motor.X.production.o
+__pidataBANK0 15B2 0 CODE 0 idataBANK0 dist/default/production\motor.X.production.o
 __Lclrtext 0 0 ABS 0 clrtext dist/default/production\motor.X.production.o
 medianF@middle 19 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
-_medianF E92 0 CODE 0 text10 dist/default/production\motor.X.production.o
+_medianF E0A 0 CODE 0 text10 dist/default/production\motor.X.production.o
 __pcstackCOMRAM 1 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 _TXSTAbits FAC 0 ABS 0 - dist/default/production\motor.X.production.o
 _SSPCON1 FC6 0 ABS 0 - dist/default/production\motor.X.production.o
 _SSPSTAT FC7 0 ABS 0 - dist/default/production\motor.X.production.o
 PID@duty 48 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
-__end_of_main 1590 0 CODE 0 text0 dist/default/production\motor.X.production.o
+__end_of_main 1508 0 CODE 0 text0 dist/default/production\motor.X.production.o
 __pintcode 8 0 CODE 0 intcode dist/default/production\motor.X.production.o
 _bufferRef 5C 0 COMRAM 1 bssCOMRAM dist/default/production\motor.X.production.o
 __size_of_setupTimer0 0 0 ABS 0 - dist/default/production\motor.X.production.o
@@ -940,7 +938,7 @@ __size_of_ISR 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __size_of_PID 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __size_of_abs 0 0 ABS 0 - dist/default/production\motor.X.production.o
 __HdataBANK0 0 0 ABS 0 dataBANK0 dist/default/production\motor.X.production.o
-__initialization 1404 0 CODE 0 cinit dist/default/production\motor.X.production.o
+__initialization 137C 0 CODE 0 cinit dist/default/production\motor.X.production.o
 ___xxtofl@sign 30 0 COMRAM 1 cstackCOMRAM dist/default/production\motor.X.production.o
 __pbssBANK0 60 0 BANK0 1 bssBANK0 dist/default/production\motor.X.production.o
 __pdataCOMRAM 5D 0 COMRAM 1 dataCOMRAM dist/default/production\motor.X.production.o
@@ -978,7 +976,7 @@ _stringBuffer 60 0 BANK0 1 bssBANK0 dist/default/production\motor.X.production.o
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-text19 0 304 304 133E 1
+text19 0 304 304 12B6 1
 cstackCOMRAM 1 1 1 5F 1
 reset_vec 0 0 0 4 1
 bssBANK0 1 60 60 2F 1

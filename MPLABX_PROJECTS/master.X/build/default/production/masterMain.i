@@ -5289,7 +5289,52 @@ extern char * strichr(const char *, int);
 extern char * strrchr(const char *, int);
 extern char * strrichr(const char *, int);
 
-# 84 "masterMain.c"
+# 30 "C:\Program Files\Microchip\xc8\v2.32\pic\include\c90\math.h"
+extern double fabs(double);
+extern double floor(double);
+extern double ceil(double);
+extern double modf(double, double *);
+extern double sqrt(double);
+extern double atof(const char *);
+extern double sin(double) ;
+extern double cos(double) ;
+extern double tan(double) ;
+extern double asin(double) ;
+extern double acos(double) ;
+extern double atan(double);
+extern double atan2(double, double) ;
+extern double log(double);
+extern double log10(double);
+extern double pow(double, double) ;
+extern double exp(double) ;
+extern double sinh(double) ;
+extern double cosh(double) ;
+extern double tanh(double);
+extern double eval_poly(double, const double *, int);
+extern double frexp(double, int *);
+extern double ldexp(double, int);
+extern double fmod(double, double);
+extern double trunc(double);
+extern double round(double);
+
+# 4 "C:\Program Files\Microchip\xc8\v2.32\pic\include\c90\ctype.h"
+extern __bit isalpha(char);
+extern __bit isupper(char);
+extern __bit islower(char);
+extern __bit isdigit(char);
+extern __bit isxdigit(char);
+extern __bit isspace(char);
+extern __bit ispunct(char);
+extern __bit isalnum(char);
+extern __bit isprint(char);
+extern __bit isgraph(char);
+extern __bit iscntrl(char);
+
+
+extern char toupper(char);
+extern char tolower(char);
+
+# 86 "masterMain.c"
 unsigned int count = 0;
 char str[4] = "180";
 unsigned int number = 100;
@@ -5303,8 +5348,12 @@ char transRdy1 = 0;
 char transRdy2 = 0;
 char incStr1 = 0;
 char incStr2 = 0;
-unsigned char speedRef1 = 180;
-unsigned char speedRef2 = 180;
+unsigned char speedRef1 = 100;
+unsigned char speedRef2 = 100;
+unsigned char vel = 0;
+unsigned char omega = 0;
+float r = 0.085/2;
+float b = 0.172;
 
 
 void swap(char *, char *);
@@ -5365,15 +5414,8 @@ if ((int)tempM1==0 || (int)tempM1==(int)speedRef1)
 speedM1 = speedM1;
 else
 speedM1 = (int)tempM1;
-_delay((unsigned long)((1)*(20000000/4000.0)));
-tx_char(0x41);
-itoa(stringBuffer,speedM1,10);
-int i = 0;
-while (stringBuffer[i]) {
-tx_char(stringBuffer[i]);
-i++;
-}
-tx_char(0x0a);
+
+# 173
 }
 void UARTM2(void) {
 unsigned char tempM2;
@@ -5382,97 +5424,110 @@ if ((int)tempM2==0 || (int)tempM2==(int)speedRef2)
 speedM2 = speedM2;
 else
 speedM2 = (int)tempM2;
-_delay((unsigned long)((1)*(20000000/4000.0)));
-tx_char(0x42);
-itoa(stringBuffer,speedM2,10);
-int i = 0;
-while (stringBuffer[i]) {
-tx_char(stringBuffer[i]);
-i++;
-}
-tx_char(0x0a);
+
+# 189
 }
 
 void gets_UART(char string[]) {
-int i;
-for(i=0;i++;i<4) {
+for(int i=0;i++;i<4) {
 string[i] = rx_char();
 }
 }
 
 void interrupt ISR() {
-if(INTCONbits.TMR0IF == 1) {
-count++;
-_delay((unsigned long)((1)*(20000000/4000.0)));
-if (count == 100) {
-UARTM2();
-}
-if (count == 200) {
-UARTM1();
-}
-if (count == 10) {
-
-gets_UART(str);
-WriteSPI(speedRef1,1);
-WriteSPI(speedRef2,2);
-if(incStr1==0 && transRdy1 == 1) {
-speedRef1 = (unsigned char)atoi(str);
-
-transRdy1 = 0;
-PORTBbits.RB3 = 1 - PORTBbits.RB3;
-}
-
-if(incStr2==0 && transRdy2 == 1) {
-speedRef2 = (unsigned char)atoi(str);
-
-transRdy2 = 0;
-PORTBbits.RB4 = 1 - PORTBbits.RB4;
-}
-count = 0;
-}
-}
 
 if(RCIF == 1) {
 
 char c = rx_char();
 
-if(speed4M1 && incStr1 < 3) {
+
+if(speed4M1 && incStr1 < 3 && isdigit(c)) {
 str[incStr1] = c;
 incStr1++;
 }
-if(speed4M1 && incStr1 >= 3) {
+
+if(speed4M1 && incStr1 >= 3 && isdigit(c)) {
 incStr1 = 0;
-PORTBbits.RB0 = 1 - PORTBbits.RB0;
 speed4M1 = 0;
 transRdy1 = 1;
 }
 
-if(speed4M2 && incStr2 < 3) {
+if(speed4M2 && incStr2 < 3 && isdigit(c)) {
 str[incStr2] = c;
 incStr2++;
 }
-if(speed4M2 && incStr2 >= 3) {
+if(speed4M2 && incStr2 >= 3 && isdigit(c)) {
 incStr2 = 0;
-PORTBbits.RB0 = 1 - PORTBbits.RB0;
 speed4M2 = 0;
 transRdy2 = 1;
 }
-if(c=='A') {
-speed4M1 = 1;
-PORTBbits.RB3 = 1 - PORTBbits.RB3;
-}
 if(c=='B') {
 speed4M2 = 1;
+PORTDbits.RD6 = 1-PORTDbits.RD6;
 }
+if(c=='A') {
+speed4M1 = 1;
+PORTDbits.RD6 = 1-PORTDbits.RD6;
+}
+}
+
+
+if(INTCONbits.TMR0IF == 1) {
+count++;
+if(count==1) {
+UARTM2();
+}
+if(count==2) {
+UARTM1();
+}
+if(count==3) {
+vel = (unsigned char)round( (((float)(speedM2+speedM1))*0.104719*r/2) * 256 );
+omega = (unsigned char)round( (((float)(abs((speedM2-speedM1))))*0.104719/(2*b)) * 5.12 );
+PORTB = vel;
+
+if (speedM2-speedM1 < 0)
+PORTDbits.RD7 = 1;
+else
+PORTDbits.RD7 = 0;
+
+PORTA = omega;
+PORTE = omega >> 6;
+}
+if(count==4) {
+WriteSPI(speedRef1,1);
+WriteSPI(speedRef2,2);
+}
+if(count==5) {
+}
+if(count==6) {
+if(incStr1==0 && transRdy1 == 1) {
+transRdy1 = 0;
+speedRef1 = (unsigned char)atoi(str);
+PORTDbits.RD5 = 1-PORTDbits.RD5;
+}
+if(incStr2==0 && transRdy2 == 1) {
+transRdy2 = 0;
+speedRef2 = (unsigned char)atoi(str);
+PORTDbits.RD4 = 1-PORTDbits.RD4;
+}
+count=0;
+}
+_delay((unsigned long)((2500)*(20000000/4000000.0)));
 }
 }
 
 void main(void) {
-
-INTCONbits.GIE = 1; INTCONbits.PEIE = 1; TRISB = 0;
+TRISB = 0;
+TRISA = 0xC0;
+TRISDbits.RD7 = 0;
+TRISDbits.RD4 = 0;
+TRISDbits.RD5 = 0;
+TRISDbits.RD6 = 0;
+TRISE = 0;
+ADON = 0;
+INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
 setupUART();
 setupTimer0();
-PORTBbits.RB6 = 1;
 TRISCbits.RC2 = 0;
 PORTCbits.RC2 = 1;
 TRISCbits.RC1 = 0;
@@ -5491,9 +5546,9 @@ T0CONbits.T0CS = 0;
 
 
 T0CONbits.PSA = 0;
-T0CONbits.T0PS2 = 1;
+T0CONbits.T0PS2 = 0;
 T0CONbits.T0PS1 = 0;
-T0CONbits.T0PS0 = 1;
+T0CONbits.T0PS0 = 0;
 TMR0 = 0;
 T0CONbits.TMR0ON = 1;
 }
@@ -5547,13 +5602,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x20;
 
-# 341
+# 365
 PIR1bits.SSPIF=0;
 
-# 345
+# 369
 ADCON0=0;
 
-# 347
+# 371
 ADCON1=0x0F;
 }
 
@@ -5569,13 +5624,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 362
+# 386
 PIR1bits.SSPIF=0;
 PIE1bits.SSPIE=1;
 
-# 367
+# 391
 ADCON0=0;
 
-# 369
+# 393
 ADCON1=0x0F;
 }

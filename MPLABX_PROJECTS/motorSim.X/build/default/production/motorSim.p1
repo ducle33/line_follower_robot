@@ -19,10 +19,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _itoa `(*uc ~T0 @X0 0 ef3`*uc`i`i ]
 "93 motorSim.c
 [v _tx_char `(v ~T0 @X0 0 ef1`uc ]
-"8866 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4431.h
-[v _RCIF `Vb ~T0 @X0 0 e@31989 ]
-"92 motorSim.c
-[v _rx_char `(uc ~T0 @X0 0 ef ]
 [p mainexit ]
 "2495 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4431.h
 [v _TRISB `Vuc ~T0 @X0 0 e@3987 ]
@@ -110,6 +106,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _PIE1bits `VS120 ~T0 @X0 0 e@3997 ]
 "4863
 [v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
+"8866
+[v _RCIF `Vb ~T0 @X0 0 e@31989 ]
 "4851
 [v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
 "4839
@@ -3530,176 +3528,164 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 315 ]
 [; ;motorSim.c: 109: }
 [; ;motorSim.c: 110: }
-[; ;motorSim.c: 112: if(RCIF == 1) {
-"112
-[e $ ! == -> _RCIF `i -> 1 `i 320  ]
-{
-"113
-[v _c `uc ~T0 @X0 1 a ]
-[; ;motorSim.c: 113: char c = rx_char();
-[e = _c ( _rx_char ..  ]
-"114
-}
-[e :U 320 ]
-[; ;motorSim.c: 114: }
-[; ;motorSim.c: 115: }
-"115
+[; ;motorSim.c: 111: }
+"111
 [e :UE 314 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"117
+"113
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;motorSim.c: 117: void main(void) {
+[; ;motorSim.c: 113: void main(void) {
 [e :U _main ]
 [f ]
-[; ;motorSim.c: 118: TRISB = 0xFF;
-"118
+[; ;motorSim.c: 114: TRISB = 0xFF;
+"114
 [e = _TRISB -> -> 255 `i `uc ]
-[; ;motorSim.c: 119: INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
-"119
+[; ;motorSim.c: 115: INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
+"115
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;motorSim.c: 120: setupUART();
-"120
+[; ;motorSim.c: 116: setupUART();
+"116
 [e ( _setupUART ..  ]
-[; ;motorSim.c: 121: setupTimer0();
-"121
+[; ;motorSim.c: 117: setupTimer0();
+"117
 [e ( _setupTimer0 ..  ]
-[; ;motorSim.c: 122: while(1) {
-"122
-[e :U 323 ]
-{
-"123
-}
+[; ;motorSim.c: 118: while(1) {
+"118
 [e :U 322 ]
-"122
-[e $U 323  ]
-[e :U 324 ]
-[; ;motorSim.c: 123: }
-[; ;motorSim.c: 124: return;
-"124
-[e $UE 321  ]
-[; ;motorSim.c: 125: }
-"125
-[e :UE 321 ]
+{
+"120
 }
-"127
+[e :U 321 ]
+"118
+[e $U 322  ]
+[e :U 323 ]
+[; ;motorSim.c: 120: }
+[; ;motorSim.c: 121: return;
+"121
+[e $UE 320  ]
+[; ;motorSim.c: 122: }
+"122
+[e :UE 320 ]
+}
+"124
 [v _setupTimer0 `(v ~T0 @X0 1 ef ]
 {
-[; ;motorSim.c: 127: void setupTimer0(void) {
+[; ;motorSim.c: 124: void setupTimer0(void) {
 [e :U _setupTimer0 ]
 [f ]
-[; ;motorSim.c: 128: INTCONbits.TMR0IE = 1;
-"128
+[; ;motorSim.c: 125: INTCONbits.TMR0IE = 1;
+"125
 [e = . . _INTCONbits 0 5 -> -> 1 `i `uc ]
-[; ;motorSim.c: 129: T0CONbits.T016BIT = 1;
-"129
+[; ;motorSim.c: 126: T0CONbits.T016BIT = 1;
+"126
 [e = . . _T0CONbits 0 4 -> -> 1 `i `uc ]
-[; ;motorSim.c: 130: T0CONbits.T0CS = 0;
-"130
+[; ;motorSim.c: 127: T0CONbits.T0CS = 0;
+"127
 [e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;motorSim.c: 133: T0CONbits.PSA = 0;
-"133
+[; ;motorSim.c: 130: T0CONbits.PSA = 0;
+"130
 [e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;motorSim.c: 134: T0CONbits.T0PS2 = 1;
-"134
+[; ;motorSim.c: 131: T0CONbits.T0PS2 = 1;
+"131
 [e = . . _T0CONbits 1 2 -> -> 1 `i `uc ]
-[; ;motorSim.c: 135: T0CONbits.T0PS1 = 0;
+[; ;motorSim.c: 132: T0CONbits.T0PS1 = 1;
+"132
+[e = . . _T0CONbits 1 1 -> -> 1 `i `uc ]
+[; ;motorSim.c: 133: T0CONbits.T0PS0 = 0;
+"133
+[e = . . _T0CONbits 1 0 -> -> 0 `i `uc ]
+[; ;motorSim.c: 134: TMR0 = 250;
+"134
+[e = _TMR0 -> -> 250 `i `us ]
+[; ;motorSim.c: 135: T0CONbits.TMR0ON = 1;
 "135
-[e = . . _T0CONbits 1 1 -> -> 0 `i `uc ]
-[; ;motorSim.c: 136: T0CONbits.T0PS0 = 1;
-"136
-[e = . . _T0CONbits 1 0 -> -> 1 `i `uc ]
-[; ;motorSim.c: 137: TMR0 = 0;
-"137
-[e = _TMR0 -> -> 0 `i `us ]
-[; ;motorSim.c: 138: T0CONbits.TMR0ON = 1;
-"138
 [e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-[; ;motorSim.c: 139: }
-"139
-[e :UE 325 ]
+[; ;motorSim.c: 136: }
+"136
+[e :UE 324 ]
 }
-"141
+"138
 [v _setupUART `(v ~T0 @X0 1 ef ]
 {
-[; ;motorSim.c: 141: void setupUART(void) {
+[; ;motorSim.c: 138: void setupUART(void) {
 [e :U _setupUART ]
 [f ]
-[; ;motorSim.c: 142: TRISCbits.RC6 = 0;
-"142
+[; ;motorSim.c: 139: TRISCbits.RC6 = 0;
+"139
 [e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
-[; ;motorSim.c: 143: TRISCbits.RC7 = 1;
-"143
+[; ;motorSim.c: 140: TRISCbits.RC7 = 1;
+"140
 [e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
-[; ;motorSim.c: 144: TXSTAbits.BRGH = 0;
-"144
+[; ;motorSim.c: 141: TXSTAbits.BRGH = 0;
+"141
 [e = . . _TXSTAbits 0 2 -> -> 0 `i `uc ]
-[; ;motorSim.c: 145: TXSTAbits.SYNC = 0;
-"145
+[; ;motorSim.c: 142: TXSTAbits.SYNC = 0;
+"142
 [e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
-[; ;motorSim.c: 146: TXSTAbits.TXEN = 1;
-"146
+[; ;motorSim.c: 143: TXSTAbits.TXEN = 1;
+"143
 [e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
-[; ;motorSim.c: 147: RCSTAbits.SPEN = 1;
-"147
+[; ;motorSim.c: 144: RCSTAbits.SPEN = 1;
+"144
 [e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-[; ;motorSim.c: 148: RCSTAbits.CREN = 1;
-"148
+[; ;motorSim.c: 145: RCSTAbits.CREN = 1;
+"145
 [e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-[; ;motorSim.c: 149: PIE1bits.RCIE = 1;
-"149
+[; ;motorSim.c: 146: PIE1bits.RCIE = 1;
+"146
 [e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-[; ;motorSim.c: 150: PIE1bits.TXIE = 0;
-"150
+[; ;motorSim.c: 147: PIE1bits.TXIE = 0;
+"147
 [e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
-[; ;motorSim.c: 151: SPBRG = 31;
-"151
+[; ;motorSim.c: 148: SPBRG = 31;
+"148
 [e = _SPBRG -> -> 31 `i `uc ]
-[; ;motorSim.c: 152: }
-"152
-[e :UE 326 ]
+[; ;motorSim.c: 149: }
+"149
+[e :UE 325 ]
 }
-"154
+"151
 [v _rx_char `(uc ~T0 @X0 1 ef ]
 {
-[; ;motorSim.c: 154: char rx_char(void) {
+[; ;motorSim.c: 151: char rx_char(void) {
 [e :U _rx_char ]
 [f ]
-[; ;motorSim.c: 155: while(!RCIF);
-"155
-[e $U 328  ]
-[e :U 329 ]
+[; ;motorSim.c: 152: while(!RCIF);
+"152
+[e $U 327  ]
 [e :U 328 ]
-[e $ ! _RCIF 329  ]
-[e :U 330 ]
-[; ;motorSim.c: 156: return RCREG;
-"156
+[e :U 327 ]
+[e $ ! _RCIF 328  ]
+[e :U 329 ]
+[; ;motorSim.c: 153: return RCREG;
+"153
 [e ) _RCREG ]
-[e $UE 327  ]
-[; ;motorSim.c: 157: }
-"157
-[e :UE 327 ]
+[e $UE 326  ]
+[; ;motorSim.c: 154: }
+"154
+[e :UE 326 ]
 }
-"159
+"156
 [v _tx_char `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;motorSim.c: 159: void tx_char(char a) {
+[; ;motorSim.c: 156: void tx_char(char a) {
 [e :U _tx_char ]
 [v _a `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;motorSim.c: 160: TXREG=a;
-"160
+[; ;motorSim.c: 157: TXREG=a;
+"157
 [e = _TXREG _a ]
-[; ;motorSim.c: 161: while(!TRMT);
-"161
-[e $U 332  ]
-[e :U 333 ]
+[; ;motorSim.c: 158: while(!TRMT);
+"158
+[e $U 331  ]
 [e :U 332 ]
-[e $ ! _TRMT 333  ]
-[e :U 334 ]
-[; ;motorSim.c: 162: }
-"162
-[e :UE 331 ]
+[e :U 331 ]
+[e $ ! _TRMT 332  ]
+[e :U 333 ]
+[; ;motorSim.c: 159: }
+"159
+[e :UE 330 ]
 }

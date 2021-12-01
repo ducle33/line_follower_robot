@@ -5317,10 +5317,6 @@ tx_char(0x0a);
 count = 0;
 }
 }
-
-if(RCIF == 1) {
-char c = rx_char();
-}
 }
 
 void main(void) {
@@ -5329,6 +5325,7 @@ INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
 setupUART();
 setupTimer0();
 while(1) {
+
 }
 return;
 }
@@ -5341,9 +5338,9 @@ T0CONbits.T0CS = 0;
 
 T0CONbits.PSA = 0;
 T0CONbits.T0PS2 = 1;
-T0CONbits.T0PS1 = 0;
-T0CONbits.T0PS0 = 1;
-TMR0 = 0;
+T0CONbits.T0PS1 = 1;
+T0CONbits.T0PS0 = 0;
+TMR0 = 250;
 T0CONbits.TMR0ON = 1;
 }
 
