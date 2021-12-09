@@ -100,7 +100,10 @@ char stringBuffer[20];
 float speed = 0; float a = 0; float b = 0;
 float sum_err = 0;
 int speedPID = 0;
-unsigned char speedRef = 180;
+int speedVal[3];
+char ind = 0;
+char firstTime = 1;
+unsigned char speedRef = 100;
 unsigned char bufferRef = 0;
 
 
@@ -166,26 +169,50 @@ void interrupt ISR() {
         IC2QEIF = 0;
     }
     if(INTCONbits.TMR0IF) {
-        if (count == 1) {
+        bufferRef = ReadSPI();
+        if (bufferRef==0) {
+            speedRef = speedRef;
+        }
+        else speedRef = bufferRef;
+        if (count == 2*4) {
             a = speed;
             speed = 0;
         }
-        if (count == 2) {
+        if (count == 4*4) {
             b = speed;
             speed = 0;
         }
-        if (count == 3) {
+        if (count == 6*4) {
             speed = medianF(a,b,speed);
-            speedPID = (int)(speed*11.4);
-            PORTB = speedPID;
-            WriteSPI(speedPID);
-            bufferRef = ReadSPI();
-            if (bufferRef==0) {
-                speedRef = speedRef;
+            if (firstTime) {
+                speedVal[0] = (int)(speed*7.538462);
+                speedVal[1] = (int)(speed*7.538462);
+                speedVal[2] = (int)(speed*7.538462);
+//                speedVal[3] = (int)(speed*7.538462);
+//                speedVal[4] = (int)(speed*7.538462);
+//                speedVal[5] = (int)(speed*7.538462);
+//                speedVal[6] = (int)(speed*7.538462);
+//                speedVal[7] = (int)(speed*7.538462);
+//                speedVal[8] = (int)(speed*7.538462);
+//                speedVal[9] = (int)(speed*7.538462);
+//                speedVal[10] = (int)(speed*7.538462);
+                firstTime = 0;
             }
-            else speedRef = bufferRef;
+//            speedPID = (int)(speed*7.538462);
+            speedVal[ind] = (int)(speed*7.538462);
+//            speedPID = (int)((speedVal[0]+speedVal[1]+speedVal[2]+speedVal[3]+speedVal[4]+speedVal[5]+speedVal[6]+speedVal[7]+speedVal[8]+speedVal[9]+speedVal[10])/10);
+            
+            speedPID = (int)((speedVal[0]+speedVal[1]+speedVal[2])/3);
+            ind++;
+            if (ind==3)
+                ind = 0;
+            PORTB = speedRef;
+//            WriteSPI(speedPID);
+            
             CCPR1L = motorOutMSB(PID(speedRef));
             CCP1CONbits.DC1B = motorOutLSB(PID(speedRef));
+//            CCPR1L = motorOutMSB(60);
+//            CCP1CONbits.DC1B = motorOutLSB(60);
             speed = 0;
             count = 0;
         }
@@ -229,13 +256,13 @@ void setupQEI(void) {
 
 void setupTimer0(void) {
     INTCONbits.TMR0IE = 1;
-    T0CONbits.T016BIT = 1; // 16bit Mode
+    T0CONbits.T016BIT = 1; // 8bit Mode
     T0CONbits.T0CS = 0; // Internal CLK = 1/20MHz * 4
     
-    // Set Prescaler to 1:256
+    // Set Prescaler to 1:64
     T0CONbits.PSA = 0;
     T0CONbits.T0PS2 = 1;
-    T0CONbits.T0PS1 = 1;
+    T0CONbits.T0PS1 = 0;
     T0CONbits.T0PS0 = 1;
     TMR0 = 0;
     T0CONbits.TMR0ON = 1; // Turns on Timer0
@@ -343,8 +370,8 @@ unsigned char motorOutLSB(float duty) {
 
 float PID(int ref) {
     float duty = 0;
-    float Kp = 0.5;
-    float Ki = 0.03;
+    float Kp = 0.4; // 0.5
+    float Ki = 0.03; // 0.032
     float err = speedPID - ref;
     sum_err = sum_err + err;
     // anti-windup

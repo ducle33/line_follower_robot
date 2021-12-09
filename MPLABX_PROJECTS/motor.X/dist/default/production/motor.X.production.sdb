@@ -5,6 +5,8 @@
 [d frameptr 4065 ]
 "4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\fleq.c
 [v ___fleq __fleq `(b  1 e 0 0 ]
 "4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\flge.c
@@ -35,33 +37,31 @@
 [v ___omul __omul `(ul  1 e 4 0 ]
 "10 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\xxtofl.c
 [v ___xxtofl __xxtofl `(d  1 e 4 0 ]
-"122 C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
-[v _WriteSPI WriteSPI `(c  1 e 1 0 ]
-"136
+"139 C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 [v _ReadSPI ReadSPI `(uc  1 e 1 0 ]
-"145
+"148
 [v _medianF medianF `(f  1 e 4 0 ]
-"162
+"165
 [v _ISR ISR `II(v  1 e 1 0 ]
-"197
+"224
 [v _main main `(v  1 e 1 0 ]
-"212
+"239
 [v _setupQEI setupQEI `(v  1 e 1 0 ]
-"230
+"257
 [v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
-"244
+"271
 [v _setupTimer5 setupTimer5 `(v  1 e 1 0 ]
-"274
+"301
 [v _SPI_Init_Slave SPI_Init_Slave `(v  1 e 1 0 ]
-"308
+"335
 [v _setupPWM setupPWM `(v  1 e 1 0 ]
-"324
+"351
 [v _setupTimer2 setupTimer2 `(v  1 e 1 0 ]
-"332
+"359
 [v _motorOutMSB motorOutMSB `(uc  1 e 1 0 ]
-"338
+"365
 [v _motorOutLSB motorOutLSB `(uc  1 e 1 0 ]
-"344
+"371
 [v _PID PID `(f  1 e 4 0 ]
 [s S209 . 1 `uc 1 FLTCK 1 0 :3:0 
 `uc 1 FLT1EN 1 0 :1:3 
@@ -490,110 +490,120 @@
 "102
 [v _speedPID speedPID `i  1 e 2 0 ]
 "103
-[v _speedRef speedRef `uc  1 e 1 0 ]
+[v _speedVal speedVal `[3]i  1 e 6 0 ]
 "104
+[v _ind ind `uc  1 e 1 0 ]
+"105
+[v _firstTime firstTime `uc  1 e 1 0 ]
+"106
+[v _speedRef speedRef `uc  1 e 1 0 ]
+"107
 [v _bufferRef bufferRef `uc  1 e 1 0 ]
-"197
+"224
 [v _main main `(v  1 e 1 0 ]
 {
-"209
+"236
 } 0
-"244
+"271
 [v _setupTimer5 setupTimer5 `(v  1 e 1 0 ]
 {
-"252
+"279
 } 0
-"230
+"257
 [v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
 {
-"242
+"269
 } 0
-"212
+"239
 [v _setupQEI setupQEI `(v  1 e 1 0 ]
 {
-"228
+"255
 } 0
-"308
+"335
 [v _setupPWM setupPWM `(v  1 e 1 0 ]
 {
-"322
+"349
 } 0
-"324
+"351
 [v _setupTimer2 setupTimer2 `(v  1 e 1 0 ]
 {
-"330
+"357
 } 0
-"274
+"301
 [v _SPI_Init_Slave SPI_Init_Slave `(v  1 e 1 0 ]
 {
-"293
+"320
 } 0
-"162
+"165
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"195
+"222
 } 0
-"332
+"359
 [v _motorOutMSB motorOutMSB `(uc  1 e 1 0 ]
 {
-"333
+"360
 [v motorOutMSB@buffer buffer `i  1 a 2 81 ]
-"334
+"361
 [v motorOutMSB@bufferChar bufferChar `uc  1 a 1 83 ]
-"332
+"359
 [v motorOutMSB@duty duty `f  1 p 4 75 ]
-"336
+"363
 } 0
-"338
+"365
 [v _motorOutLSB motorOutLSB `(uc  1 e 1 0 ]
 {
-"339
+"366
 [v motorOutLSB@buffer buffer `i  1 a 2 79 ]
-"340
+"367
 [v motorOutLSB@bufferChar bufferChar `uc  1 a 1 81 ]
-"338
+"365
 [v motorOutLSB@duty duty `f  1 p 4 75 ]
-"342
+"369
 } 0
-"145
+"148
 [v _medianF medianF `(f  1 e 4 0 ]
 {
-"146
+"149
 [v medianF@middle middle `f  1 a 4 24 ]
-"145
+"148
 [v medianF@a a `f  1 p 4 12 ]
 [v medianF@b b `f  1 p 4 16 ]
 [v medianF@c c `f  1 p 4 20 ]
-"160
+"163
 } 0
-"122
-[v _WriteSPI WriteSPI `(c  1 e 1 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
 {
-[v WriteSPI@data_out data_out `uc  1 a 1 wreg ]
-[v WriteSPI@data_out data_out `uc  1 a 1 wreg ]
-"124
-[v WriteSPI@data_out data_out `uc  1 a 1 0 ]
-"133
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 6 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 5 ]
+[v ___awdiv@counter counter `uc  1 a 1 4 ]
+"7
+[v ___awdiv@dividend dividend `i  1 p 2 0 ]
+[v ___awdiv@divisor divisor `i  1 p 2 2 ]
+"41
 } 0
-"136
+"139 C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\motor.X\motorMain.c
 [v _ReadSPI ReadSPI `(uc  1 e 1 0 ]
 {
-"143
+"146
 } 0
-"344
+"371
 [v _PID PID `(f  1 e 4 0 ]
 {
-"345
+"372
 [v PID@duty duty `f  1 a 4 71 ]
-"348
+"375
 [v PID@err err `f  1 a 4 67 ]
-"347
+"374
 [v PID@Ki Ki `f  1 a 4 63 ]
-"346
+"373
 [v PID@Kp Kp `f  1 a 4 59 ]
-"344
+"371
 [v PID@ref ref `i  1 p 2 53 ]
-"367
+"394
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\abs.c
 [v _abs abs `(i  1 e 2 0 ]
@@ -629,17 +639,17 @@
 "8 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S1363 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S1365 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S1368 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S1371 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1363 1 fAsBytes 4 0 `S1368 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S1371  1 a 4 19 ]
+[s S1370 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S1373 . 4 `l 1 i 4 0 `d 1 f 4 0 `S1365 1 fAsBytes 4 0 `S1370 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S1373  1 a 4 19 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 13 ]
-[s S1439 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S1441 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S1442 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1439 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S1442  1 a 2 23 ]
+[u S1444 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S1441 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S1444  1 a 2 23 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 18 ]
 "11

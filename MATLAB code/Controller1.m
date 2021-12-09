@@ -6,8 +6,8 @@ global v omega n d pre_error_PID_r pre_pre_error_PID_r integral_r ...
 format long;
 %% Thong so xe
 r           = 0.085/2;                                          % ban kinh banh xe
-d           = 0.115; %0.08                                      % khoang cach tam 2 banh xe den tam he cam bien
-b           = 0.18;                                             % khoang cach giua 2 xe
+d           = 0.159; %0.115                                      % khoang cach tam 2 banh xe den tam he cam bien
+b           = 0.172; %0.18                                            % khoang cach giua 2 xe
 vr          = 0.8;                                              % van toc mong muon
 omega_r_ref = 0;                                                % van toc quay banh phai reference
 omega_l_ref = 0;                                                % van toc quay banh trai reference
@@ -206,7 +206,6 @@ for i = 1 : n
     x = starting_position(1) + xc_dot*tsamp;
     y = starting_position(2) + yc_dot*tsamp;
     theta = starting_position(3) + thetac_dot*tsamp;
-    theta_reset = theta_reset - reset1*thetac_dot*tsamp;
     theta_m = [theta_m;theta];
 %     starting_position = y(length(y),:);
     starting_position = [x y theta];

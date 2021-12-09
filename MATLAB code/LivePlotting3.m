@@ -21,14 +21,23 @@ ylabel(yLabel,'FontSize',15);
 title("PID System Response",'FontSize',15);
 T_Line = animatedline('Color',[1.000 0.000 0.000],'LineWidth',2); % the line animating the live (main) feed of data in red
 P_Line = animatedline('Color',[0.000 0.000 1.000],'LineWidth',2); % Orange
+xline(1,'--','Color','black');
+yline(100,'--','Color','black');
 yline(180,'--','Color','black');
-yline(220,'--','Color','black');
-yline(150,'--','Color','black');
+yticks(min:10:max)
+grid on
 legend('Left','Right','Reference','Location','southeast')
 
 % SET TIME FOR THE CYCLE (AND FINISH THE EXPERIMENT)
 stopTime = '11/27 06:55'; % MM/DD Time
 fisrtTime = 1;
+
+speedRefM1 = 180;
+speedRefM2 = 180;
+strA = "100";
+strB = "100";
+count = 0;
+countMultiplier = 2;
 
 while ~isequal(datestr(now,'mm/DD HH:MM'),stopTime)
     
@@ -37,14 +46,26 @@ while ~isequal(datestr(now,'mm/DD HH:MM'),stopTime)
         fisrtTime = 0;
     end
 
-    t =  milliseconds(datetime('now') - begTime)/10000 - 0.5
+    t =  milliseconds(datetime('now') - begTime)/19000 - 0.5;
+    
+    strA = num2str(speedRefM1);
+    strB = num2str(speedRefM2);
+    if(count==0)
+        fprintf(s,"A");
+    end
+    if(count==countMultiplier)
+        fprintf(s,"A");
+        count = 0;
+    end    
+    
+    count = count + 1
     
     addpoints(T_Line,t,fscanf(s1,'%d')); 
     addpoints(P_Line,t,fscanf(s2,'%d'));
     
     axis([t-scrollWidth t+0.25*scrollWidth min max]);
     drawnow
-    pause(0.000000000001);
+    pause(0.000000001);
     
 end
 disp('END');

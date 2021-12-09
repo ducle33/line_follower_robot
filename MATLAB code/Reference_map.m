@@ -1,13 +1,17 @@
-% Thoai
+
 function map = Reference_map()
 %xr,yr;                 reference coordinate
 %phr;                   angle of reference section
 
-global n n1 n2 n3 n4 n5 n6          %number of sampling times
-%number of sampling times
-dt = 0.0005;             %sampling time, s
+global xr1 xr2 xr3 xr4 xr5 xr6 
+global yr1 yr2 yr3 yr4 yr5 yr6
+global phr1 phr2 phr3 phr4 phr5 phr6 
+global d_thresh
+
+dt = 0.005;             %sampling time, s
 vr = 0.8;               %refernce velocity, m / s
 x0 = -1;     y0 = 0.5;     %starting point
+d_thresh = dt*vr;
 
 % A-B
 x1 = x0 + 2   ;   y1 = y0;

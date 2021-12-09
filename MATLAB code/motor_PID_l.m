@@ -25,7 +25,7 @@ pre_error_PID_l     = error_PID;
     ul = 0;
  end
 %                                               compute recent omega
-omega = trans_func_l(starting,t_current,ul); %return value
+omega = trans_func_l(t_current,ul); %return value
 omega = omega*pi/30;
 end
 

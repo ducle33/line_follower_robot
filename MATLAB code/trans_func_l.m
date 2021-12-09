@@ -1,4 +1,4 @@
-function tf = trans_func_l(starting,t,u)
+function tf = trans_func_l(t,u)
 
 % Input: initial omega, pwm
 % Output: recent omega

@@ -5268,7 +5268,10 @@ char stringBuffer[20];
 float speed = 0; float a = 0; float b = 0;
 float sum_err = 0;
 int speedPID = 0;
-unsigned char speedRef = 180;
+int speedVal[3];
+char ind = 0;
+char firstTime = 1;
+unsigned char speedRef = 100;
 unsigned char bufferRef = 0;
 
 
@@ -5334,26 +5337,44 @@ speed = speed + 1;
 IC2QEIF = 0;
 }
 if(INTCONbits.TMR0IF) {
-if (count == 1) {
-a = speed;
-speed = 0;
-}
-if (count == 2) {
-b = speed;
-speed = 0;
-}
-if (count == 3) {
-speed = medianF(a,b,speed);
-speedPID = (int)(speed*11.4);
-PORTB = speedPID;
-WriteSPI(speedPID);
 bufferRef = ReadSPI();
 if (bufferRef==0) {
 speedRef = speedRef;
 }
 else speedRef = bufferRef;
+if (count == 2*4) {
+a = speed;
+speed = 0;
+}
+if (count == 4*4) {
+b = speed;
+speed = 0;
+}
+if (count == 6*4) {
+speed = medianF(a,b,speed);
+if (firstTime) {
+speedVal[0] = (int)(speed*7.538462);
+speedVal[1] = (int)(speed*7.538462);
+speedVal[2] = (int)(speed*7.538462);
+
+# 199
+firstTime = 0;
+}
+
+speedVal[ind] = (int)(speed*7.538462);
+
+
+speedPID = (int)((speedVal[0]+speedVal[1]+speedVal[2])/3);
+ind++;
+if (ind==3)
+ind = 0;
+PORTB = speedRef;
+
+
 CCPR1L = motorOutMSB(PID(speedRef));
 CCP1CONbits.DC1B = motorOutLSB(PID(speedRef));
+
+
 speed = 0;
 count = 0;
 }
@@ -5403,7 +5424,7 @@ T0CONbits.T0CS = 0;
 
 T0CONbits.PSA = 0;
 T0CONbits.T0PS2 = 1;
-T0CONbits.T0PS1 = 1;
+T0CONbits.T0PS1 = 0;
 T0CONbits.T0PS0 = 1;
 TMR0 = 0;
 T0CONbits.TMR0ON = 1;
@@ -5430,13 +5451,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 265
+# 292
 PIR1bits.SSPIF=0;
 
-# 269
+# 296
 ADCON0=0;
 
-# 271
+# 298
 ADCON1=0x0F;
 }
 
@@ -5452,13 +5473,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 286
+# 313
 PIR1bits.SSPIF=0;
 
-# 290
+# 317
 ADCON0=0;
 
-# 292
+# 319
 ADCON1=0x0F;
 }
 
@@ -5513,7 +5534,7 @@ return bufferChar;
 
 float PID(int ref) {
 float duty = 0;
-float Kp = 0.5;
+float Kp = 0.4;
 float Ki = 0.03;
 float err = speedPID - ref;
 sum_err = sum_err + err;
