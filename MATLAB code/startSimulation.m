@@ -6,7 +6,7 @@ global phr1 phr2 phr3 phr4 phr5 phr6
 global d_thresh
 
 timeScalar = 1000;
-timeScalar = timeScalar*156.044/31.016514;
+timeScalar = timeScalar*72.2640/25;
 
 path = Reference_map();      
 
@@ -81,7 +81,7 @@ if (mousePos(1)<-1 && mousePos(2)>=0)
         end
     end
 end
-timeScalar = timeScalar*5;
+timeScalar = timeScalar;
 if (mousePos(1)<-1 && mousePos(2)<0)
     %Segment3, x increasing, y decreasing
     Lp = 0; Rp = length(xr2);
@@ -255,7 +255,7 @@ count = 0;
 countStable = 0;
 notStable = 1;
 
-while isnumeric(fscanf(s6,'%d'))
+while ischar(fscanf(s8,'%s'))
     
     if (fisrtTime)
         begTime =  datetime('now');
@@ -264,6 +264,9 @@ while isnumeric(fscanf(s6,'%d'))
     end
     
     t =  milliseconds(datetime('now') - begTime)/timeScalar;
+    for i = 1:20000000
+        
+    end
     time = [time t];
     
     if (countStable>=100)
@@ -271,18 +274,10 @@ while isnumeric(fscanf(s6,'%d'))
         notStable = 0;
     end
     
-    amp = 6;
-    sensor_noise = normrnd(0,amp);
-    if(sensor_noise > amp)
-        sensor_noise = amp;
-    end
-    if(sensor_noise < -amp)
-        sensor_noise = -amp;
-    end
-    
     if (notStable)
         flushinput(s6);
         flushinput(s7);
+        flushinput(s8);
         countStable = countStable + 1;
         theta_m = [theta_m; theta];
         theta_store = [theta_store 0];
@@ -295,43 +290,34 @@ while isnumeric(fscanf(s6,'%d'))
     
     
     % Convert omega from RPM to rad/s
-    omega_buff_l = fscanf(s6,'%d')/30*pi + sensor_noise;
-    if (isempty(omega_buff_l)==0 && omega_buff_l<30 && omega_buff_l>5)
-        if (firsTime2)
-           omega_l = omega_buff_l;
-           omega_pre_l = omega_buff_l;
-           firstTime2 = 0;
-        else
-            if (abs(omega_pre_l-omega_buff_l)<2)
-                omega_l = omega_buff_l;
-                omega_pre_l = omega_buff_l;
-            end
-        end
-    end
-    omega_buff_r = fscanf(s7,'%d')/30*pi + sensor_noise;
-    if (isempty(omega_buff_r)==0 && omega_buff_r<30 && omega_buff_r>13)
-        if (firsTime3)
-           omega_r = omega_buff_r;
-           omega_pre_r = omega_buff_r;
-           firstTime3 = 0;
-        else
-            if (abs(omega_pre_r-omega_buff_r)<2)
-                omega_r = omega_buff_r;
-                omega_pre_r = omega_buff_r;
-            end
-        end
-    end
+%     omega_buff_l = fscanf(s6,'%d')/30*pi + sensor_noise;
+%     if (isempty(omega_buff_l)==0 && omega_buff_l<30 && omega_buff_l>5)
+%         if (firsTime2)
+%            omega_l = omega_buff_l;
+%            omega_pre_l = omega_buff_l;
+%            firstTime2 = 0;
+%         else
+%             if (abs(omega_pre_l-omega_buff_l)<2)
+%                 omega_l = omega_buff_l;
+%                 omega_pre_l = omega_buff_l;
+%             end
+%         end
+%     end
+%     omega_buff_r = fscanf(s7,'%d')/30*pi + sensor_noise;
+%     if (isempty(omega_buff_r)==0 && omega_buff_r<30 && omega_buff_r>13)
+%         if (firsTime3)
+%            omega_r = omega_buff_r;
+%            omega_pre_r = omega_buff_r;
+%            firstTime3 = 0;
+%         else
+%             if (abs(omega_pre_r-omega_buff_r)<2)
+%                 omega_r = omega_buff_r;
+%                 omega_pre_r = omega_buff_r;
+%             end
+%         end
+%     end
+
     
-    % Calculate vel and omega and send to ports for debugging
-    vel = (omega_r+omega_l)*r/2;                                                                       % tính giá tri velocity hien tai
-    omega = (omega_r-omega_l)/(2*b);
-%     fprintf(s9,num2str(vel));
-%     fprintf(s11,num2str(omega));
-
-    theta_store = [theta_store omega];
-    theta_dot = omega;
-
-    omega_value = [omega_value; omega_r omega_l];
     
     % Find the ref position for the robot
     
@@ -553,7 +539,7 @@ while isnumeric(fscanf(s6,'%d'))
     if(sensor_noise < -amp)
         sensor_noise = -amp;
     end
-    sensor_noise = 0;
+%     sensor_noise = 0;
     error(2) = error(2) + sensor_noise;
     
     err2Send = round((error(2) + 0.1)*255/0.2);
@@ -574,11 +560,48 @@ while isnumeric(fscanf(s6,'%d'))
     
     tracking_error_position = [tracking_error_position; error(1)*1000 error(2)*1000];
     tracking_error_angle = [tracking_error_angle error(3)*180/pi];
+    
+    tsamp = milliseconds(datetime('now') - begTime)/timeScalar - t;
+    
+    omega_buff = fscanf(s8,'%s');
+    if (isempty(omega_buff_l)==0 && length(omega_buff)==6)
+        omega_buff_l = str2double(omega_buff(1:3));
+        omega_buff_r = str2double(omega_buff(4:6));
+    end
+    
+    amp = 10;
+    sensor_noise = normrnd(0,amp);
+    if(sensor_noise > amp)
+        sensor_noise = amp;
+    end
+    if(sensor_noise < -amp)
+        sensor_noise = -amp;
+    end
+    
+    omega_buff_l = omega_buff_l*200/255 - 100;
+    omega_l = trans_func_l(omega_l*30/pi,tsamp,omega_buff_l) + sensor_noise;
+    fprintf(s6,"%c",round(omega_l*255/366));
+    fprintf(s9,num2str(round(omega_l)));
+    omega_l = omega_l*pi/30;
+    
+    omega_buff_r = omega_buff_r*200/255 - 100;
+    omega_r = trans_func_r(omega_r*30/pi,tsamp,omega_buff_r) + sensor_noise;
+    fprintf(s7,"%c",round(omega_r*255/366));
+    fprintf(s11,num2str(round(omega_r)));
+    omega_r = omega_r*pi/30;
+    
+    % Calculate vel and omega and send to ports for debugging
+    vel = (omega_r+omega_l)*r/2;                                                                       % tính giá tri velocity hien tai
+    omega = (omega_r-omega_l)/(2*b);
+
+    theta_store = [theta_store omega];
+    theta_dot = omega;
+
+    omega_value = [omega_value; omega_r omega_l];
                           
     xc_dot = cos(theta)*vel - d*sin(theta)*theta_dot;
     yc_dot = sin(theta)*vel + d*cos(theta)*theta_dot;
     thetac_dot = omega;
-    tsamp = milliseconds(datetime('now') - begTime)/timeScalar - t;
 
     x = currentPos(1) + xc_dot*tsamp;
     y = currentPos(2) + yc_dot*tsamp;

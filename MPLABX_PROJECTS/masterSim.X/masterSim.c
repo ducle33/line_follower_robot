@@ -82,10 +82,10 @@
 
 
 unsigned int count = 0;
+unsigned char u1 = 0;
+unsigned char u2 = 0;
 unsigned char stringBuffer[20];
-unsigned char vel = 0;
-unsigned char omega = 0;
-int omegaInt = 0;
+
 
 void swap(char *, char *);
 char* reverse(char *, int , int );
@@ -98,47 +98,46 @@ void interrupt ISR() {
     if(INTCONbits.TMR0IF == 1) {
         count++;
         if(count == 1) {
-            vel = PORTB;
-            omega = PORTD;
-            if(PORTCbits.RC0)
-                omegaInt = -(int)omega;
-            else
-                omegaInt = (int)omega;
-            tx_char(0x4F);
-            itoa(stringBuffer,omegaInt,10);
+            u1 = PORTB;
+            u2 = PORTD;
+            itoa(stringBuffer,u1,10);
             int i = 0;
+            if (u1<10) {
+                tx_char('0');
+                tx_char('0');
+            }
+            else if (u1>10 && u1<100)
+                tx_char('0');
             while (stringBuffer[i]) {
                 tx_char(stringBuffer[i]);
                 i++;
             }
-            tx_char(0x0a);
-            
-            tx_char(0x56);
-            itoa(stringBuffer,vel,10);
-            int i = 0;
+            itoa(stringBuffer,u2,10);
+            i = 0;
+            if (u2<10) {
+                tx_char('0');
+                tx_char('0');
+            }
+            else if (u2>10 && u2<100)
+                tx_char('0');
             while (stringBuffer[i]) {
                 tx_char(stringBuffer[i]);
                 i++;
             }
-            tx_char(0x0a);
             
+            tx_char(0x0a);
             count = 0;
         }
-    }
-    
-    if(RCIF == 1) {
     }
 }
 
 void main(void) {
     TRISB = 0xFF;
-    TRISA = 0x03;
     TRISD = 0xFF;
-    TRISCbits.RC0 = 1;
-    ADON = 0;
-    TRISEbits.RE0 = 1;
-    TRISEbits.RE1 = 1;
-    TRISEbits.RE2 = 1;
+    
+    TRISEbits.RE0 = 0;
+    TRISEbits.RE1 = 0;
+    TRISEbits.RE2 = 0;
     INTCONbits.GIE = 1; INTCONbits.PEIE = 1; 
     setupUART();
     setupTimer0();
@@ -175,7 +174,7 @@ void setupUART(void) {
     SPBRG = 31;        // 9600 baud rate @20Mhz clock freq
 }
 
-char rx_char(void) {
+unsigned char rx_char(void) {
     while(!RCIF);                   //Wait till RCREG is full
     return RCREG;                   //Return value in received data
 }

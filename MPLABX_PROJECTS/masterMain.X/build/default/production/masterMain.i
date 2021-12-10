@@ -5340,11 +5340,11 @@ int speedRef1 = 180;
 int speedRef2 = 180;
 unsigned char vel = 0;
 unsigned char omega = 0;
-float r = 0.085/2;
+float r = 0.0425;
 float b = 0.172;
 unsigned char c = 127;
 float err2=0, integral=0, preError=0, omega_ref=0, angleErr2=0;
-float Kp=100, Ki=0, Kd=0, Kg = 1, integral_max = 0.36, omega_max = 5;
+float Kp=30, Ki=0, Kd=0.00000, Kg = 1, integral_max = 0.36, omega_max = 10;
 float v_ref=0.8;
 
 void swap(char *, char *);
@@ -5421,6 +5421,7 @@ if(count==1) {
 
 err2 = (float)c*0.2/255 - 0.1;
 
+
 if (err2>=0) {
 PORTDbits.RD6 = 1;
 PORTDbits.RD7 = 0;
@@ -5455,6 +5456,8 @@ speedRef2 = 255;
 if(speedRef2 < 0)
 speedRef2 = 0;
 
+PORTB = speedRef1;
+
 WriteSPI(speedRef1,1);
 WriteSPI(speedRef2,2);
 count=0;
@@ -5468,6 +5471,8 @@ TRISDbits.RD5 = 0;
 TRISDbits.RD6 = 0;
 TRISDbits.RD7 = 0;
 TRISDbits.RD0 = 0;
+
+TRISB = 0;
 
 PORTDbits.RD0 = 0;
 PORTDbits.RD4 = 0;
@@ -5552,13 +5557,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x20;
 
-# 336
+# 341
 PIR1bits.SSPIF=0;
 
-# 340
+# 345
 ADCON0=0;
 
-# 342
+# 347
 ADCON1=0x0F;
 }
 
@@ -5574,13 +5579,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 357
+# 362
 PIR1bits.SSPIF=0;
 PIE1bits.SSPIE=1;
 
-# 362
+# 367
 ADCON0=0;
 
-# 364
+# 369
 ADCON1=0x0F;
 }

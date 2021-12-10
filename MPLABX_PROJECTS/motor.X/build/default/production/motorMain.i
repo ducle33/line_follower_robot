@@ -5257,8 +5257,35 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 93 "motorMain.c"
-unsigned char w = "u";
+# 30 "C:\Program Files\Microchip\xc8\v2.32\pic\include\c90\math.h"
+extern double fabs(double);
+extern double floor(double);
+extern double ceil(double);
+extern double modf(double, double *);
+extern double sqrt(double);
+extern double atof(const char *);
+extern double sin(double) ;
+extern double cos(double) ;
+extern double tan(double) ;
+extern double asin(double) ;
+extern double acos(double) ;
+extern double atan(double);
+extern double atan2(double, double) ;
+extern double log(double);
+extern double log10(double);
+extern double pow(double, double) ;
+extern double exp(double) ;
+extern double sinh(double) ;
+extern double cosh(double) ;
+extern double tanh(double);
+extern double eval_poly(double, const double *, int);
+extern double frexp(double, int *);
+extern double ldexp(double, int);
+extern double fmod(double, double);
+extern double trunc(double);
+extern double round(double);
+
+# 94 "motorMain.c"
 unsigned int count = 0;
 unsigned int count2 = 0;
 char *str;
@@ -5266,13 +5293,14 @@ unsigned int number = 100;
 unsigned char digit = 0;
 char stringBuffer[20];
 float speed = 0; float a = 0; float b = 0;
-float sum_err = 0;
 int speedPID = 0;
 int speedVal[3];
 char ind = 0;
 char firstTime = 1;
 unsigned char speedRef = 100;
 unsigned char bufferRef = 0;
+unsigned int u = 0;
+float Kp = 0.4, Ki = 0.03, duty = 0, err = 0, sum_err = 0;
 
 
 void setupUART(void);
@@ -5336,55 +5364,43 @@ if(IC2QEIE && IC2QEIF) {
 speed = speed + 1;
 IC2QEIF = 0;
 }
-if(INTCONbits.TMR0IF) {
+if(INTCONbits.TMR0IF==1) {
 bufferRef = ReadSPI();
 if (bufferRef==0) {
 speedRef = speedRef;
 }
 else speedRef = bufferRef;
-if (count == 2*4) {
-a = speed;
-speed = 0;
+count++;
+if (count==1) {
+
+speed = PORTD;
+speedPID = (int)(speed*1.435294);
 }
-if (count == 4*4) {
-b = speed;
-speed = 0;
+if (count==2) {
+duty = 0;
+Kp = 5;
+Ki = 0;
+err = speedRef - speedPID;
+sum_err = sum_err + err;
+duty = Kp*err + Ki*sum_err;
+if(duty>100) duty = 100;
+if(duty<-100) duty = -100;
+
+duty = (duty + 100)*1.275;
 }
-if (count == 6*4) {
-speed = medianF(a,b,speed);
-if (firstTime) {
-speedVal[0] = (int)(speed*7.538462);
-speedVal[1] = (int)(speed*7.538462);
-speedVal[2] = (int)(speed*7.538462);
-
-# 199
-firstTime = 0;
-}
-
-speedVal[ind] = (int)(speed*7.538462);
-
-
-speedPID = (int)((speedVal[0]+speedVal[1]+speedVal[2])/3);
-ind++;
-if (ind==3)
-ind = 0;
-PORTB = speedRef;
-
-
-CCPR1L = motorOutMSB(PID(speedRef));
-CCP1CONbits.DC1B = motorOutLSB(PID(speedRef));
-
-
-speed = 0;
+if (count==3) {
+count = (unsigned int)duty;
+PORTB = count;
 count = 0;
 }
-count++;
+
 INTCONbits.TMR0IF = 0;
 }
 }
 
 void main(void) {
 TRISB = 0;
+TRISD = 0xFF;
 INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
 setupQEI();
 setupTimer5();
@@ -5451,13 +5467,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 292
+# 275
 PIR1bits.SSPIF=0;
 
-# 296
+# 279
 ADCON0=0;
 
-# 298
+# 281
 ADCON1=0x0F;
 }
 
@@ -5473,13 +5489,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 313
+# 296
 PIR1bits.SSPIF=0;
 
-# 317
+# 300
 ADCON0=0;
 
-# 319
+# 302
 ADCON1=0x0F;
 }
 
@@ -5533,10 +5549,10 @@ return bufferChar;
 }
 
 float PID(int ref) {
-float duty = 0;
-float Kp = 0.4;
-float Ki = 0.03;
-float err = speedPID - ref;
+duty = 0;
+Kp = 0.4;
+Ki = 0.03;
+err = ref - speedPID;
 sum_err = sum_err + err;
 
 
@@ -5546,15 +5562,8 @@ duty = Kp*err + Ki*sum_err;
 if(duty>100) duty = 100;
 if(duty<-100) duty = -100;
 
-if(duty<0) {
-PORTCbits.RC0 = 1;
-PORTCbits.RC1 = 0;
-}
-if(duty>0) {
-PORTCbits.RC0 = 0;
-PORTCbits.RC1 = 1;
-}
-return abs(duty);
+# 376
+return duty;
 }
 
 char rx_char(void) {

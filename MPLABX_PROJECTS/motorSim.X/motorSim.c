@@ -94,24 +94,20 @@ void tx_char(char );
 void setupTimer0(void);
 
 void interrupt ISR() {
+    if(RCIF == 1) {
+        speed = rx_char();
+    }
     if(INTCONbits.TMR0IF == 1) {
         count++;
         if (count == 1) {
-            speed = PORTB;
-            itoa(stringBuffer,speed,10);
-            int i = 0;
-            while (stringBuffer[i]) {
-                tx_char(stringBuffer[i]);
-                i++;
-            }
-            tx_char(0x0a);
+            PORTD = speed;
             count = 0;
         }
     }
 }
 
 void main(void) {
-    TRISB = 0xFF;
+    TRISD = 0x00;
     INTCONbits.GIE = 1; INTCONbits.PEIE = 1; 
     setupUART();
     setupTimer0();

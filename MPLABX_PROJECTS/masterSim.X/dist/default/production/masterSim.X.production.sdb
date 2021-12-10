@@ -37,81 +37,21 @@
 [v ___omul __omul `(ul  1 e 4 0 ]
 "97 C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 [v _ISR ISR `II(v  1 e 1 0 ]
-"133
+"134
 [v _main main `(v  1 e 1 0 ]
-"151
+"150
 [v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
-"165
+"164
 [v _setupUART setupUART `(v  1 e 1 0 ]
-"183
+"182
 [v _tx_char tx_char `(v  1 e 1 0 ]
 "1197 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18Fxxxx_DFP/1.2.26/xc8\pic\include\proc\pic18f4431.h
 [v _PORTB PORTB `VEuc  1 e 1 @3969 ]
-[s S75 . 1 `uc 1 RC0 1 0 :1:0 
-`uc 1 RC1 1 0 :1:1 
-`uc 1 RC2 1 0 :1:2 
-`uc 1 RC3 1 0 :1:3 
-`uc 1 RC4 1 0 :1:4 
-`uc 1 RC5 1 0 :1:5 
-`uc 1 RC6 1 0 :1:6 
-`uc 1 RC7 1 0 :1:7 
-]
-"1339
-[s S84 . 1 `uc 1 T1OSO 1 0 :1:0 
-`uc 1 T1OSI 1 0 :1:1 
-`uc 1 CCP1 1 0 :1:2 
-`uc 1 INT0 1 0 :1:3 
-`uc 1 INT1 1 0 :1:4 
-`uc 1 INT2 1 0 :1:5 
-`uc 1 TX 1 0 :1:6 
-`uc 1 RX 1 0 :1:7 
-]
-[s S93 . 1 `uc 1 T13CKI 1 0 :1:0 
-`uc 1 CCP2 1 0 :1:1 
-`uc 1 . 1 0 :1:2 
-`uc 1 T0CKI 1 0 :1:3 
-`uc 1 SDA 1 0 :1:4 
-`uc 1 SCK 1 0 :1:5 
-`uc 1 CK 1 0 :1:6 
-`uc 1 DT 1 0 :1:7 
-]
-[s S102 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 NOT_FLTA 1 0 :1:1 
-]
-[s S105 . 1 `uc 1 . 1 0 :2:0 
-`uc 1 NOT_FLTB 1 0 :1:2 
-]
-[s S108 . 1 `uc 1 . 1 0 :6:0 
-`uc 1 NOT_SS 1 0 :1:6 
-]
-[s S111 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 nFLTA 1 0 :1:1 
-`uc 1 nFLTB 1 0 :1:2 
-`uc 1 T5CKI 1 0 :1:3 
-`uc 1 SDI 1 0 :1:4 
-`uc 1 SCL 1 0 :1:5 
-`uc 1 nSS 1 0 :1:6 
-`uc 1 SDO 1 0 :1:7 
-]
-[s S120 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 FLTA 1 0 :1:1 
-`uc 1 FLTB 1 0 :1:2 
-`uc 1 . 1 0 :3:3 
-`uc 1 SS 1 0 :1:6 
-]
-[s S126 . 1 `uc 1 . 1 0 :1:0 
-`uc 1 PA2 1 0 :1:1 
-`uc 1 PA1 1 0 :1:2 
-]
-[u S130 . 1 `S75 1 . 1 0 `S84 1 . 1 0 `S93 1 . 1 0 `S102 1 . 1 0 `S105 1 . 1 0 `S108 1 . 1 0 `S111 1 . 1 0 `S120 1 . 1 0 `S126 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES130  1 e 1 @3970 ]
 "1534
 [v _PORTD PORTD `VEuc  1 e 1 @3971 ]
-"2273
-[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "2495
 [v _TRISB TRISB `VEuc  1 e 1 @3987 ]
-[s S212 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S146 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -121,22 +61,31 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "2749
-[u S230 . 1 `S212 1 . 1 0 `S75 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES230  1 e 1 @3988 ]
+[s S155 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+[u S164 . 1 `S146 1 . 1 0 `S155 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES164  1 e 1 @3988 ]
 "2939
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-[s S253 . 1 `uc 1 TRISE0 1 0 :1:0 
+[s S89 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 ]
 "3183
-[s S257 . 1 `uc 1 RE0 1 0 :1:0 
+[s S93 . 1 `uc 1 RE0 1 0 :1:0 
 `uc 1 RE1 1 0 :1:1 
 `uc 1 RE2 1 0 :1:2 
 ]
-[u S261 . 1 `S253 1 . 1 0 `S257 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES261  1 e 1 @3990 ]
-[s S416 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[u S97 . 1 `S89 1 . 1 0 `S93 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES97  1 e 1 @3990 ]
+[s S292 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSPIE 1 0 :1:3 
@@ -145,16 +94,16 @@
 `uc 1 ADIE 1 0 :1:6 
 ]
 "3556
-[s S424 . 1 `uc 1 . 1 0 :4:0 
+[s S300 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TBIE 1 0 :1:4 
 ]
-[s S427 . 1 `uc 1 . 1 0 :4:0 
+[s S303 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IE 1 0 :1:4 
 `uc 1 RC1IE 1 0 :1:5 
 ]
-[u S431 . 1 `S416 1 . 1 0 `S424 1 . 1 0 `S427 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES431  1 e 1 @3997 ]
-[s S362 . 1 `uc 1 RX9D 1 0 :1:0 
+[u S307 . 1 `S292 1 . 1 0 `S300 1 . 1 0 `S303 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES307  1 e 1 @3997 ]
+[s S238 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -164,23 +113,23 @@
 `uc 1 SPEN 1 0 :1:7 
 ]
 "4414
-[s S371 . 1 `uc 1 . 1 0 :3:0 
+[s S247 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 ADEN 1 0 :1:3 
 ]
-[s S374 . 1 `uc 1 . 1 0 :5:0 
+[s S250 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SRENA 1 0 :1:5 
 ]
-[s S377 . 1 `uc 1 . 1 0 :6:0 
+[s S253 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[s S380 . 1 `uc 1 . 1 0 :6:0 
+[s S256 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S383 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S259 . 1 `uc 1 RCD8 1 0 :1:0 
 ]
-[u S385 . 1 `S362 1 . 1 0 `S371 1 . 1 0 `S374 1 . 1 0 `S377 1 . 1 0 `S380 1 . 1 0 `S383 1 . 1 0 ]
-[v _RCSTAbits RCSTAbits `VES385  1 e 1 @4011 ]
-[s S310 . 1 `uc 1 TX9D 1 0 :1:0 
+[u S261 . 1 `S238 1 . 1 0 `S247 1 . 1 0 `S250 1 . 1 0 `S253 1 . 1 0 `S256 1 . 1 0 `S259 1 . 1 0 ]
+[v _RCSTAbits RCSTAbits `VES261  1 e 1 @4011 ]
+[s S186 . 1 `uc 1 TX9D 1 0 :1:0 
 `uc 1 TRMT 1 0 :1:1 
 `uc 1 BRGH 1 0 :1:2 
 `uc 1 SENDB 1 0 :1:3 
@@ -190,7 +139,7 @@
 `uc 1 CSRC 1 0 :1:7 
 ]
 "4622
-[s S319 . 1 `uc 1 TX9D1 1 0 :1:0 
+[s S195 . 1 `uc 1 TX9D1 1 0 :1:0 
 `uc 1 TRMT1 1 0 :1:1 
 `uc 1 BRGH1 1 0 :1:2 
 `uc 1 SENDB1 1 0 :1:3 
@@ -199,20 +148,20 @@
 `uc 1 TX91 1 0 :1:6 
 `uc 1 CSRC1 1 0 :1:7 
 ]
-[s S328 . 1 `uc 1 . 1 0 :6:0 
+[s S204 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 TX8_9 1 0 :1:6 
 ]
-[s S331 . 1 `uc 1 TXD8 1 0 :1:0 
+[s S207 . 1 `uc 1 TXD8 1 0 :1:0 
 ]
-[u S333 . 1 `S310 1 . 1 0 `S319 1 . 1 0 `S328 1 . 1 0 `S331 1 . 1 0 ]
-[v _TXSTAbits TXSTAbits `VES333  1 e 1 @4012 ]
+[u S209 . 1 `S186 1 . 1 0 `S195 1 . 1 0 `S204 1 . 1 0 `S207 1 . 1 0 ]
+[v _TXSTAbits TXSTAbits `VES209  1 e 1 @4012 ]
 "4839
 [v _TXREG TXREG `VEuc  1 e 1 @4013 ]
 "4851
 [v _RCREG RCREG `VEuc  1 e 1 @4014 ]
 "4863
 [v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
-[s S281 . 1 `uc 1 T0PS 1 0 :3:0 
+[s S117 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -220,13 +169,13 @@
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "6809
-[s S288 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S124 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 `uc 1 T0PS3 1 0 :1:3 
 ]
-[u S293 . 1 `S281 1 . 1 0 `S288 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES293  1 e 1 @4053 ]
+[u S129 . 1 `S117 1 . 1 0 `S124 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES129  1 e 1 @4053 ]
 "6864
 [v _TMR0 TMR0 `VEus  1 e 2 @4054 ]
 [s S24 . 1 `uc 1 RBIF 1 0 :1:0 
@@ -254,8 +203,6 @@
 ]
 [u S46 . 1 `S24 1 . 1 0 `S33 1 . 1 0 `S42 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES46  1 e 1 @4082 ]
-"7684
-[v _ADON ADON `VEb  1 e 0 @32272 ]
 "8866
 [v _RCIF RCIF `VEb  1 e 0 @31989 ]
 "9433
@@ -263,42 +210,40 @@
 "84 C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 [v _count count `ui  1 e 2 0 ]
 "85
-[v _stringBuffer stringBuffer `[20]uc  1 e 20 0 ]
+[v _u1 u1 `uc  1 e 1 0 ]
 "86
-[v _vel vel `uc  1 e 1 0 ]
+[v _u2 u2 `uc  1 e 1 0 ]
 "87
-[v _omega omega `uc  1 e 1 0 ]
-"88
-[v _omegaInt omegaInt `i  1 e 2 0 ]
-"133
+[v _stringBuffer stringBuffer `[20]uc  1 e 20 0 ]
+"134
 [v _main main `(v  1 e 1 0 ]
 {
-"149
+"148
 } 0
-"165
+"164
 [v _setupUART setupUART `(v  1 e 1 0 ]
 {
-"176
+"175
 } 0
-"151
+"150
 [v _setupTimer0 setupTimer0 `(v  1 e 1 0 ]
 {
-"163
+"162
 } 0
 "97
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"109
-[v ISR@i i `i  1 a 2 26 ]
-"131
+"104
+[v ISR@i i `i  1 a 2 24 ]
+"132
 } 0
-"183
+"182
 [v _tx_char tx_char `(v  1 e 1 0 ]
 {
 [v tx_char@a a `uc  1 a 1 wreg ]
 [v tx_char@a a `uc  1 a 1 wreg ]
 [v tx_char@a a `uc  1 a 1 0 ]
-"186
+"185
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\itoa.c
 [v _itoa itoa `(*.39uc  1 e 2 0 ]

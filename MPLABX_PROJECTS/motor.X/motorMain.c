@@ -77,6 +77,7 @@
 #include <xc.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #define _XTAL_FREQ 20000000 // Define oscillator frequency
 #define ENCODER_PPR 200 // PPR of Encoder on the motor
@@ -90,7 +91,6 @@
 
 // 200, 8225 rpm,
 
-unsigned char w = "u";
 unsigned int count = 0;
 unsigned int count2 = 0;
 char *str;                          //Global variable used for interrupt
@@ -98,13 +98,14 @@ unsigned int number = 100;
 unsigned char digit = 0;
 char stringBuffer[20];
 float speed = 0; float a = 0; float b = 0;
-float sum_err = 0;
 int speedPID = 0;
 int speedVal[3];
 char ind = 0;
 char firstTime = 1;
 unsigned char speedRef = 100;
 unsigned char bufferRef = 0;
+unsigned int u = 0;
+float Kp = 0.4, Ki = 0.03, duty = 0, err = 0, sum_err = 0;
 
 
 void setupUART(void);
@@ -168,61 +169,43 @@ void interrupt ISR() {
         speed = speed + 1;
         IC2QEIF = 0;
     }
-    if(INTCONbits.TMR0IF) {
+    if(INTCONbits.TMR0IF==1) {
         bufferRef = ReadSPI();
         if (bufferRef==0) {
             speedRef = speedRef;
         }
         else speedRef = bufferRef;
-        if (count == 2*4) {
-            a = speed;
-            speed = 0;
+        count++;
+        if (count==1) {
+        // Speed from MATLAB
+            speed = PORTD;
+            speedPID = (int)(speed*1.435294);
         }
-        if (count == 4*4) {
-            b = speed;
-            speed = 0;
+        if (count==2) {
+            duty = 0;
+            Kp = 5; // 0.5
+            Ki = 0; // 0.032
+            err = speedRef - speedPID;
+            sum_err = sum_err + err;
+            duty = Kp*err + Ki*sum_err;
+            if(duty>100) duty = 100;
+            if(duty<-100) duty = -100;
+            
+            duty = (duty + 100)*1.275;
         }
-        if (count == 6*4) {
-            speed = medianF(a,b,speed);
-            if (firstTime) {
-                speedVal[0] = (int)(speed*7.538462);
-                speedVal[1] = (int)(speed*7.538462);
-                speedVal[2] = (int)(speed*7.538462);
-//                speedVal[3] = (int)(speed*7.538462);
-//                speedVal[4] = (int)(speed*7.538462);
-//                speedVal[5] = (int)(speed*7.538462);
-//                speedVal[6] = (int)(speed*7.538462);
-//                speedVal[7] = (int)(speed*7.538462);
-//                speedVal[8] = (int)(speed*7.538462);
-//                speedVal[9] = (int)(speed*7.538462);
-//                speedVal[10] = (int)(speed*7.538462);
-                firstTime = 0;
-            }
-//            speedPID = (int)(speed*7.538462);
-            speedVal[ind] = (int)(speed*7.538462);
-//            speedPID = (int)((speedVal[0]+speedVal[1]+speedVal[2]+speedVal[3]+speedVal[4]+speedVal[5]+speedVal[6]+speedVal[7]+speedVal[8]+speedVal[9]+speedVal[10])/10);
-            
-            speedPID = (int)((speedVal[0]+speedVal[1]+speedVal[2])/3);
-            ind++;
-            if (ind==3)
-                ind = 0;
-            PORTB = speedRef;
-//            WriteSPI(speedPID);
-            
-            CCPR1L = motorOutMSB(PID(speedRef));
-            CCP1CONbits.DC1B = motorOutLSB(PID(speedRef));
-//            CCPR1L = motorOutMSB(60);
-//            CCP1CONbits.DC1B = motorOutLSB(60);
-            speed = 0;
+        if (count==3) {
+            count = (unsigned int)duty;
+            PORTB = count;
             count = 0;
         }
-        count++;
+//        u = (int)( ( (int)(PID(speedRef)) + 100 )*1.275 );
         INTCONbits.TMR0IF = 0;
     }
 }
 
 void main(void) {
     TRISB = 0;
+    TRISD = 0xFF;
     INTCONbits.GIE = 1; INTCONbits.PEIE = 1;
     setupQEI();
     setupTimer5();
@@ -369,10 +352,10 @@ unsigned char motorOutLSB(float duty) {
 }
 
 float PID(int ref) {
-    float duty = 0;
-    float Kp = 0.4; // 0.5
-    float Ki = 0.03; // 0.032
-    float err = speedPID - ref;
+    duty = 0;
+    Kp = 0.4; // 0.5
+    Ki = 0.03; // 0.032
+    err = ref - speedPID;
     sum_err = sum_err + err;
     // anti-windup
 //    if (sum_err > 2000) sum_err = 2000;
@@ -382,15 +365,15 @@ float PID(int ref) {
     if(duty>100) duty = 100;
     if(duty<-100) duty = -100;
     // direction change
-    if(duty<0) {
-        PORTCbits.RC0 = 1;
-        PORTCbits.RC1 = 0;
-    }
-    if(duty>0) {
-        PORTCbits.RC0 = 0;
-        PORTCbits.RC1 = 1;
-    }
-    return abs(duty);
+//    if(duty<0) {
+//        PORTCbits.RC0 = 1;
+//        PORTCbits.RC1 = 0;
+//    }
+//    if(duty>0) {
+//        PORTCbits.RC0 = 0;
+//        PORTCbits.RC1 = 1;
+//    }
+    return duty;
 }
 
 char rx_char(void) {
