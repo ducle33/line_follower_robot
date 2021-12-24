@@ -122,8 +122,9 @@ void setupTimer0(void) {
     T0CONbits.T016BIT = 1; // 8bit Mode
     T0CONbits.T0CS = 0; // Internal CLK = 1/20MHz * 4
     
-    // Set Prescaler to 1:256
-    T0CONbits.PSA = 0;
+    // Set Prescaler to 1:1
+    // Sampling time = (255-250)*4/20*10^-6 = 1us ~ 1MHz
+    T0CONbits.PSA = 1;
     T0CONbits.T0PS2 = 0;
     T0CONbits.T0PS1 = 0;
     T0CONbits.T0PS0 = 0;

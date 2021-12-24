@@ -8,7 +8,7 @@ global yr1 yr2 yr3 yr4 yr5 yr6
 global phr1 phr2 phr3 phr4 phr5 phr6 
 global d_thresh
 
-dt = 0.005;             %sampling time, s
+dt = 0.00125;             %sampling time, s
 vr = 0.8;               %refernce velocity, m / s
 x0 = -1;     y0 = 0.5;     %starting point
 d_thresh = dt*vr;

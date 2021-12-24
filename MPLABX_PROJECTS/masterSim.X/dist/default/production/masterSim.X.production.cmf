@@ -27,7 +27,7 @@ temp COMRAM 1 33 33 1 1
 intcode CODE 0 8 8 18C 1
 bssCOMRAM COMRAM 1 1B 1B 18 1
 config CONFIG 4 300000 300000 E 1
-$C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+$C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 idloc IDLOC 5 200000 200000 8 1
 init CODE 0 194 194 4 1
 reset_vec CODE 0 0 0 4 1
@@ -67,7 +67,7 @@ MEDIUMCONST 3F2-3FFF 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\masterSim.X.production.o
-8 intcode CODE >1134:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
+8 intcode CODE >1134:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
 8 intcode CODE >97:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 12 intcode CODE >98:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 20 intcode CODE >99:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
@@ -152,33 +152,33 @@ FE intcode CODE >117:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECT
 350 text5 CODE >10:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\itoa.c
 358 text5 CODE >12:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\itoa.c
 374 text5 CODE >14:C:\Program Files\Microchip\xc8\v2.32\pic\sources\c90\common\itoa.c
-3DC text4 CODE >182:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3DE text4 CODE >183:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3E2 text4 CODE >184:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3F0 text4 CODE >185:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3DC text4 CODE >183:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3DE text4 CODE >184:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3E2 text4 CODE >185:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3F0 text4 CODE >186:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 394 text2 CODE >150:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 394 text2 CODE >151:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 396 text2 CODE >152:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 398 text2 CODE >153:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-39A text2 CODE >156:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-39C text2 CODE >157:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-39E text2 CODE >158:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3A0 text2 CODE >159:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3A2 text2 CODE >160:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3AA text2 CODE >161:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3AC text2 CODE >162:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3AE text1 CODE >164:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+39A text2 CODE >157:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+39C text2 CODE >158:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+39E text2 CODE >159:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3A0 text2 CODE >160:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3A2 text2 CODE >161:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3AA text2 CODE >162:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3AC text2 CODE >163:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 3AE text1 CODE >165:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3B0 text1 CODE >166:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3B2 text1 CODE >167:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3B4 text1 CODE >168:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3B6 text1 CODE >169:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3B8 text1 CODE >170:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3BA text1 CODE >171:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3BC text1 CODE >172:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3BE text1 CODE >173:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3C0 text1 CODE >174:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3C4 text1 CODE >175:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3AE text1 CODE >166:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3B0 text1 CODE >167:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3B2 text1 CODE >168:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3B4 text1 CODE >169:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3B6 text1 CODE >170:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3B8 text1 CODE >171:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3BA text1 CODE >172:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3BC text1 CODE >173:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3BE text1 CODE >174:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3C0 text1 CODE >175:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
+3C4 text1 CODE >176:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 376 text0 CODE >134:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 376 text0 CODE >135:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 378 text0 CODE >136:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
@@ -190,20 +190,20 @@ FE intcode CODE >117:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECT
 388 text0 CODE >143:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 38C text0 CODE >144:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
 38C text0 CODE >146:C:\Users\david\OneDrive\Desktop\Protheus_Sim\MPLABX_PROJECTS\masterSim.X\masterSim.c
-3C6 cinit CODE >565:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3C6 cinit CODE >567:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3C6 cinit CODE >570:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3C6 cinit CODE >591:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3CA cinit CODE >592:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3CC cinit CODE >593:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3CC cinit CODE >594:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3CE cinit CODE >595:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3D0 cinit CODE >596:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3D2 cinit CODE >602:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3D2 cinit CODE >604:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3D4 cinit CODE >605:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3D6 cinit CODE >606:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
-3D8 cinit CODE >607:C:\Users\david\AppData\Local\Temp\xcAs8gq4.s
+3C6 cinit CODE >565:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3C6 cinit CODE >567:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3C6 cinit CODE >570:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3C6 cinit CODE >591:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3CA cinit CODE >592:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3CC cinit CODE >593:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3CC cinit CODE >594:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3CE cinit CODE >595:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3D0 cinit CODE >596:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3D2 cinit CODE >602:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3D2 cinit CODE >604:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3D4 cinit CODE >605:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3D6 cinit CODE >606:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
+3D8 cinit CODE >607:C:\Users\david\AppData\Local\Temp\xcAs6bk0.s
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -223,7 +223,7 @@ __Hspace_1 34 0 ABS 0 - dist/default/production\masterSim.X.production.o
 __Hspace_2 0 0 ABS 0 - dist/default/production\masterSim.X.production.o
 __Hspace_4 60000E 0 ABS 0 - dist/default/production\masterSim.X.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\masterSim.X.production.o
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\masterSim.X.production.o
 _u1 1E 0 COMRAM 1 bssCOMRAM dist/default/production\masterSim.X.production.o
 _u2 1D 0 COMRAM 1 bssCOMRAM dist/default/production\masterSim.X.production.o
@@ -233,12 +233,12 @@ __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\masterSim.X.pr
 _RCIF 7CF5 0 ABS 0 - dist/default/production\masterSim.X.production.o
 _TMR0 FD6 0 ABS 0 - dist/default/production\masterSim.X.production.o
 _TRMT 7D61 0 ABS 0 - dist/default/production\masterSim.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+___sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 _itoa 332 0 CODE 0 text5 dist/default/production\masterSim.X.production.o
 _main 376 0 CODE 0 text0 dist/default/production\masterSim.X.production.o
 _utoa 198 0 CODE 0 text6 dist/default/production\masterSim.X.production.o
 btemp 33 0 COMRAM 1 temp dist/default/production\masterSim.X.production.o
-start 194 0 CODE 0 init C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+start 194 0 CODE 0 init C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 __size_of_itoa 0 0 ABS 0 - dist/default/production\masterSim.X.production.o
 __size_of_main 0 0 ABS 0 - dist/default/production\masterSim.X.production.o
 __size_of_utoa 0 0 ABS 0 - dist/default/production\masterSim.X.production.o
@@ -252,11 +252,11 @@ ttemp6 37 0 COMRAM 1 temp dist/default/production\masterSim.X.production.o
 ttemp7 3B 0 COMRAM 1 temp dist/default/production\masterSim.X.production.o
 utoa@c 10 0 COMRAM 1 cstackCOMRAM dist/default/production\masterSim.X.production.o
 utoa@v E 0 COMRAM 1 cstackCOMRAM dist/default/production\masterSim.X.production.o
-__accesstop 60 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
-intlevel0 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
-intlevel1 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
-intlevel2 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
-intlevel3 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+__accesstop 60 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
+intlevel0 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
+intlevel1 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
+intlevel2 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
+intlevel3 0 0 CODE 0 text C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\masterSim.X.production.o
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\masterSim.X.production.o
 wtemp8 34 0 COMRAM 1 temp dist/default/production\masterSim.X.production.o
@@ -265,8 +265,8 @@ __Hifardata 0 0 CODE 0 ifardata dist/default/production\masterSim.X.production.o
 __Hclrtext 0 0 ABS 0 clrtext dist/default/production\masterSim.X.production.o
 __end_of_setupUART 3C6 0 CODE 0 text1 dist/default/production\masterSim.X.production.o
 __size_of_setupUART 0 0 ABS 0 - dist/default/production\masterSim.X.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\masterSim.X.production.o
 _setupUART 3AE 0 CODE 0 text1 dist/default/production\masterSim.X.production.o
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\masterSim.X.production.o
@@ -288,7 +288,7 @@ _TRISEbits F96 0 ABS 0 - dist/default/production\masterSim.X.production.o
 ___rparam_used 1 0 ABS 0 - dist/default/production\masterSim.X.production.o
 utoa@buf 8 0 COMRAM 1 cstackCOMRAM dist/default/production\masterSim.X.production.o
 utoa@val A 0 COMRAM 1 cstackCOMRAM dist/default/production\masterSim.X.production.o
-isa$xinst 0 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+isa$xinst 0 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 __Hbank0 0 0 ABS 0 bank0 dist/default/production\masterSim.X.production.o
 __Hbank1 0 0 ABS 0 bank1 dist/default/production\masterSim.X.production.o
 __Hbank2 0 0 ABS 0 bank2 dist/default/production\masterSim.X.production.o
@@ -311,7 +311,7 @@ __Htext8 0 0 ABS 0 text8 dist/default/production\masterSim.X.production.o
 ___lwdiv@counter 7 0 COMRAM 1 cstackCOMRAM dist/default/production\masterSim.X.production.o
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\masterSim.X.production.o
 __Hbigram 0 0 ABS 0 bigram dist/default/production\masterSim.X.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 __Hcomram 0 0 ABS 0 comram dist/default/production\masterSim.X.production.o
 __Hconfig 30000E 0 CONFIG 4 config dist/default/production\masterSim.X.production.o
 __Lbank0 0 0 ABS 0 bank0 dist/default/production\masterSim.X.production.o
@@ -382,9 +382,9 @@ __end_of_setupTimer0 3AE 0 CODE 0 text2 dist/default/production\masterSim.X.prod
 __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\masterSim.X.production.o
 ___lwdiv@divisor 3 0 COMRAM 1 cstackCOMRAM dist/default/production\masterSim.X.production.o
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\masterSim.X.production.o
-isa$std 1 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
-stackhi 2FF 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
-stacklo 60 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+isa$std 1 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
+stackhi 2FF 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
+stacklo 60 0 ABS 0 - C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 __Lintcode 8 0 CODE 0 intcode dist/default/production\masterSim.X.production.o
 __Lintret 0 0 ABS 0 intret dist/default/production\masterSim.X.production.o
 __Lirdata 0 0 CODE 0 irdata dist/default/production\masterSim.X.production.o
@@ -413,7 +413,7 @@ __ptext6 198 0 CODE 0 text6 dist/default/production\masterSim.X.production.o
 __ptext7 2CE 0 CODE 0 text7 dist/default/production\masterSim.X.production.o
 __ptext8 25A 0 CODE 0 text8 dist/default/production\masterSim.X.production.o
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\masterSim.X.production.o
-__ramtop 300 0 RAM 0 ramtop C:\Users\david\AppData\Local\Temp\xcAs8gq4.o
+__ramtop 300 0 RAM 0 ramtop C:\Users\david\AppData\Local\Temp\xcAs6bk0.o
 __end_of_tx_char 3F2 0 CODE 0 text4 dist/default/production\masterSim.X.production.o
 __Lpowerup 194 0 CODE 0 powerup dist/default/production\masterSim.X.production.o
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\masterSim.X.production.o

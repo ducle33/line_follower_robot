@@ -200,7 +200,7 @@ void interrupt ISR() {
 //            UARTM1();
             
 //            c = 0;
-            err2 = (float)c*0.2/255 - 0.1;
+            err2 = (float)c*0.08/255 - 0.04;
             
 //            err2 = (float)c*0.36/255 - 0.18;
             if (err2>=0) {
@@ -281,11 +281,12 @@ void setupTimer0(void) {
     T0CONbits.T0CS = 0; // Internal CLK = 1/20MHz * 4
     
     // Set Prescaler to 1:256
+    // Sampling time = (255-60)*4/20*10^-6*256 = 10ms ~ 100Hz
     T0CONbits.PSA = 0;
-    T0CONbits.T0PS2 = 0;
-    T0CONbits.T0PS1 = 0;
-    T0CONbits.T0PS0 = 0;
-    TMR0 = 192;
+    T0CONbits.T0PS2 = 1;
+    T0CONbits.T0PS1 = 1;
+    T0CONbits.T0PS0 = 1;
+    TMR0 = 60;
     T0CONbits.TMR0ON = 1; // Turns on Timer0
 }
 

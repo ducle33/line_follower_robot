@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
-                                                                                               Fri Dec 10 00:01:49 2021
+                                                                                               Wed Dec 15 13:03:16 2021
 
 Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1 
      1                           	processor	18F4431
@@ -285,7 +285,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    271                           
    272 ;; *************** function _setupUART *****************
    273 ;; Defined at:
-   274 ;;		line 164 in file "masterSim.c"
+   274 ;;		line 165 in file "masterSim.c"
    275 ;; Parameters:    Size  Location     Type
    276 ;;		None
    277 ;; Auto vars:     Size  Location     Type
@@ -319,34 +319,34 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    305  0003AE                     _setupUART:
    306                           	callstack 26
    307  0003AE                     
-   308                           ;masterSim.c: 165: TRISCbits.RC6 = 0;
+   308                           ;masterSim.c: 166: TRISCbits.RC6 = 0;
    309  0003AE  9C94               	bcf	148,6,c	;volatile
    310                           
-   311                           ;masterSim.c: 166: TRISCbits.RC7 = 1;
+   311                           ;masterSim.c: 167: TRISCbits.RC7 = 1;
    312  0003B0  8E94               	bsf	148,7,c	;volatile
    313                           
-   314                           ;masterSim.c: 167: TXSTAbits.BRGH = 0;
+   314                           ;masterSim.c: 168: TXSTAbits.BRGH = 0;
    315  0003B2  94AC               	bcf	172,2,c	;volatile
    316                           
-   317                           ;masterSim.c: 168: TXSTAbits.SYNC = 0;
+   317                           ;masterSim.c: 169: TXSTAbits.SYNC = 0;
    318  0003B4  98AC               	bcf	172,4,c	;volatile
    319                           
-   320                           ;masterSim.c: 169: TXSTAbits.TXEN = 1;
+   320                           ;masterSim.c: 170: TXSTAbits.TXEN = 1;
    321  0003B6  8AAC               	bsf	172,5,c	;volatile
    322                           
-   323                           ;masterSim.c: 170: RCSTAbits.SPEN = 1;
+   323                           ;masterSim.c: 171: RCSTAbits.SPEN = 1;
    324  0003B8  8EAB               	bsf	171,7,c	;volatile
    325                           
-   326                           ;masterSim.c: 171: RCSTAbits.CREN = 1;
+   326                           ;masterSim.c: 172: RCSTAbits.CREN = 1;
    327  0003BA  88AB               	bsf	171,4,c	;volatile
    328                           
-   329                           ;masterSim.c: 172: PIE1bits.RCIE = 1;
+   329                           ;masterSim.c: 173: PIE1bits.RCIE = 1;
    330  0003BC  8A9D               	bsf	157,5,c	;volatile
    331                           
-   332                           ;masterSim.c: 173: PIE1bits.TXIE = 0;
+   332                           ;masterSim.c: 174: PIE1bits.TXIE = 0;
    333  0003BE  989D               	bcf	157,4,c	;volatile
    334  0003C0                     
-   335                           ;masterSim.c: 174: SPBRG = 31;
+   335                           ;masterSim.c: 175: SPBRG = 31;
    336  0003C0  0E1F               	movlw	31
    337  0003C2  6EAF               	movwf	175,c	;volatile
    338  0003C4  0012               	return		;funcret
@@ -398,25 +398,25 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    384                           ;masterSim.c: 153: T0CONbits.T0CS = 0;
    385  000398  9AD5               	bcf	213,5,c	;volatile
    386                           
-   387                           ;masterSim.c: 156: T0CONbits.PSA = 0;
-   388  00039A  96D5               	bcf	213,3,c	;volatile
+   387                           ;masterSim.c: 157: T0CONbits.PSA = 1;
+   388  00039A  86D5               	bsf	213,3,c	;volatile
    389                           
-   390                           ;masterSim.c: 157: T0CONbits.T0PS2 = 0;
+   390                           ;masterSim.c: 158: T0CONbits.T0PS2 = 0;
    391  00039C  94D5               	bcf	213,2,c	;volatile
    392                           
-   393                           ;masterSim.c: 158: T0CONbits.T0PS1 = 0;
+   393                           ;masterSim.c: 159: T0CONbits.T0PS1 = 0;
    394  00039E  92D5               	bcf	213,1,c	;volatile
    395                           
-   396                           ;masterSim.c: 159: T0CONbits.T0PS0 = 0;
+   396                           ;masterSim.c: 160: T0CONbits.T0PS0 = 0;
    397  0003A0  90D5               	bcf	213,0,c	;volatile
    398  0003A2                     
-   399                           ;masterSim.c: 160: TMR0 = 250;
+   399                           ;masterSim.c: 161: TMR0 = 250;
    400  0003A2  0E00               	movlw	0
    401  0003A4  6ED7               	movwf	215,c	;volatile
    402  0003A6  0EFA               	movlw	250
    403  0003A8  6ED6               	movwf	214,c	;volatile
    404  0003AA                     
-   405                           ;masterSim.c: 161: T0CONbits.TMR0ON = 1;
+   405                           ;masterSim.c: 162: T0CONbits.TMR0ON = 1;
    406  0003AA  8ED5               	bsf	213,7,c	;volatile
    407  0003AC  0012               	return		;funcret
    408  0003AE                     __end_of_setupTimer0:
@@ -691,7 +691,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    677                           
    678 ;; *************** function _tx_char *****************
    679 ;; Defined at:
-   680 ;;		line 182 in file "masterSim.c"
+   680 ;;		line 183 in file "masterSim.c"
    681 ;; Parameters:    Size  Location     Type
    682 ;;  a               1    wreg     unsigned char 
    683 ;; Auto vars:     Size  Location     Type
@@ -728,7 +728,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    714                           ;tx_char@a stored from wreg
    715  0003DC  6E01               	movwf	tx_char@a^0,c
    716  0003DE                     
-   717                           ;masterSim.c: 183: TXREG=a;
+   717                           ;masterSim.c: 184: TXREG=a;
    718  0003DE  C001  FFAD         	movff	tx_char@a,4013	;volatile
    719  0003E2                     i2l92:
    720  0003E2  A2AC               	btfss	4012,1,c	;volatile
@@ -1483,7 +1483,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.32 build 20210201212658 
-Symbol Table                                                                                   Fri Dec 10 00:01:49 2021
+Symbol Table                                                                                   Wed Dec 15 13:03:16 2021
 
                      l80 03AC                       l74 038C                       l83 03C4  
                      l75 038C                       _u1 001E                       _u2 001D  

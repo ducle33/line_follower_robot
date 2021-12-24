@@ -3691,107 +3691,107 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;masterSim.c: 153: T0CONbits.T0CS = 0;
 "153
 [e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;masterSim.c: 156: T0CONbits.PSA = 0;
-"156
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;masterSim.c: 157: T0CONbits.T0PS2 = 0;
+[; ;masterSim.c: 157: T0CONbits.PSA = 1;
 "157
-[e = . . _T0CONbits 1 2 -> -> 0 `i `uc ]
-[; ;masterSim.c: 158: T0CONbits.T0PS1 = 0;
+[e = . . _T0CONbits 0 1 -> -> 1 `i `uc ]
+[; ;masterSim.c: 158: T0CONbits.T0PS2 = 0;
 "158
-[e = . . _T0CONbits 1 1 -> -> 0 `i `uc ]
-[; ;masterSim.c: 159: T0CONbits.T0PS0 = 0;
+[e = . . _T0CONbits 1 2 -> -> 0 `i `uc ]
+[; ;masterSim.c: 159: T0CONbits.T0PS1 = 0;
 "159
-[e = . . _T0CONbits 1 0 -> -> 0 `i `uc ]
-[; ;masterSim.c: 160: TMR0 = 250;
+[e = . . _T0CONbits 1 1 -> -> 0 `i `uc ]
+[; ;masterSim.c: 160: T0CONbits.T0PS0 = 0;
 "160
-[e = _TMR0 -> -> 250 `i `us ]
-[; ;masterSim.c: 161: T0CONbits.TMR0ON = 1;
+[e = . . _T0CONbits 1 0 -> -> 0 `i `uc ]
+[; ;masterSim.c: 161: TMR0 = 250;
 "161
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-[; ;masterSim.c: 162: }
+[e = _TMR0 -> -> 250 `i `us ]
+[; ;masterSim.c: 162: T0CONbits.TMR0ON = 1;
 "162
+[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
+[; ;masterSim.c: 163: }
+"163
 [e :UE 333 ]
 }
-"164
+"165
 [v _setupUART `(v ~T0 @X0 1 ef ]
 {
-[; ;masterSim.c: 164: void setupUART(void) {
+[; ;masterSim.c: 165: void setupUART(void) {
 [e :U _setupUART ]
 [f ]
-[; ;masterSim.c: 165: TRISCbits.RC6 = 0;
-"165
-[e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
-[; ;masterSim.c: 166: TRISCbits.RC7 = 1;
+[; ;masterSim.c: 166: TRISCbits.RC6 = 0;
 "166
-[e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
-[; ;masterSim.c: 167: TXSTAbits.BRGH = 0;
+[e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
+[; ;masterSim.c: 167: TRISCbits.RC7 = 1;
 "167
-[e = . . _TXSTAbits 0 2 -> -> 0 `i `uc ]
-[; ;masterSim.c: 168: TXSTAbits.SYNC = 0;
+[e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
+[; ;masterSim.c: 168: TXSTAbits.BRGH = 0;
 "168
-[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
-[; ;masterSim.c: 169: TXSTAbits.TXEN = 1;
+[e = . . _TXSTAbits 0 2 -> -> 0 `i `uc ]
+[; ;masterSim.c: 169: TXSTAbits.SYNC = 0;
 "169
-[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
-[; ;masterSim.c: 170: RCSTAbits.SPEN = 1;
+[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
+[; ;masterSim.c: 170: TXSTAbits.TXEN = 1;
 "170
-[e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-[; ;masterSim.c: 171: RCSTAbits.CREN = 1;
+[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
+[; ;masterSim.c: 171: RCSTAbits.SPEN = 1;
 "171
-[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-[; ;masterSim.c: 172: PIE1bits.RCIE = 1;
+[e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
+[; ;masterSim.c: 172: RCSTAbits.CREN = 1;
 "172
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-[; ;masterSim.c: 173: PIE1bits.TXIE = 0;
+[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
+[; ;masterSim.c: 173: PIE1bits.RCIE = 1;
 "173
-[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
-[; ;masterSim.c: 174: SPBRG = 31;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;masterSim.c: 174: PIE1bits.TXIE = 0;
 "174
-[e = _SPBRG -> -> 31 `i `uc ]
-[; ;masterSim.c: 175: }
+[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
+[; ;masterSim.c: 175: SPBRG = 31;
 "175
+[e = _SPBRG -> -> 31 `i `uc ]
+[; ;masterSim.c: 176: }
+"176
 [e :UE 334 ]
 }
-"177
+"178
 [v _rx_char `(uc ~T0 @X0 1 ef ]
 {
-[; ;masterSim.c: 177: unsigned char rx_char(void) {
+[; ;masterSim.c: 178: unsigned char rx_char(void) {
 [e :U _rx_char ]
 [f ]
-[; ;masterSim.c: 178: while(!RCIF);
-"178
+[; ;masterSim.c: 179: while(!RCIF);
+"179
 [e $U 336  ]
 [e :U 337 ]
 [e :U 336 ]
 [e $ ! _RCIF 337  ]
 [e :U 338 ]
-[; ;masterSim.c: 179: return RCREG;
-"179
+[; ;masterSim.c: 180: return RCREG;
+"180
 [e ) _RCREG ]
 [e $UE 335  ]
-[; ;masterSim.c: 180: }
-"180
+[; ;masterSim.c: 181: }
+"181
 [e :UE 335 ]
 }
-"182
+"183
 [v _tx_char `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;masterSim.c: 182: void tx_char(char a) {
+[; ;masterSim.c: 183: void tx_char(char a) {
 [e :U _tx_char ]
 [v _a `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;masterSim.c: 183: TXREG=a;
-"183
-[e = _TXREG _a ]
-[; ;masterSim.c: 184: while(!TRMT);
+[; ;masterSim.c: 184: TXREG=a;
 "184
+[e = _TXREG _a ]
+[; ;masterSim.c: 185: while(!TRMT);
+"185
 [e $U 340  ]
 [e :U 341 ]
 [e :U 340 ]
 [e $ ! _TRMT 341  ]
 [e :U 342 ]
-[; ;masterSim.c: 185: }
-"185
+[; ;masterSim.c: 186: }
+"186
 [e :UE 339 ]
 }

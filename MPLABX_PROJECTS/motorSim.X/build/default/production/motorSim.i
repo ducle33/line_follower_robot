@@ -5332,7 +5332,8 @@ T0CONbits.T016BIT = 1;
 T0CONbits.T0CS = 0;
 
 
-T0CONbits.PSA = 0;
+
+T0CONbits.PSA = 1;
 T0CONbits.T0PS2 = 0;
 T0CONbits.T0PS1 = 0;
 T0CONbits.T0PS0 = 0;

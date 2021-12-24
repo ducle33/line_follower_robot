@@ -5419,7 +5419,7 @@ if(count==1) {
 
 
 
-err2 = (float)c*0.2/255 - 0.1;
+err2 = (float)c*0.08/255 - 0.04;
 
 
 if (err2>=0) {
@@ -5500,11 +5500,12 @@ T0CONbits.T016BIT = 1;
 T0CONbits.T0CS = 0;
 
 
+
 T0CONbits.PSA = 0;
-T0CONbits.T0PS2 = 0;
-T0CONbits.T0PS1 = 0;
-T0CONbits.T0PS0 = 0;
-TMR0 = 192;
+T0CONbits.T0PS2 = 1;
+T0CONbits.T0PS1 = 1;
+T0CONbits.T0PS0 = 1;
+TMR0 = 60;
 T0CONbits.TMR0ON = 1;
 }
 
@@ -5557,13 +5558,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x20;
 
-# 341
+# 342
 PIR1bits.SSPIF=0;
 
-# 345
+# 346
 ADCON0=0;
 
-# 347
+# 348
 ADCON1=0x0F;
 }
 
@@ -5579,13 +5580,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 362
+# 363
 PIR1bits.SSPIF=0;
 PIE1bits.SSPIE=1;
 
-# 367
+# 368
 ADCON0=0;
 
-# 369
+# 370
 ADCON1=0x0F;
 }

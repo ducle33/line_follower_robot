@@ -3931,9 +3931,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "198
 [e $ ! == _count -> -> 1 `i `ui 340  ]
 {
-[; ;masterMain.c: 203: err2 = (float)c*0.2/255 - 0.1;
+[; ;masterMain.c: 203: err2 = (float)c*0.08/255 - 0.04;
 "203
-[e = _err2 -> - / * -> -> _c `f `d .0.2 -> -> 255 `i `d .0.1 `f ]
+[e = _err2 -> - / * -> -> _c `f `d .0.08 -> -> 255 `i `d .0.04 `f ]
 [; ;masterMain.c: 206: if (err2>=0) {
 "206
 [e $ ! >= _err2 -> -> 0 `i `f 341  ]
@@ -4155,224 +4155,224 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;masterMain.c: 281: T0CONbits.T0CS = 0;
 "281
 [e = . . _T0CONbits 0 3 -> -> 0 `i `uc ]
-[; ;masterMain.c: 284: T0CONbits.PSA = 0;
-"284
-[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
-[; ;masterMain.c: 285: T0CONbits.T0PS2 = 0;
+[; ;masterMain.c: 285: T0CONbits.PSA = 0;
 "285
-[e = . . _T0CONbits 1 2 -> -> 0 `i `uc ]
-[; ;masterMain.c: 286: T0CONbits.T0PS1 = 0;
+[e = . . _T0CONbits 0 1 -> -> 0 `i `uc ]
+[; ;masterMain.c: 286: T0CONbits.T0PS2 = 1;
 "286
-[e = . . _T0CONbits 1 1 -> -> 0 `i `uc ]
-[; ;masterMain.c: 287: T0CONbits.T0PS0 = 0;
+[e = . . _T0CONbits 1 2 -> -> 1 `i `uc ]
+[; ;masterMain.c: 287: T0CONbits.T0PS1 = 1;
 "287
-[e = . . _T0CONbits 1 0 -> -> 0 `i `uc ]
-[; ;masterMain.c: 288: TMR0 = 192;
+[e = . . _T0CONbits 1 1 -> -> 1 `i `uc ]
+[; ;masterMain.c: 288: T0CONbits.T0PS0 = 1;
 "288
-[e = _TMR0 -> -> 192 `i `us ]
-[; ;masterMain.c: 289: T0CONbits.TMR0ON = 1;
+[e = . . _T0CONbits 1 0 -> -> 1 `i `uc ]
+[; ;masterMain.c: 289: TMR0 = 60;
 "289
-[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
-[; ;masterMain.c: 290: }
+[e = _TMR0 -> -> 60 `i `us ]
+[; ;masterMain.c: 290: T0CONbits.TMR0ON = 1;
 "290
+[e = . . _T0CONbits 0 5 -> -> 1 `i `uc ]
+[; ;masterMain.c: 291: }
+"291
 [e :UE 355 ]
 }
-"292
+"293
 [v _setupTimer1 `(v ~T0 @X0 1 ef ]
 {
-[; ;masterMain.c: 292: void setupTimer1(void) {
+[; ;masterMain.c: 293: void setupTimer1(void) {
 [e :U _setupTimer1 ]
 [f ]
-[; ;masterMain.c: 293: PIE1bits.TMR1IE = 1;
-"293
-[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
-[; ;masterMain.c: 294: TMR1 = 0;
+[; ;masterMain.c: 294: PIE1bits.TMR1IE = 1;
 "294
-[e = _TMR1 -> -> 0 `i `us ]
-[; ;masterMain.c: 295: T1CONbits.RD16 = 1;
+[e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
+[; ;masterMain.c: 295: TMR1 = 0;
 "295
-[e = . . _T1CONbits 1 6 -> -> 1 `i `uc ]
-[; ;masterMain.c: 296: T1CONbits.TMR1CS = 0;
+[e = _TMR1 -> -> 0 `i `us ]
+[; ;masterMain.c: 296: T1CONbits.RD16 = 1;
 "296
+[e = . . _T1CONbits 1 6 -> -> 1 `i `uc ]
+[; ;masterMain.c: 297: T1CONbits.TMR1CS = 0;
+"297
 [e = . . _T1CONbits 1 1 -> -> 0 `i `uc ]
-[; ;masterMain.c: 298: T1CONbits.T1CKPS0 = 0;
-"298
-[e = . . _T1CONbits 2 3 -> -> 0 `i `uc ]
-[; ;masterMain.c: 299: T1CONbits.T1CKPS1 = 0;
+[; ;masterMain.c: 299: T1CONbits.T1CKPS0 = 0;
 "299
+[e = . . _T1CONbits 2 3 -> -> 0 `i `uc ]
+[; ;masterMain.c: 300: T1CONbits.T1CKPS1 = 0;
+"300
 [e = . . _T1CONbits 2 4 -> -> 0 `i `uc ]
-[; ;masterMain.c: 301: T1CONbits.TMR1ON = 1;
-"301
-[e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
-[; ;masterMain.c: 302: }
+[; ;masterMain.c: 302: T1CONbits.TMR1ON = 1;
 "302
+[e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
+[; ;masterMain.c: 303: }
+"303
 [e :UE 356 ]
 }
-"304
+"305
 [v _setupUART `(v ~T0 @X0 1 ef ]
 {
-[; ;masterMain.c: 304: void setupUART(void) {
+[; ;masterMain.c: 305: void setupUART(void) {
 [e :U _setupUART ]
 [f ]
-[; ;masterMain.c: 305: TRISCbits.RC6 = 0;
-"305
-[e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
-[; ;masterMain.c: 306: TRISCbits.RC7 = 1;
+[; ;masterMain.c: 306: TRISCbits.RC6 = 0;
 "306
-[e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
-[; ;masterMain.c: 307: TXSTAbits.BRGH = 0;
+[e = . . _TRISCbits 1 6 -> -> 0 `i `uc ]
+[; ;masterMain.c: 307: TRISCbits.RC7 = 1;
 "307
-[e = . . _TXSTAbits 0 2 -> -> 0 `i `uc ]
-[; ;masterMain.c: 308: TXSTAbits.SYNC = 0;
+[e = . . _TRISCbits 1 7 -> -> 1 `i `uc ]
+[; ;masterMain.c: 308: TXSTAbits.BRGH = 0;
 "308
-[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
-[; ;masterMain.c: 309: TXSTAbits.TXEN = 1;
+[e = . . _TXSTAbits 0 2 -> -> 0 `i `uc ]
+[; ;masterMain.c: 309: TXSTAbits.SYNC = 0;
 "309
-[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
-[; ;masterMain.c: 310: RCSTAbits.SPEN = 1;
+[e = . . _TXSTAbits 0 4 -> -> 0 `i `uc ]
+[; ;masterMain.c: 310: TXSTAbits.TXEN = 1;
 "310
-[e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
-[; ;masterMain.c: 311: RCSTAbits.CREN = 1;
+[e = . . _TXSTAbits 0 5 -> -> 1 `i `uc ]
+[; ;masterMain.c: 311: RCSTAbits.SPEN = 1;
 "311
-[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
-[; ;masterMain.c: 312: PIE1bits.RCIE = 1;
+[e = . . _RCSTAbits 0 7 -> -> 1 `i `uc ]
+[; ;masterMain.c: 312: RCSTAbits.CREN = 1;
 "312
-[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
-[; ;masterMain.c: 313: PIE1bits.TXIE = 0;
+[e = . . _RCSTAbits 0 4 -> -> 1 `i `uc ]
+[; ;masterMain.c: 313: PIE1bits.RCIE = 1;
 "313
-[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
-[; ;masterMain.c: 314: SPBRG = 31;
+[e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
+[; ;masterMain.c: 314: PIE1bits.TXIE = 0;
 "314
-[e = _SPBRG -> -> 31 `i `uc ]
-[; ;masterMain.c: 315: }
+[e = . . _PIE1bits 0 4 -> -> 0 `i `uc ]
+[; ;masterMain.c: 315: SPBRG = 31;
 "315
+[e = _SPBRG -> -> 31 `i `uc ]
+[; ;masterMain.c: 316: }
+"316
 [e :UE 357 ]
 }
-"317
+"318
 [v _rx_char `(uc ~T0 @X0 1 ef ]
 {
-[; ;masterMain.c: 317: unsigned char rx_char(void) {
+[; ;masterMain.c: 318: unsigned char rx_char(void) {
 [e :U _rx_char ]
 [f ]
-[; ;masterMain.c: 318: while(!RCIF);
-"318
+[; ;masterMain.c: 319: while(!RCIF);
+"319
 [e $U 359  ]
 [e :U 360 ]
 [e :U 359 ]
 [e $ ! _RCIF 360  ]
 [e :U 361 ]
-[; ;masterMain.c: 319: return RCREG;
-"319
+[; ;masterMain.c: 320: return RCREG;
+"320
 [e ) _RCREG ]
 [e $UE 358  ]
-[; ;masterMain.c: 320: }
-"320
+[; ;masterMain.c: 321: }
+"321
 [e :UE 358 ]
 }
-"322
+"323
 [v _tx_char `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;masterMain.c: 322: void tx_char(char a) {
+[; ;masterMain.c: 323: void tx_char(char a) {
 [e :U _tx_char ]
 [v _a `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;masterMain.c: 323: TXREG=a;
-"323
-[e = _TXREG _a ]
-[; ;masterMain.c: 324: while(!TRMT);
+[; ;masterMain.c: 324: TXREG=a;
 "324
+[e = _TXREG _a ]
+[; ;masterMain.c: 325: while(!TRMT);
+"325
 [e $U 363  ]
 [e :U 364 ]
 [e :U 363 ]
 [e $ ! _TRMT 364  ]
 [e :U 365 ]
-[; ;masterMain.c: 325: }
-"325
+[; ;masterMain.c: 326: }
+"326
 [e :UE 362 ]
 }
-"327
+"328
 [v _SPI_Init_Master `(v ~T0 @X0 1 ef ]
 {
-[; ;masterMain.c: 327: void SPI_Init_Master() {
+[; ;masterMain.c: 328: void SPI_Init_Master() {
 [e :U _SPI_Init_Master ]
 [f ]
-[; ;masterMain.c: 328: PIE1bits.SSPIE = 1;
-"328
-[e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
-[; ;masterMain.c: 329: IPR1bits.SSPIP = 1;
+[; ;masterMain.c: 329: PIE1bits.SSPIE = 1;
 "329
+[e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
+[; ;masterMain.c: 330: IPR1bits.SSPIP = 1;
+"330
 [e = . . _IPR1bits 0 3 -> -> 1 `i `uc ]
-[; ;masterMain.c: 332: TRISDbits.TRISD2 = 1;
-"332
-[e = . . _TRISDbits 0 2 -> -> 1 `i `uc ]
-[; ;masterMain.c: 333: TRISDbits.TRISD3 = 0;
+[; ;masterMain.c: 333: TRISDbits.TRISD2 = 1;
 "333
-[e = . . _TRISDbits 0 3 -> -> 0 `i `uc ]
-[; ;masterMain.c: 334: TRISDbits.TRISD1 = 0;
+[e = . . _TRISDbits 0 2 -> -> 1 `i `uc ]
+[; ;masterMain.c: 334: TRISDbits.TRISD3 = 0;
 "334
+[e = . . _TRISDbits 0 3 -> -> 0 `i `uc ]
+[; ;masterMain.c: 335: TRISDbits.TRISD1 = 0;
+"335
 [e = . . _TRISDbits 0 1 -> -> 0 `i `uc ]
-[; ;masterMain.c: 337: CS = 1;
-"337
-[e = _CS -> -> 1 `i `b ]
-[; ;masterMain.c: 338: SSPSTAT=0x40;
+[; ;masterMain.c: 338: CS = 1;
 "338
-[e = _SSPSTAT -> -> 64 `i `uc ]
-[; ;masterMain.c: 339: SSPCON1=0x20;
+[e = _CS -> -> 1 `i `b ]
+[; ;masterMain.c: 339: SSPSTAT=0x40;
 "339
+[e = _SSPSTAT -> -> 64 `i `uc ]
+[; ;masterMain.c: 340: SSPCON1=0x20;
+"340
 [e = _SSPCON1 -> -> 32 `i `uc ]
-[; ;masterMain.c: 341: PIR1bits.SSPIF=0;
-"341
+[; ;masterMain.c: 342: PIR1bits.SSPIF=0;
+"342
 [e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-[; ;masterMain.c: 345: ADCON0=0;
-"345
+[; ;masterMain.c: 346: ADCON0=0;
+"346
 [e = _ADCON0 -> -> 0 `i `uc ]
-[; ;masterMain.c: 347: ADCON1=0x0F;
-"347
-[e = _ADCON1 -> -> 15 `i `uc ]
-[; ;masterMain.c: 348: }
+[; ;masterMain.c: 348: ADCON1=0x0F;
 "348
+[e = _ADCON1 -> -> 15 `i `uc ]
+[; ;masterMain.c: 349: }
+"349
 [e :UE 366 ]
 }
-"350
+"351
 [v _SPI_Init_Slave `(v ~T0 @X0 1 ef ]
 {
-[; ;masterMain.c: 350: void SPI_Init_Slave() {
+[; ;masterMain.c: 351: void SPI_Init_Slave() {
 [e :U _SPI_Init_Slave ]
 [f ]
-[; ;masterMain.c: 352: TRISCbits.TRISC4 = 1;
-"352
-[e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
-[; ;masterMain.c: 353: TRISCbits.TRISC5 = 1;
+[; ;masterMain.c: 353: TRISCbits.TRISC4 = 1;
 "353
-[e = . . _TRISCbits 0 5 -> -> 1 `i `uc ]
-[; ;masterMain.c: 354: TRISCbits.TRISC6 = 1;
+[e = . . _TRISCbits 0 4 -> -> 1 `i `uc ]
+[; ;masterMain.c: 354: TRISCbits.TRISC5 = 1;
 "354
-[e = . . _TRISCbits 0 6 -> -> 1 `i `uc ]
-[; ;masterMain.c: 355: TRISCbits.TRISC7 = 0;
+[e = . . _TRISCbits 0 5 -> -> 1 `i `uc ]
+[; ;masterMain.c: 355: TRISCbits.TRISC6 = 1;
 "355
+[e = . . _TRISCbits 0 6 -> -> 1 `i `uc ]
+[; ;masterMain.c: 356: TRISCbits.TRISC7 = 0;
+"356
 [e = . . _TRISCbits 0 7 -> -> 0 `i `uc ]
-[; ;masterMain.c: 358: CS = 1;
-"358
-[e = _CS -> -> 1 `i `b ]
-[; ;masterMain.c: 359: SSPSTAT=0x40;
+[; ;masterMain.c: 359: CS = 1;
 "359
-[e = _SSPSTAT -> -> 64 `i `uc ]
-[; ;masterMain.c: 360: SSPCON1=0x24;
+[e = _CS -> -> 1 `i `b ]
+[; ;masterMain.c: 360: SSPSTAT=0x40;
 "360
+[e = _SSPSTAT -> -> 64 `i `uc ]
+[; ;masterMain.c: 361: SSPCON1=0x24;
+"361
 [e = _SSPCON1 -> -> 36 `i `uc ]
-[; ;masterMain.c: 362: PIR1bits.SSPIF=0;
-"362
-[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
-[; ;masterMain.c: 363: PIE1bits.SSPIE=1;
+[; ;masterMain.c: 363: PIR1bits.SSPIF=0;
 "363
+[e = . . _PIR1bits 0 3 -> -> 0 `i `uc ]
+[; ;masterMain.c: 364: PIE1bits.SSPIE=1;
+"364
 [e = . . _PIE1bits 0 3 -> -> 1 `i `uc ]
-[; ;masterMain.c: 367: ADCON0=0;
-"367
+[; ;masterMain.c: 368: ADCON0=0;
+"368
 [e = _ADCON0 -> -> 0 `i `uc ]
-[; ;masterMain.c: 369: ADCON1=0x0F;
-"369
-[e = _ADCON1 -> -> 15 `i `uc ]
-[; ;masterMain.c: 370: }
+[; ;masterMain.c: 370: ADCON1=0x0F;
 "370
+[e = _ADCON1 -> -> 15 `i `uc ]
+[; ;masterMain.c: 371: }
+"371
 [e :UE 367 ]
 }

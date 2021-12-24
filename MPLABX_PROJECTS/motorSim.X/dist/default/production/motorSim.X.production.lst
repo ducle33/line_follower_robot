@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
-                                                                                               Thu Dec 09 23:37:13 2021
+                                                                                               Wed Dec 15 13:03:27 2021
 
 Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1 
      1                           	processor	18F4431
@@ -183,7 +183,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    169                           
    170 ;; *************** function _setupUART *****************
    171 ;; Defined at:
-   172 ;;		line 134 in file "motorSim.c"
+   172 ;;		line 135 in file "motorSim.c"
    173 ;; Parameters:    Size  Location     Type
    174 ;;		None
    175 ;; Auto vars:     Size  Location     Type
@@ -217,34 +217,34 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    203  000088                     _setupUART:
    204                           	callstack 28
    205  000088                     
-   206                           ;motorSim.c: 135: TRISCbits.RC6 = 0;
+   206                           ;motorSim.c: 136: TRISCbits.RC6 = 0;
    207  000088  9C94               	bcf	148,6,c	;volatile
    208                           
-   209                           ;motorSim.c: 136: TRISCbits.RC7 = 1;
+   209                           ;motorSim.c: 137: TRISCbits.RC7 = 1;
    210  00008A  8E94               	bsf	148,7,c	;volatile
    211                           
-   212                           ;motorSim.c: 137: TXSTAbits.BRGH = 0;
+   212                           ;motorSim.c: 138: TXSTAbits.BRGH = 0;
    213  00008C  94AC               	bcf	172,2,c	;volatile
    214                           
-   215                           ;motorSim.c: 138: TXSTAbits.SYNC = 0;
+   215                           ;motorSim.c: 139: TXSTAbits.SYNC = 0;
    216  00008E  98AC               	bcf	172,4,c	;volatile
    217                           
-   218                           ;motorSim.c: 139: TXSTAbits.TXEN = 1;
+   218                           ;motorSim.c: 140: TXSTAbits.TXEN = 1;
    219  000090  8AAC               	bsf	172,5,c	;volatile
    220                           
-   221                           ;motorSim.c: 140: RCSTAbits.SPEN = 1;
+   221                           ;motorSim.c: 141: RCSTAbits.SPEN = 1;
    222  000092  8EAB               	bsf	171,7,c	;volatile
    223                           
-   224                           ;motorSim.c: 141: RCSTAbits.CREN = 1;
+   224                           ;motorSim.c: 142: RCSTAbits.CREN = 1;
    225  000094  88AB               	bsf	171,4,c	;volatile
    226                           
-   227                           ;motorSim.c: 142: PIE1bits.RCIE = 1;
+   227                           ;motorSim.c: 143: PIE1bits.RCIE = 1;
    228  000096  8A9D               	bsf	157,5,c	;volatile
    229                           
-   230                           ;motorSim.c: 143: PIE1bits.TXIE = 0;
+   230                           ;motorSim.c: 144: PIE1bits.TXIE = 0;
    231  000098  989D               	bcf	157,4,c	;volatile
    232  00009A                     
-   233                           ;motorSim.c: 144: SPBRG = 31;
+   233                           ;motorSim.c: 145: SPBRG = 31;
    234  00009A  0E1F               	movlw	31
    235  00009C  6EAF               	movwf	175,c	;volatile
    236  00009E  0012               	return		;funcret
@@ -296,25 +296,25 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    282                           ;motorSim.c: 123: T0CONbits.T0CS = 0;
    283  00005A  9AD5               	bcf	213,5,c	;volatile
    284                           
-   285                           ;motorSim.c: 126: T0CONbits.PSA = 0;
-   286  00005C  96D5               	bcf	213,3,c	;volatile
+   285                           ;motorSim.c: 127: T0CONbits.PSA = 1;
+   286  00005C  86D5               	bsf	213,3,c	;volatile
    287                           
-   288                           ;motorSim.c: 127: T0CONbits.T0PS2 = 0;
+   288                           ;motorSim.c: 128: T0CONbits.T0PS2 = 0;
    289  00005E  94D5               	bcf	213,2,c	;volatile
    290                           
-   291                           ;motorSim.c: 128: T0CONbits.T0PS1 = 0;
+   291                           ;motorSim.c: 129: T0CONbits.T0PS1 = 0;
    292  000060  92D5               	bcf	213,1,c	;volatile
    293                           
-   294                           ;motorSim.c: 129: T0CONbits.T0PS0 = 0;
+   294                           ;motorSim.c: 130: T0CONbits.T0PS0 = 0;
    295  000062  90D5               	bcf	213,0,c	;volatile
    296  000064                     
-   297                           ;motorSim.c: 130: TMR0 = 250;
+   297                           ;motorSim.c: 131: TMR0 = 250;
    298  000064  0E00               	movlw	0
    299  000066  6ED7               	movwf	215,c	;volatile
    300  000068  0EFA               	movlw	250
    301  00006A  6ED6               	movwf	214,c	;volatile
    302  00006C                     
-   303                           ;motorSim.c: 131: T0CONbits.TMR0ON = 1;
+   303                           ;motorSim.c: 132: T0CONbits.TMR0ON = 1;
    304  00006C  8ED5               	bsf	213,7,c	;volatile
    305  00006E  0012               	return		;funcret
    306  000070                     __end_of_setupTimer0:
@@ -410,7 +410,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    396                           
    397 ;; *************** function _rx_char *****************
    398 ;; Defined at:
-   399 ;;		line 147 in file "motorSim.c"
+   399 ;;		line 148 in file "motorSim.c"
    400 ;; Parameters:    Size  Location     Type
    401 ;;		None
    402 ;; Auto vars:     Size  Location     Type
@@ -450,7 +450,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    436  0000C0  EF5B  F000         	goto	i2l65
    437  0000C4                     i2u1_40:
    438  0000C4                     
-   439                           ;motorSim.c: 149: return RCREG;
+   439                           ;motorSim.c: 150: return RCREG;
    440  0000C4  50AE               	movf	174,w,c	;volatile
    441  0000C6  0012               	return		;funcret
    442  0000C8                     __end_of_rx_char:
@@ -796,7 +796,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.32 build 20210201212658 
-Symbol Table                                                                                   Thu Dec 09 23:37:13 2021
+Symbol Table                                                                                   Wed Dec 15 13:03:27 2021
 
                      l53 0080                       l62 009E                       l54 0080  
                      l59 006E                      l830 009A                      l832 0056  

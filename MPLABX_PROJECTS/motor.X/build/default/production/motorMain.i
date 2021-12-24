@@ -5300,7 +5300,7 @@ char firstTime = 1;
 unsigned char speedRef = 100;
 unsigned char bufferRef = 0;
 unsigned int u = 0;
-float Kp = 0.4, Ki = 0.03, duty = 0, err = 0, sum_err = 0;
+float Kp = 0.5, Ki = 0.00005, Kd = 0, duty = 0, err = 0, sum_err = 0, pre_err = 0;
 
 
 void setupUART(void);
@@ -5315,7 +5315,6 @@ void setupTimer2(void);
 void setupPWM(void);
 unsigned char motorOutMSB(float);
 unsigned char motorOutLSB(float);
-float PID(int);
 long RPM_CONSTANT_QEI = 93750;
 
 signed char WriteSPI( unsigned char data_out ) {
@@ -5370,30 +5369,27 @@ if (bufferRef==0) {
 speedRef = speedRef;
 }
 else speedRef = bufferRef;
+
+# 190
 count++;
+
 if (count==1) {
 
 speed = PORTD;
 speedPID = (int)(speed*1.435294);
-}
-if (count==2) {
 duty = 0;
-Kp = 5;
-Ki = 0;
 err = speedRef - speedPID;
 sum_err = sum_err + err;
-duty = Kp*err + Ki*sum_err;
+duty = Kp*err + Ki*sum_err + Kd*(err-pre_err);
+pre_err = err;
 if(duty>100) duty = 100;
 if(duty<-100) duty = -100;
 
 duty = (duty + 100)*1.275;
-}
-if (count==3) {
 count = (unsigned int)duty;
 PORTB = count;
 count = 0;
 }
-
 INTCONbits.TMR0IF = 0;
 }
 }
@@ -5438,11 +5434,12 @@ T0CONbits.T016BIT = 1;
 T0CONbits.T0CS = 0;
 
 
+
 T0CONbits.PSA = 0;
 T0CONbits.T0PS2 = 1;
-T0CONbits.T0PS1 = 0;
+T0CONbits.T0PS1 = 1;
 T0CONbits.T0PS0 = 1;
-TMR0 = 0;
+TMR0 = 60;
 T0CONbits.TMR0ON = 1;
 }
 
@@ -5467,13 +5464,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 275
+# 283
 PIR1bits.SSPIF=0;
 
-# 279
+# 287
 ADCON0=0;
 
-# 281
+# 289
 ADCON1=0x0F;
 }
 
@@ -5489,13 +5486,13 @@ CS = 1;
 SSPSTAT=0x40;
 SSPCON1=0x24;
 
-# 296
+# 304
 PIR1bits.SSPIF=0;
 
-# 300
+# 308
 ADCON0=0;
 
-# 302
+# 310
 ADCON1=0x0F;
 }
 
@@ -5546,24 +5543,6 @@ unsigned char motorOutLSB(float duty) {
 int buffer = 10.239*duty;
 unsigned char bufferChar = buffer & 0b00000011;
 return bufferChar;
-}
-
-float PID(int ref) {
-duty = 0;
-Kp = 0.4;
-Ki = 0.03;
-err = ref - speedPID;
-sum_err = sum_err + err;
-
-
-
-duty = Kp*err + Ki*sum_err;
-
-if(duty>100) duty = 100;
-if(duty<-100) duty = -100;
-
-# 376
-return duty;
 }
 
 char rx_char(void) {

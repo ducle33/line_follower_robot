@@ -1,7 +1,7 @@
 
 
 Microchip MPLAB XC8 Assembler V2.32 build 20210201212658 
-                                                                                               Fri Dec 10 13:13:57 2021
+                                                                                               Thu Dec 16 13:11:59 2021
 
 Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1 
      1                           	processor	18F4431
@@ -594,7 +594,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    580                           
    581 ;; *************** function _setupUART *****************
    582 ;; Defined at:
-   583 ;;		line 304 in file "masterMain.c"
+   583 ;;		line 305 in file "masterMain.c"
    584 ;; Parameters:    Size  Location     Type
    585 ;;		None
    586 ;; Auto vars:     Size  Location     Type
@@ -628,34 +628,34 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    614  00179E                     _setupUART:
    615                           	callstack 27
    616  00179E                     
-   617                           ;masterMain.c: 305: TRISCbits.RC6 = 0;
+   617                           ;masterMain.c: 306: TRISCbits.RC6 = 0;
    618  00179E  9C94               	bcf	148,6,c	;volatile
    619                           
-   620                           ;masterMain.c: 306: TRISCbits.RC7 = 1;
+   620                           ;masterMain.c: 307: TRISCbits.RC7 = 1;
    621  0017A0  8E94               	bsf	148,7,c	;volatile
    622                           
-   623                           ;masterMain.c: 307: TXSTAbits.BRGH = 0;
+   623                           ;masterMain.c: 308: TXSTAbits.BRGH = 0;
    624  0017A2  94AC               	bcf	172,2,c	;volatile
    625                           
-   626                           ;masterMain.c: 308: TXSTAbits.SYNC = 0;
+   626                           ;masterMain.c: 309: TXSTAbits.SYNC = 0;
    627  0017A4  98AC               	bcf	172,4,c	;volatile
    628                           
-   629                           ;masterMain.c: 309: TXSTAbits.TXEN = 1;
+   629                           ;masterMain.c: 310: TXSTAbits.TXEN = 1;
    630  0017A6  8AAC               	bsf	172,5,c	;volatile
    631                           
-   632                           ;masterMain.c: 310: RCSTAbits.SPEN = 1;
+   632                           ;masterMain.c: 311: RCSTAbits.SPEN = 1;
    633  0017A8  8EAB               	bsf	171,7,c	;volatile
    634                           
-   635                           ;masterMain.c: 311: RCSTAbits.CREN = 1;
+   635                           ;masterMain.c: 312: RCSTAbits.CREN = 1;
    636  0017AA  88AB               	bsf	171,4,c	;volatile
    637                           
-   638                           ;masterMain.c: 312: PIE1bits.RCIE = 1;
+   638                           ;masterMain.c: 313: PIE1bits.RCIE = 1;
    639  0017AC  8A9D               	bsf	157,5,c	;volatile
    640                           
-   641                           ;masterMain.c: 313: PIE1bits.TXIE = 0;
+   641                           ;masterMain.c: 314: PIE1bits.TXIE = 0;
    642  0017AE  989D               	bcf	157,4,c	;volatile
    643  0017B0                     
-   644                           ;masterMain.c: 314: SPBRG = 31;
+   644                           ;masterMain.c: 315: SPBRG = 31;
    645  0017B0  0E1F               	movlw	31
    646  0017B2  6EAF               	movwf	175,c	;volatile
    647  0017B4  0012               	return		;funcret
@@ -707,25 +707,25 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    693                           ;masterMain.c: 281: T0CONbits.T0CS = 0;
    694  001788  9AD5               	bcf	213,5,c	;volatile
    695                           
-   696                           ;masterMain.c: 284: T0CONbits.PSA = 0;
+   696                           ;masterMain.c: 285: T0CONbits.PSA = 0;
    697  00178A  96D5               	bcf	213,3,c	;volatile
    698                           
-   699                           ;masterMain.c: 285: T0CONbits.T0PS2 = 0;
-   700  00178C  94D5               	bcf	213,2,c	;volatile
+   699                           ;masterMain.c: 286: T0CONbits.T0PS2 = 1;
+   700  00178C  84D5               	bsf	213,2,c	;volatile
    701                           
-   702                           ;masterMain.c: 286: T0CONbits.T0PS1 = 0;
-   703  00178E  92D5               	bcf	213,1,c	;volatile
+   702                           ;masterMain.c: 287: T0CONbits.T0PS1 = 1;
+   703  00178E  82D5               	bsf	213,1,c	;volatile
    704                           
-   705                           ;masterMain.c: 287: T0CONbits.T0PS0 = 0;
-   706  001790  90D5               	bcf	213,0,c	;volatile
+   705                           ;masterMain.c: 288: T0CONbits.T0PS0 = 1;
+   706  001790  80D5               	bsf	213,0,c	;volatile
    707  001792                     
-   708                           ;masterMain.c: 288: TMR0 = 192;
+   708                           ;masterMain.c: 289: TMR0 = 60;
    709  001792  0E00               	movlw	0
    710  001794  6ED7               	movwf	215,c	;volatile
-   711  001796  0EC0               	movlw	192
+   711  001796  0E3C               	movlw	60
    712  001798  6ED6               	movwf	214,c	;volatile
    713  00179A                     
-   714                           ;masterMain.c: 289: T0CONbits.TMR0ON = 1;
+   714                           ;masterMain.c: 290: T0CONbits.TMR0ON = 1;
    715  00179A  8ED5               	bsf	213,7,c	;volatile
    716  00179C  0012               	return		;funcret
    717  00179E                     __end_of_setupTimer0:
@@ -733,7 +733,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    719                           
    720 ;; *************** function _SPI_Init_Master *****************
    721 ;; Defined at:
-   722 ;;		line 327 in file "masterMain.c"
+   722 ;;		line 328 in file "masterMain.c"
    723 ;; Parameters:    Size  Location     Type
    724 ;;		None
    725 ;; Auto vars:     Size  Location     Type
@@ -767,40 +767,40 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    753  001764                     _SPI_Init_Master:
    754                           	callstack 27
    755  001764                     
-   756                           ;masterMain.c: 328: PIE1bits.SSPIE = 1;
+   756                           ;masterMain.c: 329: PIE1bits.SSPIE = 1;
    757  001764  869D               	bsf	157,3,c	;volatile
    758                           
-   759                           ;masterMain.c: 329: IPR1bits.SSPIP = 1;
+   759                           ;masterMain.c: 330: IPR1bits.SSPIP = 1;
    760  001766  869F               	bsf	159,3,c	;volatile
    761                           
-   762                           ;masterMain.c: 332: TRISDbits.TRISD2 = 1;
+   762                           ;masterMain.c: 333: TRISDbits.TRISD2 = 1;
    763  001768  8495               	bsf	149,2,c	;volatile
    764                           
-   765                           ;masterMain.c: 333: TRISDbits.TRISD3 = 0;
+   765                           ;masterMain.c: 334: TRISDbits.TRISD3 = 0;
    766  00176A  9695               	bcf	149,3,c	;volatile
    767                           
-   768                           ;masterMain.c: 334: TRISDbits.TRISD1 = 0;
+   768                           ;masterMain.c: 335: TRISDbits.TRISD1 = 0;
    769  00176C  9295               	bcf	149,1,c	;volatile
    770                           
-   771                           ;masterMain.c: 337: CS = 1;
+   771                           ;masterMain.c: 338: CS = 1;
    772  00176E  8484               	bsf	3972,2,c	;volatile
    773  001770                     
-   774                           ;masterMain.c: 338: SSPSTAT=0x40;
+   774                           ;masterMain.c: 339: SSPSTAT=0x40;
    775  001770  0E40               	movlw	64
    776  001772  6EC7               	movwf	199,c	;volatile
    777                           
-   778                           ;masterMain.c: 339: SSPCON1=0x20;
+   778                           ;masterMain.c: 340: SSPCON1=0x20;
    779  001774  0E20               	movlw	32
    780  001776  6EC6               	movwf	198,c	;volatile
    781  001778                     
-   782                           ;masterMain.c: 341: PIR1bits.SSPIF=0;
+   782                           ;masterMain.c: 342: PIR1bits.SSPIF=0;
    783  001778  969E               	bcf	158,3,c	;volatile
    784                           
-   785                           ;masterMain.c: 345: ADCON0=0;
+   785                           ;masterMain.c: 346: ADCON0=0;
    786  00177A  0E00               	movlw	0
    787  00177C  6EC2               	movwf	194,c	;volatile
    788                           
-   789                           ;masterMain.c: 347: ADCON1=0x0F;
+   789                           ;masterMain.c: 348: ADCON1=0x0F;
    790  00177E  0E0F               	movlw	15
    791  001780  6EC1               	movwf	193,c	;volatile
    792  001782  0012               	return		;funcret
@@ -918,7 +918,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    904  000074                     i2u248_40:
    905  000074                     
    906                           ; BSR set to: 0
-   907                           ;masterMain.c: 203: err2 = (float)c*0.2/255 - 0.1;
+   907                           ;masterMain.c: 203: err2 = (float)c*0.08/255 - 0.04;
    908  000074  0E00               	movlw	0
    909  000076  6E2C               	movwf	___fldiv@a^0,c
    910  000078  0E00               	movlw	0
@@ -927,13 +927,13 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    913  00007E  6E2E               	movwf	(___fldiv@a+2)^0,c
    914  000080  0E43               	movlw	67
    915  000082  6E2F               	movwf	(___fldiv@a+3)^0,c
-   916  000084  0ECD               	movlw	205
+   916  000084  0E0A               	movlw	10
    917  000086  6E13               	movwf	___flmul@a^0,c
-   918  000088  0ECC               	movlw	204
+   918  000088  0ED7               	movlw	215
    919  00008A  6E14               	movwf	(___flmul@a+1)^0,c
-   920  00008C  0E4C               	movlw	76
+   920  00008C  0EA3               	movlw	163
    921  00008E  6E15               	movwf	(___flmul@a+2)^0,c
-   922  000090  0E3E               	movlw	62
+   922  000090  0E3D               	movlw	61
    923  000092  6E16               	movwf	(___flmul@a+3)^0,c
    924  000094  5180               	movf	_c& (0+255),w,b
    925  000096  6E01               	movwf	___xxtofl@val^0,c
@@ -956,11 +956,11 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
    942  0000D0  C029  F042         	movff	?___fldiv+1,___fladd@b+1
    943  0000D4  C02A  F043         	movff	?___fldiv+2,___fladd@b+2
    944  0000D8  C02B  F044         	movff	?___fldiv+3,___fladd@b+3
-   945  0000DC  0ECD               	movlw	205
+   945  0000DC  0E0A               	movlw	10
    946  0000DE  6E45               	movwf	___fladd@a^0,c
-   947  0000E0  0ECC               	movlw	204
+   947  0000E0  0ED7               	movlw	215
    948  0000E2  6E46               	movwf	(___fladd@a+1)^0,c
-   949  0000E4  0ECC               	movlw	204
+   949  0000E4  0E23               	movlw	35
    950  0000E6  6E47               	movwf	(___fladd@a+2)^0,c
    951  0000E8  0EBD               	movlw	189
    952  0000EA  6E48               	movwf	(___fladd@a+3)^0,c
@@ -1409,7 +1409,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1395                           
   1396 ;; *************** function _rx_char *****************
   1397 ;; Defined at:
-  1398 ;;		line 317 in file "masterMain.c"
+  1398 ;;		line 318 in file "masterMain.c"
   1399 ;; Parameters:    Size  Location     Type
   1400 ;;		None
   1401 ;; Auto vars:     Size  Location     Type
@@ -1450,7 +1450,7 @@ Microchip MPLAB XC8 C Compiler v2.32 (Free license) build 20210201212658 Og1
   1436  0017C0  EFDB  F00B         	goto	i2l170
   1437  0017C4                     i2u178_40:
   1438  0017C4                     
-  1439                           ;masterMain.c: 319: return RCREG;
+  1439                           ;masterMain.c: 320: return RCREG;
   1440  0017C4  50AE               	movf	174,w,c	;volatile
   1441  0017C6  0012               	return		;funcret
   1442  0017C8                     __end_of_rx_char:
@@ -4318,7 +4318,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.32 build 20210201212658 
-Symbol Table                                                                                   Fri Dec 10 13:13:57 2021
+Symbol Table                                                                                   Thu Dec 16 13:11:59 2021
 
             ___fldiv@aexp 0040              ___fldiv@bexp 003F                         _b 0074  
                        _c 0080                         _r 0078              ___fldiv@sign 0038  

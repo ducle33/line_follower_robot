@@ -11,9 +11,9 @@ timeScalar = timeScalar*72.2640/25;
 path = Reference_map();      
 
 fig = figure;
-plot(path(1,:),path(2,:),'b','LineWidth', 2)
-xlim([-1.5,1.5]);
-ylim([-1,1]);
+plot(path(1,:),path(2,:),'b','LineWidth', 1.2)
+xlim([-1.7,1.7]);
+ylim([-0.6,0.6]);
 title('Line Map')
 xlabel('X Coordinate (m)'); ylabel('Y Coordinate (m)')
 hold on
@@ -247,6 +247,7 @@ position = [];
 omega_value = [];
 tracking_error_position = [];
 tracking_error_angle = [];
+theta_ref = [];
 
 fisrtTime = 1;
 firsTime2 = 1;
@@ -265,11 +266,10 @@ while ischar(fscanf(s8,'%s'))
     
     t =  milliseconds(datetime('now') - begTime)/timeScalar;
     for i = 1:20000000
-        
     end
     time = [time t];
     
-    if (countStable>=100)
+    if (countStable>=10)
         countStable = 0;
         notStable = 0;
     end
@@ -521,6 +521,8 @@ while ischar(fscanf(s8,'%s'))
         end
     end
     
+    theta_ref = [theta_ref refPos(3)];
+    
     % Calculate error
     R = [cos(theta)  sin(theta) 0;
          -sin(theta) cos(theta) 0;
@@ -531,7 +533,7 @@ while ischar(fscanf(s8,'%s'))
     error = R*P;
     
     % Add Gaussian noise
-    amp = 0.005;
+    amp = 0.005; % +-5 mm
     sensor_noise = normrnd(0,amp);
     if(sensor_noise > amp)
         sensor_noise = amp;
@@ -542,7 +544,7 @@ while ischar(fscanf(s8,'%s'))
 %     sensor_noise = 0;
     error(2) = error(2) + sensor_noise;
     
-    err2Send = round((error(2) + 0.1)*255/0.2);
+    err2Send = round((error(2) + 0.04)*255/0.08);
     if (err2Send>255)
         err2Send = 255;
     end
@@ -569,7 +571,7 @@ while ischar(fscanf(s8,'%s'))
         omega_buff_r = str2double(omega_buff(4:6));
     end
     
-    amp = 10;
+    amp = 5;
     sensor_noise = normrnd(0,amp);
     if(sensor_noise > amp)
         sensor_noise = amp;
@@ -577,6 +579,7 @@ while ischar(fscanf(s8,'%s'))
     if(sensor_noise < -amp)
         sensor_noise = -amp;
     end
+    
     
     omega_buff_l = omega_buff_l*200/255 - 100;
     omega_l = trans_func_l(omega_l*30/pi,tsamp,omega_buff_l) + sensor_noise;

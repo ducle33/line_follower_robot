@@ -105,7 +105,7 @@ char firstTime = 1;
 unsigned char speedRef = 100;
 unsigned char bufferRef = 0;
 unsigned int u = 0;
-float Kp = 0.4, Ki = 0.03, duty = 0, err = 0, sum_err = 0;
+float Kp = 0.5, Ki = 0.00005, Kd = 0, duty = 0, err = 0, sum_err = 0, pre_err = 0;
 
 
 void setupUART(void);
@@ -120,7 +120,6 @@ void setupTimer2(void);
 void setupPWM(void);
 unsigned char motorOutMSB(float);
 unsigned char motorOutLSB(float);
-float PID(int);
 long RPM_CONSTANT_QEI = 93750;
 
 signed char WriteSPI( unsigned char data_out ) {
@@ -175,30 +174,38 @@ void interrupt ISR() {
             speedRef = speedRef;
         }
         else speedRef = bufferRef;
+        
+        // 0.35 seconds
+//        if (count2>100 && count2 < 2*100) {
+//            speedRef = 200;
+//        } else {
+//            speedRef = 150;
+//        }
+//        
+//        if (count2==2*100) {
+//            count2 = 0;
+//        }
+//        count2++;
+        
         count++;
+        
         if (count==1) {
         // Speed from MATLAB
             speed = PORTD;
             speedPID = (int)(speed*1.435294);
-        }
-        if (count==2) {
             duty = 0;
-            Kp = 5; // 0.5
-            Ki = 0; // 0.032
             err = speedRef - speedPID;
             sum_err = sum_err + err;
-            duty = Kp*err + Ki*sum_err;
+            duty = Kp*err + Ki*sum_err + Kd*(err-pre_err);
+            pre_err = err;
             if(duty>100) duty = 100;
             if(duty<-100) duty = -100;
             
             duty = (duty + 100)*1.275;
-        }
-        if (count==3) {
             count = (unsigned int)duty;
             PORTB = count;
             count = 0;
         }
-//        u = (int)( ( (int)(PID(speedRef)) + 100 )*1.275 );
         INTCONbits.TMR0IF = 0;
     }
 }
@@ -242,12 +249,13 @@ void setupTimer0(void) {
     T0CONbits.T016BIT = 1; // 8bit Mode
     T0CONbits.T0CS = 0; // Internal CLK = 1/20MHz * 4
     
-    // Set Prescaler to 1:64
+    // Set Prescaler to 1:256
+    // Sampling time = (255-60)*4/20*10^-6*256 = 10ms ~ 100Hz
     T0CONbits.PSA = 0;
     T0CONbits.T0PS2 = 1;
-    T0CONbits.T0PS1 = 0;
+    T0CONbits.T0PS1 = 1;
     T0CONbits.T0PS0 = 1;
-    TMR0 = 0;
+    TMR0 = 60;
     T0CONbits.TMR0ON = 1; // Turns on Timer0
 }
 
@@ -349,31 +357,6 @@ unsigned char motorOutLSB(float duty) {
     int buffer = 10.239*duty;
     unsigned char bufferChar = buffer & 0b00000011;
     return bufferChar;
-}
-
-float PID(int ref) {
-    duty = 0;
-    Kp = 0.4; // 0.5
-    Ki = 0.03; // 0.032
-    err = ref - speedPID;
-    sum_err = sum_err + err;
-    // anti-windup
-//    if (sum_err > 2000) sum_err = 2000;
-//    if (sum_err < -2000) sum_err = -2000;
-    duty = Kp*err + Ki*sum_err;
-    // cut-off
-    if(duty>100) duty = 100;
-    if(duty<-100) duty = -100;
-    // direction change
-//    if(duty<0) {
-//        PORTCbits.RC0 = 1;
-//        PORTCbits.RC1 = 0;
-//    }
-//    if(duty>0) {
-//        PORTCbits.RC0 = 0;
-//        PORTCbits.RC1 = 1;
-//    }
-    return duty;
 }
 
 char rx_char(void) {
